@@ -1,0 +1,1110 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php,模板语言," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP
+PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。PHP 能够做什么？
+
+PHP 能够生成动态页面内容
+PHP 能够创建、打开、读取、写入、删除以及关闭服务器上的文件
+PHP 能够接收表单数据
+PHP 能够发送并取回 cookies
+PHP 能够添加、删除、修改数据库中的数据
+PHP 能够限制用户访问网站中的某些页面
+PHP 能够对数据进行加密
+通过 PHP，您可以不受限于只输出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php">
+<meta property="og:url" content="http://yoursite.com/2016/10/20/php/index.html">
+<meta property="og:site_name" content="Sunbaixin blog">
+<meta property="og:description" content="PHP
+PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。PHP 能够做什么？
+
+PHP 能够生成动态页面内容
+PHP 能够创建、打开、读取、写入、删除以及关闭服务器上的文件
+PHP 能够接收表单数据
+PHP 能够发送并取回 cookies
+PHP 能够添加、删除、修改数据库中的数据
+PHP 能够限制用户访问网站中的某些页面
+PHP 能够对数据进行加密
+通过 PHP，您可以不受限于只输出">
+<meta property="og:updated_time" content="2016-10-24T04:40:36.262Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php">
+<meta name="twitter:description" content="PHP
+PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。PHP 能够做什么？
+
+PHP 能够生成动态页面内容
+PHP 能够创建、打开、读取、写入、删除以及关闭服务器上的文件
+PHP 能够接收表单数据
+PHP 能够发送并取回 cookies
+PHP 能够添加、删除、修改数据库中的数据
+PHP 能够限制用户访问网站中的某些页面
+PHP 能够对数据进行加密
+通过 PHP，您可以不受限于只输出">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/20/php/"/>
+
+
+  <title> php | Sunbaixin blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Sunbaixin blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Goals determine what you are going to be</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                php
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T20:33:17+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/20/php/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/php/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><blockquote>
+<p>PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。<br>PHP 能够做什么？</p>
+<ul>
+<li>PHP 能够生成动态页面内容</li>
+<li>PHP 能够创建、打开、读取、写入、删除以及关闭服务器上的文件</li>
+<li>PHP 能够接收表单数据</li>
+<li>PHP 能够发送并取回 cookies</li>
+<li>PHP 能够添加、删除、修改数据库中的数据</li>
+<li>PHP 能够限制用户访问网站中的某些页面</li>
+<li>PHP 能够对数据进行加密</li>
+<li>通过 PHP，您可以不受限于只输出 HTML。您还能够输出图像、PDF 文件、甚至 Flash 影片。您也可以输出任何文本，比如 XHTML 和 XML。</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h3 id="PHP基础"><a href="#PHP基础" class="headerlink" title="PHP基础"></a>PHP基础</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>PHP 脚本在服务器上执行，然后向浏览器发送回纯 HTML 结果。</p>
+<p><strong>1</strong>. PHP 脚本可放置于文档中的任何位置。<br>PHP 脚本以 &lt;?php 开头，以 ?&gt; 结尾：</p>
+<p>注释：PHP 语句以分号结尾（;）。PHP 代码块的关闭标签也会自动表明分号（因此在 PHP 代码块的最后一行不必使用分号）。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;我的第一张 PHP 页面&lt;/h1&gt;
+&lt;?php
+echo &quot;Hello World!&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><strong>2</strong>  支持三种注释方式</p>
+<p><strong>3</strong>  变量对大小写敏感</p>
+<p> PHP 变量规则：</p>
+<ul>
+<li>变量<strong>以 $ 符号开头</strong>，其后是变量的名称</li>
+<li>变量名称必须以字母或下划线开头</li>
+<li>变量名称不能以数字开头</li>
+<li>变量名称只能包含字母数字字符和下划线（A-z、0-9 以及 _）</li>
+<li>变量名称对大小写敏感（$y 与 $Y 是两个不同的变量）</li>
+</ul>
+<p><strong>4</strong>  向浏览器输出</p>
+<p>  echo（）<br>  printf（）</p>
+<p><strong>5</strong>  PHP数据类型</p>
+<ul>
+<li>标量数据类型 布尔型 整型 浮点型 字符型</li>
+<li>符合数据类型：数组 对象</li>
+<li><strong>6 </strong> 强制类型转换</li>
+</ul>
+<p>（array）<br>（bool）或（boolean）<br>（int）或（integer）<br>（object）<br>（real）或（double）或（float）<br>（string）</p>
+<p><strong>7</strong>  类型自动转换</p>
+<p><strong>8 </strong> 与类型有关的函数</p>
+<p>gettype<br>settype</p>
+<p><strong>9</strong>  类型标识符函数<br>   标识符</p>
+<p><strong>10</strong>  变量作用域</p>
+<p>局部变量 函数参数 全局变量 静态变量（函数退出时不会丢失值）</p>
+<p>$_SERVER</p>
+<p><strong>11</strong> 表达式</p>
+<p>逻辑 比较 位操作都与js类似</p>
+<p>拼接符不同 字符串拼接符（.) 拼接赋值操作符（.=)</p>
+<pre><code>$a=&apos;abc&apos;.&apos;def&apos;;//abcdef
+$a=&apos;abc&apos;+&apos;def&apos;//0  +是赋值操作符
+</code></pre><p><strong>12</strong> 字符串插入</p>
+<ul>
+<li>双引号扩起的字符串 变量和转义序列都会得到相应的解析</li>
+<li><p>单引号 变量和转义序列都不会得到解析</p>
+<p>  $a=”abc”.”def”;<br>  echo “this is $a”;//this is abcdef<br>  echo ‘this is $a’;//this is $a</p>
+</li>
+</ul>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p><strong>1</strong></p>
+<pre><code>&lt;?php
+ $total=22;
+ $cost=4;
+
+ function calcute(&amp;$total,$cost){
+     $total=$total+$cost;
+     $cost+=4;
+
+ }
+ calcute($total,$cost);
+ echo($total.&quot;   &quot;.$cost);//26,4
+ ?&gt;
+</code></pre><ul>
+<li>按值传递参数（把实参的值 传递给形参 形参是实参的拷贝）</li>
+</ul>
+<p>这就意味着，函数范围内对这些值的任意改变在函数外部都会被忽略</p>
+<ul>
+<li>按引用传递参数（把实参的地址传递给形参， 形参和实参是同一个对象）</li>
+</ul>
+<p>函数内对参数所做的改变都会体现在函数外</p>
+<p>2 函数库</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>1 创建数组</p>
+<pre><code>array（item1，item2.....);
+$lang=array(&quot;English&quot;,&quot;Spanish&quot;);
+关联数组
+$lang=array(&quot;Spain&quot;=&gt;&quot;Spanish&quot;,&quot;United&quot;=&gt;&quot;English&quot;);
+</code></pre><p>2 list()提取数组<br>  range（）预定义范围的值填充数组</p>
+<p>3 测试数组<br>  is_array()</p>
+<p>4 输出数组<br>foreach</p>
+<p>5添加删除元素</p>
+<pre><code>array_unshift(array,mixed ele,....)
+array_push()
+array_shift()
+array_pop()
+</code></pre><p>6 定位数组元素</p>
+<p>搜索数组</p>
+<pre><code>in_array() 搜索特定值
+array_key_exists() 找到指定的键 返回bool值
+array_search() 搜索指定的值 返回相应的键
+array_keys() 返回一个数组 包含所有的键
+array_values()返回一个数组所有值，并提供索引值
+</code></pre><p>7 遍历数组</p>
+<pre><code>key() 获取当前数组键
+current()获取当前数组值
+each（）返回数组的当前键值对
+next（）向下移动数组指针
+prev（）向上移动数组指针
+reset（）
+end（）
+array_walk(array,callback())
+
+eg:$fruits = array(&quot;d&quot;=&gt;&quot;lemon&quot;,&quot;a&quot;=&gt;&quot;orange&quot;,&quot;b&quot;=&gt;&quot;banana&quot;,&quot;c&quot;=&gt;&quot;apple&quot;);
+   function test_print( $value,$key ) {
+   echo &quot;$value&lt;br&gt;\n&quot;;
+   echo &quot;$key&lt;br&gt;\n&quot;;
+
+   }
+   array_walk( $fruits, &apos;test_print&apos; );
+</code></pre><p>8 确定数组大小和唯一性</p>
+<pre><code>count（）返回数组中值的总数
+array_unique() 删除所有重复值 返回由唯一值组成的数组
+array_count_values() 统计数组元素出现的频度
+</code></pre><p>9数组排序</p>
+<p>array_reverse() 逆置数组元素顺序<br>array_flip()置换数组键和值<br>sort（）数组排序</p>
+<p>10 合并 拆分 接合和分解数组<br>array_merge()</p>
+<h4 id="面向对象的PHP"><a href="#面向对象的PHP" class="headerlink" title="面向对象的PHP"></a>面向对象的PHP</h4><p>1.oop :封装 继承 多态<br>实例：</p>
+<pre><code>&lt;?php
+class Site {
+  /* 成员变量 */
+  var $url;
+  var $title;
+
+  function __construct( $par1, $par2 ) {
+$this-&gt;url = $par1;
+$this-&gt;title = $par2;
+  }
+  /* 成员函数 */
+  function setUrl($par){
+ $this-&gt;url = $par;
+  }
+
+  function getUrl(){
+ echo $this-&gt;url . PHP_EOL;
+  }
+
+  function setTitle($par){
+ $this-&gt;title = $par;
+  }
+
+  function getTitle(){
+ echo $this-&gt;title . PHP_EOL;
+  }
+}
+
+$runoob = new Site(&apos;www.runoob.com&apos;, &apos;菜鸟教程&apos;);
+$taobao = new Site(&apos;www.taobao.com&apos;, &apos;淘宝&apos;);
+$google = new Site(&apos;www.google.com&apos;, &apos;Google 搜索&apos;);
+
+// 调用成员函数，获取标题和URL
+$runoob-&gt;getTitle();
+$taobao-&gt;getTitle();
+$google-&gt;getTitle();
+
+$runoob-&gt;getUrl();
+$taobao-&gt;getUrl();
+$google-&gt;getUrl();
+?&gt;
+//变量 $this 代表自身的对象。
+   PHP_EOL 为换行符。
+</code></pre><p>2.类 对象 属性 常量 方法</p>
+<p>属性：</p>
+<ul>
+<li>public 任何位置都能访问</li>
+<li>private 只能在类内部使用 不能由实例化的对象调用 也不能由类的子类使用</li>
+<li>protected 只能在该类及其子类中使用</li>
+<li>abstract  </li>
+<li>final  标记为final的方法可以防止被子类覆盖</li>
+<li>static</li>
+</ul>
+<p>3 构造函数和析构函数</p>
+<p>对象实例化的时候 自动执行构造函数<br>     &lt;?php<br>      class Emplyee{<br>          private $name;</p>
+<pre><code>    function __construct($Vname){
+    $this-&gt;setName($Vname);
+    $this-&gt;getName();
+    }
+  function setName($name){ 
+        $this-&gt;name=$name;
+    }
+  function getName(){
+        echo $this-&gt;name;
+    }
+
+}
+
+  $emply=new Emplyee(&quot;salary&quot;);
+
+?&gt;
+</code></pre><p>调用父类构造函数</p>
+<pre><code>function __construct(){
+   parent::__construct();
+}
+</code></pre><p>调用无关的构造函数</p>
+<p>classname：：__construct()</p>
+<p>析构函数</p>
+<p>3 静态类成员 所有类实例共享的属性和方法</p>
+<p><strong>静态变量</strong></p>
+<p>是只存在于函数作用域的变量, 不过, 在函数执行完成后,这种变量的值不会丢失,也就是说, 在下一次调用这个函数时,变量仍然会记得原来的值. 要将某个变量定义为静态的, 只需要在变量前加上 static 关键字即可.</p>
+<blockquote>
+<p>类中静态元素的使用<br>在类中, static 关键字有两种主要用法, 一是用来定义静态成员,一是用来定义静态方法. 在类的内部, 可以使用作用域限定符 (::) 来访问不同层次作用域的变量.</p>
+</blockquote>
+<p><strong>静态成员</strong></p>
+<p>静态成员是一种类变量, 可以把它看成时属于整个类而不是属于类的某个实例. 与一般的实例变量不同的是, 静态成员只保留一个变量值, 而这个变量值对所有的实例都是有效的, 也就是说, 所有的实例共享这个成员.</p>
+<blockquote>
+<p>$this 只表示类的当前实例, 而 self:: 表示的是类本身,在类之外的代码中不能使用这个操作符,而且它不能识别自己在继承树层次结构中的位置.</p>
+</blockquote>
+<p>也就是说, 在扩展类中使用self 作用域时, self 可以调用基类中声明的方法, 但它调用的总是已经在扩展类中重写的方法. 与$this 不同的是, 在使用静态变量时,必须在作用域限定符后面加上$符号.<br>在扩展类中, 在基类的方法被重写的情况下,使用 parent 作用域调用定义在基类中的方法.静态成员也可以只属于父类. 如果在子类和父类中同时声明了某个成员,也可以使用parant:: 在子类中访问父类中的变量. 在这种情况下, 父类的静态成员和子类的静态成员保存的是不同的值.</p>
+<p>可以在 :: 操作符的左边写上类的名称来静态地访问某个成员, 这样避免创建类的实例. 不仅省略掉实例化类的代码, 而且还会更高效, 因为类的每个实例都会占用一小部分的系统资源.<br>在使用 :: 操作符访问成员变量时, 需要再次注意对$符号的使用. 因为PHP当前不支持动态的静态变量的使用, 也就是说不支持可变的静态变量. 在使用$this-&gt;$var时, 被访问的成员是包含在$var中的变量的值. <strong><em>而不用$符号访问某个变量实际上查找的是类的某个常量, 而常量是不能通过$this来访问的.</em></strong></p>
+<p>PHP6 中提出的static:: 作用域使我们不再需要使用self:: 和parent::. 当希望指向最终的实现功能的类时, 就可以使用static::, 这个限定符会在代码执行之前立即计算出继承层次机构上最后那个类的成员. 之一过程被称为延迟绑定, 它使我们可以在子类中重写某个静态变量, 并且也可以从某个在父类中声明的函数中反问这个最终成员.</p>
+<hr>
+<p><strong>静态方法</strong></p>
+<p>静态方法和非静态方法之间有一个重要的区别: 在调用静态方法时, 不再需要拥有类的实例.</p>
+<p>静态方法和非静态方法使用原则:<br>一是如果某个方法中不包含$this 变量, 就应该时静态方法; 如果不需要类的实例, 可能还应该使用静态类, 这样可以免去实例化类的工作. 另, 在静态方法中时不能使用$this 变量的, 因为静态方法不属于某个特定的实例.</p>
+<blockquote>
+<p>PHP中使用作用域限定操作符时, 用变量作为类的名称时不允许的.</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/erweima.png" alt="sunbaixin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫描上方二维码，关注我的博客</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag">#php</a>
+          
+            <a href="/tags/模板语言/" rel="tag">#模板语言</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/learn/" rel="next" title="学习计划">
+                <i class="fa fa-chevron-left"></i> 学习计划
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/20/sass/" rel="prev" title="sass">
+                sass <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/20/php/"
+     data-title="php"
+     data-content=""
+     data-url="http://yoursite.com/2016/10/20/php/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/20/php/"
+           data-title="php" data-url="http://yoursite.com/2016/10/20/php/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/head.jpg"
+               alt="sunbaixin" />
+          <p class="site-author-name" itemprop="name">sunbaixin</p>
+          <p class="site-description motion-element" itemprop="description">happy girl</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hello-sunbaixin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP"><span class="nav-number">1.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP基础"><span class="nav-number">1.1.</span> <span class="nav-text">PHP基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">1.1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-number">1.1.2.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">1.1.3.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象的PHP"><span class="nav-number">1.1.4.</span> <span class="nav-text">面向对象的PHP</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunbaixin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunbaixin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
