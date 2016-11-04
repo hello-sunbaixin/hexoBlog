@@ -262,6 +262,880 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/04/ajax_5/" itemprop="url">
+                  ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-04T16:24:07+08:00" content="2016-11-04">
+              2016-11-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/04/ajax_5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/04/ajax_5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">全局变量</div><div class="line">var prefilter=&#123;&#125;;</div><div class="line">jQuery.extend(&#123;</div><div class="line">  ajaxPrefilter: addToPrefiltersOrTransports(prefilters),</div><div class="line">  ajaxTransport: addToPrefiltersOrTransports(transports),</div><div class="line">  &#125;)</div><div class="line">&lt;!--ajaxPrefilter和ajaxTransport的构造器--&gt;</div><div class="line">function addToPrefiltersOrTransports(structure) &#123;</div><div class="line"></div><div class="line">        // dataTypeExpression is optional and defaults to &quot;*&quot;</div><div class="line">        &lt;!--返回的是一个函数 此处应用的就是闭包--&gt;</div><div class="line">        return function (dataTypeExpression, func) &#123;</div><div class="line"></div><div class="line">            if (typeof dataTypeExpression !== &quot;string&quot;) &#123;</div><div class="line">                func = dataTypeExpression;</div><div class="line">                dataTypeExpression = &quot;*&quot;;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if (jQuery.isFunction(func)) &#123;</div><div class="line">                var dataTypes = dataTypeExpression.toLowerCase().split(rspacesAjax),</div><div class="line">                    i = 0,</div><div class="line">                    length = dataTypes.length,</div><div class="line">                    dataType,</div><div class="line">                    list,</div><div class="line">                    placeBefore;</div><div class="line"></div><div class="line">                // For each dataType in the dataTypeExpression</div><div class="line">                for (; i &lt; length; i++) &#123;</div><div class="line">                    dataType = dataTypes[i];</div><div class="line">                    // We control if we&apos;re asked to add before</div><div class="line">                    // any existing element</div><div class="line">                    placeBefore = /^\+/.test(dataType);</div><div class="line">                    if (placeBefore) &#123;</div><div class="line">                        dataType = dataType.substr(1) || &quot;*&quot;;</div><div class="line">                    &#125;</div><div class="line">                    list = structure[dataType] = structure[dataType] || [];</div><div class="line">                    // then we add to the structure accordingly</div><div class="line">                    list[placeBefore ? &quot;unshift&quot; : &quot;push&quot;](func);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+ <!--依次全局调用jQuery.ajaxPrefilter函数，会把dataType：json jsonp script封装在 全局对象prefilter之中
+  Object {json: Array[1], jsonp: Array[1],script:Array[1]}
+  prefilter.jsonp[0]返回的是对数据类型为jsonp的预处理函数-->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line">jQuery.ajaxPrefilter(&quot;script&quot;, function (s) &#123;</div><div class="line">        if (s.cache === undefined) &#123;</div><div class="line">            s.cache = false;</div><div class="line">        &#125;</div><div class="line">        if (s.crossDomain) &#123;</div><div class="line">            s.type = &quot;GET&quot;;</div><div class="line">            s.global = false;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">jQuery.ajaxPrefilter(&quot;json jsonp&quot;, function (s, originalSettings, jqXHR) &#123;</div><div class="line">    </div><div class="line">            var inspectData = s.contentType === &quot;application/x-www-form-urlencoded&quot; &amp;&amp;</div><div class="line">                ( typeof s.data === &quot;string&quot; );</div><div class="line">    </div><div class="line">            if (s.dataTypes[0] === &quot;jsonp&quot; ||</div><div class="line">                s.jsonp !== false &amp;&amp; ( jsre.test(s.url) ||</div><div class="line">                inspectData &amp;&amp; jsre.test(s.data) )) &#123;</div><div class="line">    </div><div class="line">                var responseContainer,</div><div class="line">                    jsonpCallback = s.jsonpCallback =</div><div class="line">                        jQuery.isFunction(s.jsonpCallback) ? s.jsonpCallback() : s.jsonpCallback,</div><div class="line">                    previous = window[jsonpCallback],</div><div class="line">                    url = s.url,</div><div class="line">                    data = s.data,</div><div class="line">                    replace = &quot;$1&quot; + jsonpCallback + &quot;$2&quot;;</div><div class="line">    </div><div class="line">                if (s.jsonp !== false) &#123;</div><div class="line">                    url = url.replace(jsre, replace);</div><div class="line">                    if (s.url === url) &#123;</div><div class="line">                        if (inspectData) &#123;</div><div class="line">                            data = data.replace(jsre, replace);</div><div class="line">                        &#125;</div><div class="line">                        if (s.data === data) &#123;</div><div class="line">                            // Add callback manually</div><div class="line">                            url += (/\?/.test(url) ? &quot;&amp;&quot; : &quot;?&quot;) + s.jsonp + &quot;=&quot; + jsonpCallback;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">    </div><div class="line">                s.url = url;</div><div class="line">                s.data = data;</div><div class="line">    </div><div class="line">                // Install callback</div><div class="line">                window[jsonpCallback] = function (response) &#123;</div><div class="line">                    responseContainer = [response];</div><div class="line">                &#125;;</div><div class="line">    </div><div class="line">                // Clean-up function</div><div class="line">                jqXHR.always(function () &#123;</div><div class="line">                    // Set callback back to previous value</div><div class="line">                    window[jsonpCallback] = previous;</div><div class="line">                    // Call if it was a function and we have a response</div><div class="line">                    if (responseContainer &amp;&amp; jQuery.isFunction(previous)) &#123;</div><div class="line">                        window[jsonpCallback](responseContainer[0]);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">    </div><div class="line">                // Use data converter to retrieve json after script execution</div><div class="line">                s.converters[&quot;script json&quot;] = function () &#123;</div><div class="line">                    if (!responseContainer) &#123;</div><div class="line">                        jQuery.error(jsonpCallback + &quot; was not called&quot;);</div><div class="line">                    &#125;</div><div class="line">                    return responseContainer[0];</div><div class="line">                &#125;;</div><div class="line">    </div><div class="line">                // force json dataType</div><div class="line">                s.dataTypes[0] = &quot;json&quot;;</div><div class="line">    </div><div class="line">                // Delegate to script</div><div class="line">                return &quot;script&quot;;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<!--依次全局调用jQuery.ajaxTransport函数，会把dataType：json jsonp script封装在 全局对象transports之中
+  Object {script: Array[1],*:Array[1]}
+  transports.script[0]返回的是对数据类型为script的预处理函数  即对跨域的处理
+  后者是对xmlHttpRequest的处理  
+  返回的对象调用方法一致{send:{},abort:()}
+  -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div></pre></td><td class="code"><pre><div class="line">&lt;!--处理跨域情况的--&gt;</div><div class="line"> jQuery.ajaxTransport(&quot;script&quot;, function (s) &#123;</div><div class="line"></div><div class="line">        // This transport only deals with cross domain requests</div><div class="line">        if (s.crossDomain) &#123;</div><div class="line"></div><div class="line">            var script,</div><div class="line">                head = document.head || document.getElementsByTagName(&quot;head&quot;)[0] || document.documentElement;</div><div class="line"></div><div class="line">            return &#123;</div><div class="line"></div><div class="line">                send: function (_, callback) &#123;</div><div class="line"></div><div class="line">                    script = document.createElement(&quot;script&quot;);</div><div class="line"></div><div class="line">                    script.async = &quot;async&quot;;</div><div class="line"></div><div class="line">                    if (s.scriptCharset) &#123;</div><div class="line">                        script.charset = s.scriptCharset;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    script.src = s.url;</div><div class="line"></div><div class="line">                    // Attach handlers for all browsers</div><div class="line">                    script.onload = script.onreadystatechange = function (_, isAbort) &#123;</div><div class="line"></div><div class="line">                        if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) &#123;</div><div class="line"></div><div class="line">                            // Handle memory leak in IE</div><div class="line">                            script.onload = script.onreadystatechange = null;</div><div class="line"></div><div class="line">                            // Remove the script</div><div class="line">                            if (head &amp;&amp; script.parentNode) &#123;</div><div class="line">                                head.removeChild(script);</div><div class="line">                            &#125;</div><div class="line"></div><div class="line">                            // Dereference the script</div><div class="line">                            script = undefined;</div><div class="line"></div><div class="line">                            // Callback if not abort</div><div class="line">                            if (!isAbort) &#123;</div><div class="line">                                callback(200, &quot;success&quot;);</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                    &#125;;</div><div class="line">                    // Use insertBefore instead of appendChild  to circumvent an IE6 bug.</div><div class="line">                    // This arises when a base node is used (#2709 and #4378).</div><div class="line">                    head.insertBefore(script, head.firstChild);</div><div class="line">                &#125;,</div><div class="line"></div><div class="line">                abort: function () &#123;</div><div class="line">                    if (script) &#123;</div><div class="line">                        script.onload(0, 1);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    &lt;!--处理xmlHttpRequest请求--&gt;</div><div class="line">    if (jQuery.support.ajax) &#123;</div><div class="line">    </div><div class="line">            jQuery.ajaxTransport(function (s) &#123;</div><div class="line">                // Cross domain only allowed if supported through XMLHttpRequest</div><div class="line">                if (!s.crossDomain || jQuery.support.cors) &#123;</div><div class="line">    </div><div class="line">                    var callback;</div><div class="line">    </div><div class="line">                    return &#123;</div><div class="line">                        send: function (headers, complete) &#123;</div><div class="line">    </div><div class="line">                            // Get a new xhr</div><div class="line">                            var xhr = s.xhr(),</div><div class="line">                                handle,</div><div class="line">                                i;</div><div class="line">    </div><div class="line">                            // Open the socket</div><div class="line">                            // Passing null username, generates a login popup on Opera (#2865)</div><div class="line">                            if (s.username) &#123;</div><div class="line">                                xhr.open(s.type, s.url, s.async, s.username, s.password);</div><div class="line">                            &#125; else &#123;</div><div class="line">                                xhr.open(s.type, s.url, s.async);</div><div class="line">                            &#125;</div><div class="line">    </div><div class="line">                            // Apply custom fields if provided</div><div class="line">                            if (s.xhrFields) &#123;</div><div class="line">                                for (i in s.xhrFields) &#123;</div><div class="line">                                    xhr[i] = s.xhrFields[i];</div><div class="line">                                &#125;</div><div class="line">                            &#125;</div><div class="line">    </div><div class="line">                            // Override mime type if needed</div><div class="line">                            if (s.mimeType &amp;&amp; xhr.overrideMimeType) &#123;</div><div class="line">                                xhr.overrideMimeType(s.mimeType);</div><div class="line">                            &#125;</div><div class="line">    </div><div class="line">                            // X-Requested-With header</div><div class="line">                            // For cross-domain requests, seeing as conditions for a preflight are</div><div class="line">                            // akin to a jigsaw puzzle, we simply never set it to be sure.</div><div class="line">                            // (it can always be set on a per-request basis or even using ajaxSetup)</div><div class="line">                            // For same-domain requests, won&apos;t change header if already provided.</div><div class="line">                            if (!s.crossDomain &amp;&amp; !headers[&quot;X-Requested-With&quot;]) &#123;</div><div class="line">                                headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;</div><div class="line">                            &#125;</div><div class="line">    </div><div class="line">                            // Need an extra try/catch for cross domain requests in Firefox 3</div><div class="line">                            try &#123;</div><div class="line">                                for (i in headers) &#123;</div><div class="line">                                    xhr.setRequestHeader(i, headers[i]);</div><div class="line">                                &#125;</div><div class="line">                            &#125; catch (_) &#123;</div><div class="line">                            &#125;</div><div class="line">    </div><div class="line">                            // Do send the request</div><div class="line">                            // This may raise an exception which is actually</div><div class="line">                            // handled in jQuery.ajax (so no try/catch here)</div><div class="line">                            xhr.send(( s.hasContent &amp;&amp; s.data ) || null);</div><div class="line">    </div><div class="line">                            // Listener</div><div class="line">                            callback = function (_, isAbort) &#123;</div><div class="line">    </div><div class="line">                                var status,</div><div class="line">                                    statusText,</div><div class="line">                                    responseHeaders,</div><div class="line">                                    responses,</div><div class="line">                                    xml;</div><div class="line">    </div><div class="line">                                // Firefox throws exceptions when accessing properties</div><div class="line">                                // of an xhr when a network error occured</div><div class="line">                                // http://helpful.knobs-dials.com/index.php/Component_returned_failure_code:_0x80040111_(NS_ERROR_NOT_AVAILABLE)</div><div class="line">                                try &#123;</div><div class="line">    </div><div class="line">                                    // Was never called and is aborted or complete</div><div class="line">                                    if (callback &amp;&amp; ( isAbort || xhr.readyState === 4 )) &#123;</div><div class="line">    </div><div class="line">                                        // Only called once</div><div class="line">                                        callback = undefined;</div><div class="line">    </div><div class="line">                                        // Do not keep as active anymore</div><div class="line">                                        if (handle) &#123;</div><div class="line">                                            xhr.onreadystatechange = jQuery.noop;</div><div class="line">                                            if (xhrOnUnloadAbort) &#123;</div><div class="line">                                                delete xhrCallbacks[handle];</div><div class="line">                                            &#125;</div><div class="line">                                        &#125;</div><div class="line">    </div><div class="line">                                        // If it&apos;s an abort</div><div class="line">                                        if (isAbort) &#123;</div><div class="line">                                            // Abort it manually if needed</div><div class="line">                                            if (xhr.readyState !== 4) &#123;</div><div class="line">                                                xhr.abort();</div><div class="line">                                            &#125;</div><div class="line">                                        &#125; else &#123;</div><div class="line">                                            status = xhr.status;</div><div class="line">                                            responseHeaders = xhr.getAllResponseHeaders();</div><div class="line">                                            responses = &#123;&#125;;</div><div class="line">                                            xml = xhr.responseXML;</div><div class="line">    </div><div class="line">                                            // Construct response list</div><div class="line">                                            if (xml &amp;&amp; xml.documentElement /* #4958 */) &#123;</div><div class="line">                                                responses.xml = xml;</div><div class="line">                                            &#125;</div><div class="line">                                            responses.text = xhr.responseText;</div><div class="line">    </div><div class="line">                                            // Firefox throws an exception when accessing</div><div class="line">                                            // statusText for faulty cross-domain requests</div><div class="line">                                            try &#123;</div><div class="line">                                                statusText = xhr.statusText;</div><div class="line">                                            &#125; catch (e) &#123;</div><div class="line">                                                // We normalize with Webkit giving an empty statusText</div><div class="line">                                                statusText = &quot;&quot;;</div><div class="line">                                            &#125;</div><div class="line">    </div><div class="line">                                            // Filter status for non standard behaviors</div><div class="line">    </div><div class="line">                                            // If the request is local and we have data: assume a success</div><div class="line">                                            // (success with no data won&apos;t get notified, that&apos;s the best we</div><div class="line">                                            // can do given current implementations)</div><div class="line">                                            if (!status &amp;&amp; s.isLocal &amp;&amp; !s.crossDomain) &#123;</div><div class="line">                                                status = responses.text ? 200 : 404;</div><div class="line">                                                // IE - #1450: sometimes returns 1223 when it should be 204</div><div class="line">                                            &#125; else if (status === 1223) &#123;</div><div class="line">                                                status = 204;</div><div class="line">                                            &#125;</div><div class="line">                                        &#125;</div><div class="line">                                    &#125;</div><div class="line">                                &#125; catch (firefoxAccessException) &#123;</div><div class="line">                                    if (!isAbort) &#123;</div><div class="line">                                        complete(-1, firefoxAccessException);</div><div class="line">                                    &#125;</div><div class="line">                                &#125;</div><div class="line">    </div><div class="line">                                // Call complete if needed</div><div class="line">                                if (responses) &#123;</div><div class="line">                                    complete(status, statusText, responses, responseHeaders);</div><div class="line">                                &#125;</div><div class="line">                            &#125;;</div><div class="line">    </div><div class="line">                            // if we&apos;re in sync mode or it&apos;s in cache</div><div class="line">                            // and has been retrieved directly (IE6 &amp; IE7)</div><div class="line">                            // we need to manually fire the callback</div><div class="line">                            if (!s.async || xhr.readyState === 4) &#123;</div><div class="line">                                callback();</div><div class="line">                            &#125; else &#123;</div><div class="line">                                handle = ++xhrId;</div><div class="line">                                if (xhrOnUnloadAbort) &#123;</div><div class="line">                                    // Create the active xhrs callbacks list if needed</div><div class="line">                                    // and attach the unload handler</div><div class="line">                                    if (!xhrCallbacks) &#123;</div><div class="line">                                        xhrCallbacks = &#123;&#125;;</div><div class="line">                                        jQuery(window).unload(xhrOnUnloadAbort);</div><div class="line">                                    &#125;</div><div class="line">                                    // Add to list of active xhrs callbacks</div><div class="line">                                    xhrCallbacks[handle] = callback;</div><div class="line">                                &#125;</div><div class="line">                                xhr.onreadystatechange = callback;</div><div class="line">                            &#125;</div><div class="line">                        &#125;,</div><div class="line">    </div><div class="line">                        abort: function () &#123;</div><div class="line">                            if (callback) &#123;</div><div class="line">                                callback(0, 1);</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                    &#125;;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/03/ajax_4/" itemprop="url">
+                  ajax源码解析-$.ajax()中常见应用示例
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T14:22:25+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/03/ajax_4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/ajax_4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="ajax-中常见应用示例"><a href="#ajax-中常见应用示例" class="headerlink" title="$.ajax()中常见应用示例"></a>$.ajax()中常见应用示例</h3><blockquote>
+<p>cache和ifModified参数 跨域请求</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/03/ajax_4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/03/ajax_3/" itemprop="url">
+                  ajax源码解析-jQuery ajax相关函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T14:11:31+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/03/ajax_3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/ajax_3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>解释了ajax源码中一些函数的使用</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/03/ajax_3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/03/ajax_2/" itemprop="url">
+                  ajax源码解析-jQuery Ajax事件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T13:56:38+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/03/ajax_2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/ajax_2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>jQuery框架中，伴随Ajax请求会触发若干事件，我们可以订阅这些事件并在其中处理我们的逻辑。在jQuery中有两种Ajax事件：局部事件和全局事件。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/03/ajax_2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/03/tecLink/" itemprop="url">
+                  技术文档
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T11:26:00+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/03/tecLink/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/tecLink/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>http相关 jQuery相关等技术文档</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/03/tecLink/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/02/ajax_1/" itemprop="url">
+                  ajax源码解析-源码流程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-02T15:27:11+08:00" content="2016-11-02">
+              2016-11-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/02/ajax_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/ajax_1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>ajax源码 了解执行的整个过程 参照注释看相关文章</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/02/ajax_1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/31/ajax/" itemprop="url">
+                  ajax源码解析-s对象和jqXHR对象
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-31T19:34:06+08:00" content="2016-10-31">
+              2016-10-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/31/ajax/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/ajax/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="jQuery-ajax-url-options"><a href="#jQuery-ajax-url-options" class="headerlink" title="jQuery.ajax( [url,] options )"></a>jQuery.ajax( [url,] options )</h3><blockquote>
+<p>通过 HTTP 请求加载远程数据。<br>返回值：$.ajax() 返回jqXHR对象（jqXHR对象：为XMLHttpRequest对象的超集）。可用于手动终止请求abort()、为ajax函数设置额外的回调函数等。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/31/ajax/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/28/hexo/" itemprop="url">
                   hexo搭建个人博客
                 </a>
@@ -609,875 +1483,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/26/closure/" itemprop="url">
-                  深入理解javascript的闭包特性
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-26T13:48:21+08:00" content="2016-10-26">
-              2016-10-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/26/closure/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/closure/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>理解JavaScript的闭包是迈向高级JS程序员的必经之路，理解了其解释和运行机制才能写出更为安全和优雅的代码</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/closure/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/25/event/" itemprop="url">
-                  jQuery.event兼容各浏览器的event详细解析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-25T16:58:03+08:00" content="2016-10-25">
-              2016-10-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/25/event/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/25/event/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>jQuery在遵循W3C规范的情况下，对事件的常用属性进行了封装，使得事件处理在各大浏览器下都可以正常的运行而不需要进行浏览器类型判断,<br>如果想了解如何封装，可以看jquery源码</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/25/event/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/24/$.extend/" itemprop="url">
-                  $.extend详解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-24T11:20:58+08:00" content="2016-10-24">
-              2016-10-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/24/$.extend/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/$.extend/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>jQuery.extend()函数用于将一个或多个对象的内容合并到目标对象。<br>该函数可以将一个或多个对象的成员属性和方法复制到指定的对象上。<br>该函数属于全局jQuery对象。</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/24/$.extend/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/cookie/" itemprop="url">
-                  cookie使用总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T14:00:17+08:00" content="2016-10-21">
-              2016-10-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/21/cookie/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/cookie/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><blockquote>
-<p>一个轻量级的cookie 插件，可以读取、写入、删除 cookie。    </p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/cookie/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/note/" itemprop="url">
-                  Javascript  高级程序设计
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T13:41:23+08:00" content="2016-10-21">
-              2016-10-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/21/note/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/note/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Javascript-高级程序设计"><a href="#Javascript-高级程序设计" class="headerlink" title="Javascript  高级程序设计"></a>Javascript  高级程序设计</h2><blockquote>
-<p>记录下读书心得</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/20/backbone/" itemprop="url">
-                  Backbone
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-20T20:33:17+08:00" content="2016-10-20">
-              2016-10-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/20/backbone/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/backbone/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>Backbone 是一个 JavaScript 框架，可用于创建模型-视图-控制器 (model-view-controller, MVC) 类应用程序和单页界面</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/20/backbone/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/20/sass/" itemprop="url">
-                  sass
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-20T20:33:17+08:00" content="2016-10-20">
-              2016-10-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/css/" itemprop="url" rel="index">
-                    <span itemprop="name">css</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/20/sass/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/sass/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.w3cplus.com/sassguide/" title="sass入门" target="_blank" rel="external">sass入门</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1518,7 +1528,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1535,7 +1545,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

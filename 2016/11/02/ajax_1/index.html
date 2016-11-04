@@ -1,0 +1,854 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js,ajax源码解析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="ajax源码 了解执行的整个过程 参照注释看相关文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax源码解析-源码流程">
+<meta property="og:url" content="http://yoursite.com/2016/11/02/ajax_1/index.html">
+<meta property="og:site_name" content="Sunbaixin blog">
+<meta property="og:description" content="ajax源码 了解执行的整个过程 参照注释看相关文章">
+<meta property="og:updated_time" content="2016-11-04T12:05:28.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajax源码解析-源码流程">
+<meta name="twitter:description" content="ajax源码 了解执行的整个过程 参照注释看相关文章">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/02/ajax_1/"/>
+
+
+  <title> ajax源码解析-源码流程 | Sunbaixin blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Sunbaixin blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Goals determine what you are going to be</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ajax源码解析-源码流程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-02T15:27:11+08:00" content="2016-11-02">
+              2016-11-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/02/ajax_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/ajax_1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>ajax源码 了解执行的整个过程 参照注释看相关文章</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div></pre></td><td class="code"><pre><div class="line">ajax: function (url, options) &#123;</div><div class="line">    if (typeof url === &quot;object&quot;) &#123;</div><div class="line">        options = url;</div><div class="line">        url = undefined;</div><div class="line">    &#125;</div><div class="line">    options = options || &#123;&#125;;</div><div class="line">   // 由ajaxSetting和入口传入的option合成的对象s，</div><div class="line">   //jQuery.ajaxSetup等函数的使用 参见文章ajax源码解析-jQuery ajax相关函数</div><div class="line">    var s = jQuery.ajaxSetup(&#123;&#125;, options)。。。</div><div class="line">    &lt;!--其他变量也在此处声明 省略--&gt;</div><div class="line">   //对象s内的各个参数详解，参见文章ajax源码解析-s对象和jqXHR对象</div><div class="line">    jqXHR = &#123;</div><div class="line">        readyState: 0,</div><div class="line">        setRequestHeader: function (name, value) &#123;</div><div class="line">        &#125;,</div><div class="line">        getAllResponseHeaders: function () &#123;</div><div class="line">        &#125;,</div><div class="line">        getResponseHeader: function (key) &#123;</div><div class="line">        &#125;,</div><div class="line">        overrideMimeType: function (type) &#123;</div><div class="line">        &#125;,</div><div class="line">        abort: function (statusText) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    function done(status, nativeStatusText, responses, headers) &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Attach deferreds</div><div class="line">    // 开发网站的过程中，我们经常遇到某些耗时很长的javascript操作。其中，既有异步的操作（比如ajax读取服务器数据），也有同步的操作（比如遍历一个大型数组），它们都不是立即能得到结果的。</div><div class="line">    // 通常的做法是，为它们指定回调函数（callback）。即事先规定，一旦它们运行结束，应该调用哪些函数。</div><div class="line">    // deferred对象就是jQuery的回调函数解决方案  &apos;延迟执行&apos;</div><div class="line">    deferred.promise(jqXHR);</div><div class="line">    jqXHR.success = jqXHR.done;</div><div class="line">    jqXHR.error = jqXHR.fail;</div><div class="line">    jqXHR.complete = completeDeferred.add;</div><div class="line"></div><div class="line">    // Status-dependent callbacks</div><div class="line">    jqXHR.statusCode = function (map) &#123;</div><div class="line">    &#125;;</div><div class="line">    // 处理url 去掉hash地址和添加协议</div><div class="line">    // 例如 var c=&quot;//brandshow.58.com/show/loadBrandAds#top&quot;</div><div class="line">    // c.replace(rhash, &quot;&quot;).replace(rprotocol, ajaxLocParts[1] + &quot;//&quot;);</div><div class="line">    // 结果&quot;http://brandshow.58.com/show/loadBrandAds&quot;--&gt;</div><div class="line">    s.url = ( ( url || s.url ) + &quot;&quot; ).replace(rhash, &quot;&quot;).replace(rprotocol, ajaxLocParts[1] + &quot;//&quot;);</div><div class="line">    // 处理dataType数据类型，去除空格，转换成数组</div><div class="line">    s.dataTypes = jQuery.trim(s.dataType || &quot;*&quot;).toLowerCase().split(rspacesAjax)</div><div class="line">    // 来判断是否跨域 协议 域名 端口号 必须一致</div><div class="line">              if (s.crossDomain == null) &#123;</div><div class="line">                  parts = rurl.exec(s.url.toLowerCase());</div><div class="line">                  //parts返回值（以数组形式包含协议 域名 端口号；然后分别和当前地址的协议 域名 端口号比较，有一处不等则判断为跨域 ）</div><div class="line">                  // 例如：[&quot;http://api.house.58.com&quot;, &quot;http:&quot;, &quot;api.house.58.com&quot;, undefined]</div><div class="line">                  s.crossDomain = !!( parts &amp;&amp;</div><div class="line">                  ( parts[1] != ajaxLocParts[1] || parts[2] != ajaxLocParts[2] ||</div><div class="line">                  ( parts[3] || ( parts[1] === &quot;http:&quot; ? 80 : 443 ) ) !=</div><div class="line">                  ( ajaxLocParts[3] || ( ajaxLocParts[1] === &quot;http:&quot; ? 80 : 443 ) ) )</div><div class="line">                  );</div><div class="line">              &#125;</div><div class="line">    //处理数据data序列化 例如&#123;userId:42437217099799,cateId:8&#125;转化为userId=42437217099799&amp;cateId=8&quot;</div><div class="line">    if (s.data &amp;&amp; s.processData &amp;&amp; typeof s.data !== &quot;string&quot;) &#123;</div><div class="line">       s.data = jQuery.param(s.data, s.traditional);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Apply prefilters</div><div class="line">    // prefilters前置过滤器</div><div class="line">    // jQuery1.5以后，AJAX模块提供了三个新的方法用于管理、扩展AJAX请求，分别是：</div><div class="line">    // 1.前置过滤器 jQuery. ajaxPrefilter</div><div class="line">    // 2.请求分发器 jQuery. ajaxTransport，</div><div class="line">    // 3.类型转换器 ajaxConvert</div><div class="line">    //参见文章ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport，</div><div class="line">    //  prefilters对象  Object &#123;json: Array[1], jsonp: Array[1], script: Array[1]&#125;</div><div class="line">    &lt;!--前置过滤器主要预处理参数</div><div class="line">    举例 dataType：json或者jsonp 会一次经过jQuery. ajaxPrefilter(&quot;json jsonp&quot;)和jQuery. ajaxPrefilter(&quot;script&quot;)</div><div class="line">    结果：url会拼接上s.jsonp+jsonpcallback(如?callback=jQuery4781297478394_481274389) </div><div class="line">          s.cache=false;</div><div class="line">          如果是跨域</div><div class="line">          s.type = &quot;GET&quot;;</div><div class="line">          s.global = false;</div><div class="line">    --&gt;</div><div class="line">    inspectPrefiltersOrTransports(prefilters, s, options, jqXHR);</div><div class="line"></div><div class="line">    // If request was aborted inside a prefiler, stop there</div><div class="line">    if (state === 2) &#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">    // We can fire global events as of now if asked to</div><div class="line">    fireGlobals = s.global;</div><div class="line">    // Uppercase the type</div><div class="line">    s.type = s.type.toUpperCase();</div><div class="line">    // Determine if request has content</div><div class="line">    s.hasContent = !rnoContent.test(s.type);</div><div class="line">   // Watch for a new set of requests</div><div class="line">    if (fireGlobals &amp;&amp; jQuery.active++ === 0) &#123;</div><div class="line">        jQuery.event.trigger(&quot;ajaxStart&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // More options handling for requests with no content</div><div class="line">     &lt;!--s.hasContent 非GET或HEAD请求为true，用于处理data和contentType参数。--&gt;</div><div class="line">      if (!s.hasContent) &#123;</div><div class="line">    </div><div class="line">                    // If data is available, append data to url</div><div class="line">                    if (s.data) &#123;</div><div class="line">                       &lt;!--把传递的数据data以参数形式拼接到请求的url--&gt;</div><div class="line">                        s.url += ( rquery.test(s.url) ? &quot;&amp;&quot; : &quot;?&quot; ) + s.data;</div><div class="line">                        // #9682: remove data so that it&apos;s not used in an eventual retry</div><div class="line">                        delete s.data;</div><div class="line">                    &#125;</div><div class="line">    </div><div class="line">                    // Get ifModifiedKey before adding the anti-cache parameter</div><div class="line">                    ifModifiedKey = s.url;</div><div class="line">    </div><div class="line">                    // Add anti-cache in url if needed</div><div class="line">                    if (s.cache === false) &#123;</div><div class="line">                        默认cache为false  即无缓存 处理方法在请求地址后面加时间戳</div><div class="line">                        var ts = jQuery.now(),</div><div class="line">                        // try replacing _= if it is there</div><div class="line">                            ret = s.url.replace(rts, &quot;$1_=&quot; + ts);</div><div class="line">    </div><div class="line">                        // if nothing was replaced, add timestamp to the end</div><div class="line">                        s.url = ret + ( ( ret === s.url ) ? ( rquery.test(s.url) ? &quot;&amp;&quot; : &quot;?&quot; ) + &quot;_=&quot; + ts : &quot;&quot; );</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    // Set the correct header, if data is being sent</div><div class="line">    if (s.data &amp;&amp; s.hasContent &amp;&amp; s.contentType !== false || options.contentType) &#123;</div><div class="line">        jqXHR.setRequestHeader(&quot;Content-Type&quot;, s.contentType);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.</div><div class="line">    //If-Modified-Since和If-None-Match 的使用 参见文章ajax源码解析-$.ajax()中常见应用示例</div><div class="line">    if (s.ifModified) &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Set the Accepts header for the server, depending on the dataType</div><div class="line">    jqXHR.setRequestHeader(</div><div class="line">        &quot;Accept&quot;,</div><div class="line">        s.dataTypes[0] &amp;&amp; s.accepts[s.dataTypes[0]] ?</div><div class="line">        s.accepts[s.dataTypes[0]] + ( s.dataTypes[0] !== &quot;*&quot; ? &quot;, &quot; + allTypes + &quot;; q=0.01&quot; : &quot;&quot; ) :</div><div class="line">            s.accepts[&quot;*&quot;]</div><div class="line">    );</div><div class="line"></div><div class="line">    // Check for headers option</div><div class="line">    for (i in s.headers) &#123;</div><div class="line">        jqXHR.setRequestHeader(i, s.headers[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Allow custom headers/mimetypes and early abort</div><div class="line">  </div><div class="line">    if (s.beforeSend &amp;&amp; ( s.beforeSend.call(callbackContext, jqXHR, s) === false || state === 2 )) &#123;</div><div class="line">        // Abort if not done already</div><div class="line">        jqXHR.abort();</div><div class="line">        return false;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Install callbacks on deferreds</div><div class="line">    for (i in &#123;success: 1, error: 1, complete: 1&#125;) &#123;</div><div class="line">        jqXHR[i](s[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Get transport</div><div class="line">    &lt;!--请求分发器 一种处理跨越 一种处理xmlHttpRequest请求--&gt;</div><div class="line">    例如：dataType:json 经过ajax.Prefilters处理 返回dataType[0]==&quot;script&quot;  在经过ajax.Transports处理</div><div class="line">    如果s.crossmain==true 那么transport会以对象的形式返回两个方法&#123;send:&#123;&#125;,abort:&#123;&#125;&#125;来处理跨域问题</div><div class="line">    transport = inspectPrefiltersOrTransports(transports, s, options, jqXHR);</div><div class="line">    </div><div class="line">     // 全局事件 ajaxStart ajaxSend等参见文章ajax源码解析-全局事件及局部事件</div><div class="line">    // If no transport, we auto-abort</div><div class="line">    if (!transport) &#123;</div><div class="line">        done(-1, &quot;No Transport&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">        jqXHR.readyState = 1;</div><div class="line">        // Send global event</div><div class="line">        if (fireGlobals) &#123;</div><div class="line">            globalEventContext.trigger(&quot;ajaxSend&quot;, [jqXHR, s]);</div><div class="line">        &#125;</div><div class="line">        // Timeout</div><div class="line">        if (s.async &amp;&amp; s.timeout &gt; 0) &#123;</div><div class="line">            timeoutTimer = setTimeout(function () &#123;</div><div class="line">                jqXHR.abort(&quot;timeout&quot;);</div><div class="line">            &#125;, s.timeout);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            state = 1;</div><div class="line">            &lt;!--经过请求分发器的处理 返回的对象格式一致(不论是跨域请求还是非跨域请求) 即&#123;send:&#123;&#125;,abort:&#123;&#125;&#125;--&gt;</div><div class="line">            transport.send(requestHeaders, done);</div><div class="line">        &#125; catch (e) &#123;</div><div class="line">            // Propagate exception as error if not done</div><div class="line">            if (state &lt; 2) &#123;</div><div class="line">                done(-1, e);</div><div class="line">                // Simply rethrow otherwise</div><div class="line">            &#125; else &#123;</div><div class="line">                throw e;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">   &lt;!--$.ajax(&#123;&#125;)返回的是jqXHR对象，对象内各种属性及方法参见文章ajax源码解析-s对象和jqXHR对象 --&gt;</div><div class="line">    return jqXHR;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/erweima.png" alt="sunbaixin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫描上方二维码，关注我的博客</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag">#js</a>
+          
+            <a href="/tags/ajax源码解析/" rel="tag">#ajax源码解析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/31/ajax/" rel="next" title="ajax源码解析-s对象和jqXHR对象">
+                <i class="fa fa-chevron-left"></i> ajax源码解析-s对象和jqXHR对象
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/tecLink/" rel="prev" title="技术文档">
+                技术文档 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/02/ajax_1/"
+     data-title="ajax源码解析-源码流程"
+     data-content=""
+     data-url="http://yoursite.com/2016/11/02/ajax_1/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/02/ajax_1/"
+           data-title="ajax源码解析-源码流程" data-url="http://yoursite.com/2016/11/02/ajax_1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/head.jpg"
+               alt="sunbaixin" />
+          <p class="site-author-name" itemprop="name">sunbaixin</p>
+          <p class="site-description motion-element" itemprop="description">happy girl</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hello-sunbaixin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunbaixin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunbaixin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

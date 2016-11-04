@@ -1,0 +1,973 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js,ajax源码解析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="jQuery框架中，伴随Ajax请求会触发若干事件，我们可以订阅这些事件并在其中处理我们的逻辑。在jQuery中有两种Ajax事件：局部事件和全局事件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax源码解析-jQuery Ajax事件">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/ajax_2/index.html">
+<meta property="og:site_name" content="Sunbaixin blog">
+<meta property="og:description" content="jQuery框架中，伴随Ajax请求会触发若干事件，我们可以订阅这些事件并在其中处理我们的逻辑。在jQuery中有两种Ajax事件：局部事件和全局事件。">
+<meta property="og:image" content="http://yoursite.com/uploads/ajax_3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/ajax_4.png">
+<meta property="og:updated_time" content="2016-11-03T08:39:38.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajax源码解析-jQuery Ajax事件">
+<meta name="twitter:description" content="jQuery框架中，伴随Ajax请求会触发若干事件，我们可以订阅这些事件并在其中处理我们的逻辑。在jQuery中有两种Ajax事件：局部事件和全局事件。">
+<meta name="twitter:image" content="http://yoursite.com/uploads/ajax_3.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/ajax_2/"/>
+
+
+  <title> ajax源码解析-jQuery Ajax事件 | Sunbaixin blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Sunbaixin blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Goals determine what you are going to be</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ajax源码解析-jQuery Ajax事件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T13:56:38+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/03/ajax_2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/ajax_2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>jQuery框架中，伴随Ajax请求会触发若干事件，我们可以订阅这些事件并在其中处理我们的逻辑。在jQuery中有两种Ajax事件：局部事件和全局事件。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="局部事件（回调函数）"><a href="#局部事件（回调函数）" class="headerlink" title="局部事件（回调函数）"></a>局部事件（回调函数）</h3><p>在$.ajax()方法的options参数中声明，可以用来设置请求数据和获取、处理响应数据。</p>
+<table>
+<thead>
+<tr>
+<th>局部事件</th>
+<th>具体解析 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeSend</td>
+<td>该函数可在发送请求前修改XMLHttpRequest对象，如添加自定义 HTTP 头。签名：function (jqXHR,s) { }函数说明：传入jqXHR、s对象</td>
+</tr>
+<tr>
+<td>dataFilter</td>
+<td>在请求成功之后调用。若状态码为304(未修改)则不触发此回调。签名：function (data, dataType) { return newData; }</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入返回的数据、”dataType”参数的值。并且必须返回新的数据传递给success回调函数</td>
+</tr>
+<tr>
+<td>success</td>
+<td>请求成功时触发。签名：function (data,statusText,jqXHR) { }</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入返回的数据、描述状态的字符串”success”、jqXHR对象</td>
+</tr>
+<tr>
+<td>error</td>
+<td>请求失败时调用此函数。签名：function (jqXHR, textStatus, errorThrown) { }</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入jqXHR对象、描述状态的字符串”error”、错误信息</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>请求完成后回调函数 (请求成功或失败之后均调用)签名：function (jqXHR, textStatus) { }</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入jqXHR对象、描述状态的字符串（可能值：”No Transport”、”timeout”、”notmodified”—304 “、”parsererror”、”success”、”error”）</td>
+</tr>
+</tbody>
+</table>
+<p>定义方式例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    // ...</div><div class="line">    beforeSend: function()&#123;</div><div class="line">        // Handle the beforeSend event</div><div class="line">    &#125;,</div><div class="line">    complete: function()&#123;</div><div class="line">        // Handle the complete event</div><div class="line">    &#125;</div><div class="line">    // ...</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="全局事件"><a href="#全局事件" class="headerlink" title="全局事件"></a>全局事件</h3><blockquote>
+<p>每次Ajax请求都会触发，它会向DOM中的所有元素广播，你只需为DOM中任意元素bind好全局事件即会触发（若绑定多次，则会依次触发为事件注册的回调函数）。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>全局事件</th>
+<th>具体解析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ajaxStart</td>
+<td>开始新的Ajax请求，并且此时jQuery对象上没有其他ajax请求正在进行。签名：function(e)</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入事件对象</td>
+</tr>
+<tr>
+<td>ajaxSend</td>
+<td>当一个Ajax请求开始时触发签名：function(e,jqXHR,s)</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入事件对象、jqXHR、s对象</td>
+</tr>
+<tr>
+<td>ajaxSuccess</td>
+<td>全局的请求成功 签名：function(e,jqXHR,s,data)</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入事件对象、jqXHR、s对象、请求成功返回的相应数据</td>
+</tr>
+<tr>
+<td>ajaxError</td>
+<td>全局的发生错误时触发 签名：function(e,jqXHR,s,errorData)</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入事件对象、jqXHR、s对象、请求失败返回的错误信息</td>
+</tr>
+<tr>
+<td>ajaxComplete</td>
+<td>全局的请求完成时触发 签名：function(e,jqXHR,s)</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入事件对象、jqXHR、s对象</td>
+</tr>
+<tr>
+<td>ajaxStop</td>
+<td>当jQuery对象上正在进行Ajax请求都结束时触发。签名：function(e)</td>
+</tr>
+<tr>
+<td></td>
+<td>函数说明：传入事件对象</td>
+</tr>
+</tbody>
+</table>
+<p>全局事件在jQuery中的声明方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">jQuery.each( &quot;ajaxStart ajaxStop ajaxComplete ajaxError ajaxSuccess ajaxSend&quot;.split( &quot; &quot; ), function( i, o )&#123;</div><div class="line">        jQuery.fn[ o ] = function( f )&#123;</div><div class="line">        return this.on( o, f );</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>所以我们可以使用下面两种方式定义全局事件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 可以用bind来绑定，用unbind来取消绑定。</div><div class="line">$(&quot;#loading&quot;).bind(&quot;ajaxSend&quot;, function()&#123; … &#125;);</div><div class="line">或者：</div><div class="line">$(&quot;#loading&quot;).ajaxStart(function()&#123; … &#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="ajax方法完整的事件流"><a href="#ajax方法完整的事件流" class="headerlink" title="ajax方法完整的事件流"></a>ajax方法完整的事件流</h3><p>成功的ajax事件流<br><img src="uploads/ajax_3.png" alt="image"><br>失败的ajax事件流<br><img src="uploads/ajax_4.png" alt="image"></p>
+<h3 id="示例：-ajax-触发的事件-局部事件和全局事件"><a href="#示例：-ajax-触发的事件-局部事件和全局事件" class="headerlink" title="示例：$.ajax()触发的事件(局部事件和全局事件)"></a>示例：$.ajax()触发的事件(局部事件和全局事件)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">// 全局事件</div><div class="line">$(&quot;#div_event&quot;).ajaxStart(function (e) &#123;</div><div class="line">    doAddEvent4textarea(&apos;txt_event&apos;, &apos;触发ajaxStart回调函数&apos;);</div><div class="line">&#125;);</div><div class="line">$(&quot;#div_event&quot;).ajaxSend(function (e) &#123;</div><div class="line">    doAddEvent4textarea(&apos;txt_event&apos;, &apos;触发ajaxSend回调函数&apos;);</div><div class="line">&#125;);</div><div class="line">$(&quot;#div_event&quot;).ajaxSuccess(function (e, jqXHR, s, data) &#123;</div><div class="line">    doAddEvent4textarea(&apos;txt_event&apos;, &apos;触发ajaxSuccess回调函数&apos;);</div><div class="line">&#125;);</div><div class="line">$(&quot;#div_event&quot;).ajaxError(function (e, jqXHR, s, errorData) &#123;</div><div class="line">    doAddEvent4textarea(&apos;txt_event&apos;, &apos;触发ajaxError回调函数&apos;);</div><div class="line">&#125;);</div><div class="line">$(&quot;#div_event&quot;).ajaxComplete(function (e, jqXHR, s) &#123;</div><div class="line">    doAddEvent4textarea(&apos;txt_event&apos;, &apos;触发ajaxComplete回调函数&apos;);</div><div class="line">&#125;);</div><div class="line">$(&quot;#div_event&quot;).ajaxStop(function (e) &#123;</div><div class="line">    doAddEvent4textarea(&apos;txt_event&apos;, &apos;触发ajaxStop回调函数&apos;);</div><div class="line">&#125;);</div><div class="line">// 局部事件</div><div class="line">function bindLocalEvent(e) &#123;</div><div class="line">    var textareaid = e.data.textareaid;</div><div class="line">    var global = e.data.global;</div><div class="line"> </div><div class="line">    $.ajax(&apos;AjaxHandler.ashx?func=btn_nowTime_long&apos;,</div><div class="line">        &#123;</div><div class="line">            type: &apos;get&apos;,</div><div class="line">            dataType: &apos;text&apos;,</div><div class="line">            global: global,</div><div class="line">            cache: false,</div><div class="line">            beforeSend: function (jqXHR, s) &#123;</div><div class="line">                doAddEvent4textarea(textareaid, &apos;触发beforeSend回调函数&apos;);</div><div class="line">            &#125;,</div><div class="line">            dataFilter: function (data, dataType) &#123;</div><div class="line">                doAddEvent4textarea(textareaid, &apos;触发dataFilter回调函数&apos;);</div><div class="line">            &#125;,</div><div class="line">            success: function (data, statusText, jqXHR) &#123;</div><div class="line">                doAddEvent4textarea(textareaid, &apos;触发success回调函数&apos;);</div><div class="line">            &#125;,</div><div class="line">            error: function (jqXHR, textStatus, errorThrown) &#123;</div><div class="line">                doAddEvent4textarea(textareaid, &apos;触发error回调函数&apos;);</div><div class="line">            &#125;,</div><div class="line">            complete: function (jqXHR, textStatus) &#123;</div><div class="line">                doAddEvent4textarea(textareaid, &apos;触发complete回调函数&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">&#125;</div><div class="line">function doAddEvent4textarea(textareaid, txt) &#123;</div><div class="line">    var textarea = $(&quot;#&quot; + textareaid);</div><div class="line">    textarea.val(textarea.val() + &apos;\r\n&apos; + txt);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="ajax-方法的全局事件典型用例"><a href="#ajax-方法的全局事件典型用例" class="headerlink" title="$.ajax()方法的全局事件典型用例"></a>$.ajax()方法的全局事件典型用例</h3><blockquote>
+<p>你的页面存在多个甚至为数不少的ajax请求，但是这些ajax请求都有相同的消息机制。ajax请求开始前显示一个提示框，提示“正在读取数据”；ajax请求成功时提示框显示“数据获取成功”；ajax请求结束后隐藏提示框。</p>
+</blockquote>
+<p>a)   不使用全局事件的做法是：<br>给$.ajax()加上beforeSend、success、complete回调函数，在回调函数中加上处理提示框。<br>b)   使用全局事件的做法是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(document).ajaxStart(onStart)</div><div class="line">                   .ajaxComplete(onComplete)</div><div class="line">                   .ajaxSuccess(onSuccess);</div><div class="line">function onStart(event) &#123; //..... &#125;</div><div class="line">function onComplete(event, xhr, settings) &#123; //..... &#125;</div><div class="line">function onSuccess(event, xhr, settings) &#123; //..... &#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/erweima.png" alt="sunbaixin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫描上方二维码，关注我的博客</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag">#js</a>
+          
+            <a href="/tags/ajax源码解析/" rel="tag">#ajax源码解析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/tecLink/" rel="next" title="技术文档">
+                <i class="fa fa-chevron-left"></i> 技术文档
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/ajax_3/" rel="prev" title="ajax源码解析-jQuery ajax相关函数">
+                ajax源码解析-jQuery ajax相关函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/03/ajax_2/"
+     data-title="ajax源码解析-jQuery Ajax事件"
+     data-content=""
+     data-url="http://yoursite.com/2016/11/03/ajax_2/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/03/ajax_2/"
+           data-title="ajax源码解析-jQuery Ajax事件" data-url="http://yoursite.com/2016/11/03/ajax_2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/head.jpg"
+               alt="sunbaixin" />
+          <p class="site-author-name" itemprop="name">sunbaixin</p>
+          <p class="site-description motion-element" itemprop="description">happy girl</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hello-sunbaixin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部事件（回调函数）"><span class="nav-number">1.</span> <span class="nav-text">局部事件（回调函数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局事件"><span class="nav-number">2.</span> <span class="nav-text">全局事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax方法完整的事件流"><span class="nav-number">3.</span> <span class="nav-text">ajax方法完整的事件流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例：-ajax-触发的事件-局部事件和全局事件"><span class="nav-number">4.</span> <span class="nav-text">示例：$.ajax()触发的事件(局部事件和全局事件)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax-方法的全局事件典型用例"><span class="nav-number">5.</span> <span class="nav-text">$.ajax()方法的全局事件典型用例</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunbaixin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunbaixin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

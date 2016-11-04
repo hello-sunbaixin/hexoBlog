@@ -1,0 +1,915 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js,ajax源码解析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="$.ajax()中常见应用示例
+cache和ifModified参数 跨域请求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax源码解析-$.ajax()中常见应用示例">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/ajax_4/index.html">
+<meta property="og:site_name" content="Sunbaixin blog">
+<meta property="og:description" content="$.ajax()中常见应用示例
+cache和ifModified参数 跨域请求">
+<meta property="og:updated_time" content="2016-11-03T08:53:19.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajax源码解析-$.ajax()中常见应用示例">
+<meta name="twitter:description" content="$.ajax()中常见应用示例
+cache和ifModified参数 跨域请求">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/ajax_4/"/>
+
+
+  <title> ajax源码解析-$.ajax()中常见应用示例 | Sunbaixin blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Sunbaixin blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Goals determine what you are going to be</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ajax源码解析-$.ajax()中常见应用示例
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T14:22:25+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/03/ajax_4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/ajax_4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="ajax-中常见应用示例"><a href="#ajax-中常见应用示例" class="headerlink" title="$.ajax()中常见应用示例"></a>$.ajax()中常见应用示例</h3><blockquote>
+<p>cache和ifModified参数 跨域请求</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="cache和ifModified参数"><a href="#cache和ifModified参数" class="headerlink" title="cache和ifModified参数"></a>cache和ifModified参数</h3><p><strong>1)   cache参数：GET和POST最重要的区别（传送门）</strong><br>语义上，GET是获取指定URL上的资源，是读操作，重要的一点是不论对某个资源GET多少次，它的状态是不会改变的，在这个意义上，我们说GET是安全的（不是被密码学或者数据保护意义上的安全）。因为GET是安全的，所以GET返回的内容可以被浏览器，Cache服务器缓存起来。<br>而POST的语意是对指定资源“追加/添加”数据，所以是不安全的，每次提交的POST，参与的代码都会认为这个操作会修改操作对象资源的状态，于是，浏览器在你按下F5的时候会跳出确认框，缓存服务器不会缓存POST请求返回内容。<br><strong>2)   ifModified参数：</strong><br>通过ifModified参数提高请求性能（即：“条件GET”：Last-Modified / If-Modified-Since和ETag / If-None-Match）<br>当你请求的资源并不是一层不变的时候，即不能简单的一直使用客户端缓存时，你可能通过将cache设置为false来发送请求，这实际上是在url加上时间戳组合成新的url，每次发送新的请求，这明显加大了服务器的压力。<br>对于这种情况，我们可以通过ifModified参数改进缓存方式（即：cache和ifModified都设置为true），仅在请求的数据改变时重新获取。通过这种方式请求的url不会改变，并且每次都会发送到服务器，只是会有检验方法验证是否需要重新获取数据从而节省带宽和开销。<br>更多ETag描述（优点，解决了Last-Modified无法解决的一些问题，什么场合不应该被使用）</p>
+<blockquote>
+<p><strong>过程如下：</strong><br>a)   将$.ajax()函数的cache和ifModified参数同时设置为true。<br>b)   客户端请求服务端A，在服务端加上Last-Modified/ETag响应体一起返回。<br>c)   客户端缓存接收到的Last-Modified/ETag响应体，并在下一次发生请求A时将缓存的Last-Modified/ETag值做为If-Modified-Since/IF-None-Match请求头一起发给服务器。<br>d)   服务器接收If-Modified-Since/IF-None-Match后，就根据参数值检验自上次客服端请求之后资源是否有改动<br>                          i.      若还未改动则直接返回响应304和一个空的响应体。<br>                        ii.      若已改动则重新处理数据，返回最新的请求数据。<br>e)   这样，既保证不向客户端重复发出资源，也保证当服务器有变化时，客户端能够得到最新的资源。<br>这一过程中，我们只需要做：服务器返回Last-Modified/ETag响应头和在服务端检验数据是否失效并采取对应处理方式。其余步骤由jQuery框架的ajax()函数完成。</p>
+</blockquote>
+<p>关键代码如下：<br>客服端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> $(&apos;#btn_nowTime_long3&apos;).bind(&apos;click&apos;, null</div><div class="line">  , function () &#123;</div><div class="line">  $.ajax(&apos;AjaxHandler.ashx?func=GetServerTime4Modified&apos;,</div><div class="line">          &#123;</div><div class="line">              type: &apos;get&apos;,</div><div class="line">              dataType: &apos;text&apos;,</div><div class="line">              cache: true,</div><div class="line">              ifModified: true,</div><div class="line">              success: function (data) &#123;</div><div class="line">                  if (data)</div><div class="line">                      alert(data);</div><div class="line">              &#125;,</div><div class="line">      &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>服务端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">if(!String.IsNullOrEmpty(context.Request.Headers[&quot;If-Modified-Since&quot;]))</div><div class="line">&#123;</div><div class="line">  if (CheckResourceValidate())  // 检查资源有效性</div><div class="line">  &#123;</div><div class="line">      // 如果资源有效，则直接返回304状态码，客户端回去到此状态码后会从缓存中取值。</div><div class="line">      context.Response.StatusCode = 304;</div><div class="line"> </div><div class="line">      return;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> // 请求数据</div><div class="line">GetServerTimeAfter2Second();</div><div class="line">context.Response.Cache.SetExpires(DateTime.Now.AddSeconds(5));</div><div class="line">// 设置Last-Modified响应体</div><div class="line">context.Response.Cache.SetLastModified(DateTime.Now);</div></pre></td></tr></table></figure>
+<h3 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h3><p>在JavaScript中，有一个很重要的安全性限制，被称为“Same-Origin Policy”（同源策略）。这一策略对于JavaScript代码能够访问的页面内容做了很重要的限制，即JavaScript只能访问与包含它的文档在同一域下的内容。所谓同源是指，域名(host)，协议(protocol)，端口(port)相同。   </p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>说明</th>
+<th>是否允许通信</th>
+<th>能否通过javascript解决</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a></td>
+<td>同一域名下</td>
+<td>允许</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://www.a.com/lab/a.js" target="_blank" rel="external">http://www.a.com/lab/a.js</a> <a href="http://www.a.com/script/b.js" target="_blank" rel="external">http://www.a.com/script/b.js</a></td>
+<td>同一域名下不同文件夹</td>
+<td>允许</td>
+</tr>
+<tr>
+<td><a href="http://www.a.com:8000/a.js" target="_blank" rel="external">http://www.a.com:8000/a.js</a> <a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a></td>
+<td>同一域名，不同端口</td>
+<td>不允许</td>
+<td>能</td>
+</tr>
+<tr>
+<td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <a href="https://www.a.com/b.js" target="_blank" rel="external">https://www.a.com/b.js</a></td>
+<td>同一域名，不同协议（http和https）</td>
+<td>不允许</td>
+<td>不能</td>
+</tr>
+<tr>
+<td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <a href="http://70.32.92.74/b.js" target="_blank" rel="external">http://70.32.92.74/b.js</a></td>
+<td>域名和域名对应ip</td>
+<td>不允许</td>
+<td>能</td>
+</tr>
+<tr>
+<td><a href="http://www.cnblogs.com/a.js" target="_blank" rel="external">http://www.cnblogs.com/a.js</a> <a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a> <a href="http://script.a.com/b.js" target="_blank" rel="external">http://script.a.com/b.js</a> <a href="http://a.com/b.js" target="_blank" rel="external">http://a.com/b.js</a></td>
+<td>不同域名(host)</td>
+<td>不允许</td>
+<td>能</td>
+</tr>
+</tbody>
+</table>
+<p>1)  $.ajax()为我们提供了两种解决方案，不过都是只支持get方式，分别是jQuery的jQuery.ajax“jsonp”格式和jquery.getScript()（即jQuery.ajax “script”格式）方式。<br>2)  $.ajax()跨域原理分析<br>由于javascript的安全限制“同源策略”，所以我们无法使用XMLHttpRequest直接请求别的域名下的资源。不过拥有src属性和href属性的script\img\iframe和link\a标签不受同源策略影响。<br>$.ajax()提供的两种解决方案正是应用了动态创建script的方式来实现（即：生成script标签，src引入脚本，然后执行，最后移除script标签）。<br>3)   jQuery.ajax()的jsonp和script方式的异同点：<br>a)   相同：都走$.ajax() script格式的流程；不会触发全局事件和局部事件；只支持GET方式（POST请求会自动转化为GET请求）；默认不启用缓存(cache:false)<br>b)   不同：jsonp方式可以通过jsonp和jsonpCallback参数指定一个特定回调函数。<br>4)   示例部署说明：<br>    因为是跨域请求，所以需要在本机部署两个示例程序以模拟不同域之间的访问，并且在示例代码中需要修改“crossUrl”为目的域路径。<br>5)   jsonp示例代码：<br>客服端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// jsonp方式跨域请求(dataType:jsonp)</div><div class="line">$(&apos;#btn_cross_req1&apos;).bind(&apos;click&apos;, null</div><div class="line">    , function () &#123;</div><div class="line">        $.ajax(crossUrl,</div><div class="line">            &#123;</div><div class="line">                type: &apos;get&apos;,</div><div class="line">                dataType: &apos;jsonp&apos;,</div><div class="line">                jsonp: &apos;jsonpParamName&apos;,</div><div class="line">                jsonpCallback: &apos;crossCallback&apos;,</div><div class="line">                crossDomain: true,</div><div class="line">            &#125;);</div><div class="line">&#125;);</div><div class="line">function crossCallback(data) &#123;</div><div class="line">alert(&apos;jsonp&apos; + data);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>服务端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">context.Response.ContentType = &quot;text/plain&quot;;</div><div class="line">string jsonpCallbackName = reqCollection[&quot;jsonpParamName&quot;];  </div><div class="line">context.Response.Write(String.Format(&quot;&#123;0&#125;(&apos;来自域:&#123;1&#125;的相应信息&apos;)&quot;, jsonpCallbackName, context.Request.Url.Host));</div></pre></td></tr></table></figure>
+<p>分析：<br>a)   因jsonp和jsonpCallback参数而改变的url如下。（即默认为：callback=jQuery随机值，更改为：jsonpParamName=crossCallback）<br>URL:<a href="http://192.168.1.100:6567/AjaxHandler.ashx?func=CrossRequest&amp;jsonpParamName=crossCallback&amp;_=1368360234428" target="_blank" rel="external">http://192.168.1.100:6567/AjaxHandler.ashx?func=CrossRequest&amp;jsonpParamName=crossCallback&amp;_=1368360234428</a><br>b)   服务器端获取到jsonp回调函数名后，返回一个函数表达式。<br>6)   在XMLHttpRequest Level 2中新增了跨域访问方式、接收二进制等新功能，详细请看：XMLHttpRequest2 新技巧</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/erweima.png" alt="sunbaixin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫描上方二维码，关注我的博客</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag">#js</a>
+          
+            <a href="/tags/ajax源码解析/" rel="tag">#ajax源码解析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/ajax_3/" rel="next" title="ajax源码解析-jQuery ajax相关函数">
+                <i class="fa fa-chevron-left"></i> ajax源码解析-jQuery ajax相关函数
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/04/ajax_5/" rel="prev" title="ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport">
+                ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/03/ajax_4/"
+     data-title="ajax源码解析-$.ajax()中常见应用示例"
+     data-content=""
+     data-url="http://yoursite.com/2016/11/03/ajax_4/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/03/ajax_4/"
+           data-title="ajax源码解析-$.ajax()中常见应用示例" data-url="http://yoursite.com/2016/11/03/ajax_4/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/head.jpg"
+               alt="sunbaixin" />
+          <p class="site-author-name" itemprop="name">sunbaixin</p>
+          <p class="site-description motion-element" itemprop="description">happy girl</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hello-sunbaixin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax-中常见应用示例"><span class="nav-number">1.</span> <span class="nav-text">$.ajax()中常见应用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cache和ifModified参数"><span class="nav-number">2.</span> <span class="nav-text">cache和ifModified参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域请求"><span class="nav-number">3.</span> <span class="nav-text">跨域请求</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunbaixin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunbaixin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
