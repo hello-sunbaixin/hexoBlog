@@ -92,7 +92,7 @@ cache和ifModified参数 跨域请求">
 <meta property="og:site_name" content="Sunbaixin blog">
 <meta property="og:description" content="$.ajax()中常见应用示例
 cache和ifModified参数 跨域请求">
-<meta property="og:updated_time" content="2016-11-03T08:53:19.940Z">
+<meta property="og:updated_time" content="2016-11-04T17:01:14.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ajax源码解析-$.ajax()中常见应用示例">
 <meta name="twitter:description" content="$.ajax()中常见应用示例
@@ -289,8 +289,8 @@ cache和ifModified参数 跨域请求">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/ajax源码解析/" itemprop="url" rel="index">
+                    <span itemprop="name">ajax源码解析</span>
                   </a>
                 </span>
 
@@ -314,11 +314,15 @@ cache和ifModified参数 跨域请求">
 
           
 
-          
+
+  
+        
           
 
           
-        </div>
+    
+
+    </div>
       </header>
     
 
@@ -330,16 +334,16 @@ cache和ifModified参数 跨域请求">
 
       
         <h3 id="ajax-中常见应用示例"><a href="#ajax-中常见应用示例" class="headerlink" title="$.ajax()中常见应用示例"></a>$.ajax()中常见应用示例</h3><blockquote>
-<p>cache和ifModified参数 跨域请求</p>
+<p><font background="#ff552e">cache</font>和<font color="#ff552e">ifModified</font>参数 跨域请求</p>
 </blockquote>
 <a id="more"></a>
 <h3 id="cache和ifModified参数"><a href="#cache和ifModified参数" class="headerlink" title="cache和ifModified参数"></a>cache和ifModified参数</h3><p><strong>1)   cache参数：GET和POST最重要的区别（传送门）</strong><br>语义上，GET是获取指定URL上的资源，是读操作，重要的一点是不论对某个资源GET多少次，它的状态是不会改变的，在这个意义上，我们说GET是安全的（不是被密码学或者数据保护意义上的安全）。因为GET是安全的，所以GET返回的内容可以被浏览器，Cache服务器缓存起来。<br>而POST的语意是对指定资源“追加/添加”数据，所以是不安全的，每次提交的POST，参与的代码都会认为这个操作会修改操作对象资源的状态，于是，浏览器在你按下F5的时候会跳出确认框，缓存服务器不会缓存POST请求返回内容。<br><strong>2)   ifModified参数：</strong><br>通过ifModified参数提高请求性能（即：“条件GET”：Last-Modified / If-Modified-Since和ETag / If-None-Match）<br>当你请求的资源并不是一层不变的时候，即不能简单的一直使用客户端缓存时，你可能通过将cache设置为false来发送请求，这实际上是在url加上时间戳组合成新的url，每次发送新的请求，这明显加大了服务器的压力。<br>对于这种情况，我们可以通过ifModified参数改进缓存方式（即：cache和ifModified都设置为true），仅在请求的数据改变时重新获取。通过这种方式请求的url不会改变，并且每次都会发送到服务器，只是会有检验方法验证是否需要重新获取数据从而节省带宽和开销。<br>更多ETag描述（优点，解决了Last-Modified无法解决的一些问题，什么场合不应该被使用）</p>
 <blockquote>
 <p><strong>过程如下：</strong><br>a)   将$.ajax()函数的cache和ifModified参数同时设置为true。<br>b)   客户端请求服务端A，在服务端加上Last-Modified/ETag响应体一起返回。<br>c)   客户端缓存接收到的Last-Modified/ETag响应体，并在下一次发生请求A时将缓存的Last-Modified/ETag值做为If-Modified-Since/IF-None-Match请求头一起发给服务器。<br>d)   服务器接收If-Modified-Since/IF-None-Match后，就根据参数值检验自上次客服端请求之后资源是否有改动<br>                          i.      若还未改动则直接返回响应304和一个空的响应体。<br>                        ii.      若已改动则重新处理数据，返回最新的请求数据。<br>e)   这样，既保证不向客户端重复发出资源，也保证当服务器有变化时，客户端能够得到最新的资源。<br>这一过程中，我们只需要做：服务器返回Last-Modified/ETag响应头和在服务端检验数据是否失效并采取对应处理方式。其余步骤由jQuery框架的ajax()函数完成。</p>
 </blockquote>
-<p>关键代码如下：<br>客服端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> $(&apos;#btn_nowTime_long3&apos;).bind(&apos;click&apos;, null</div><div class="line">  , function () &#123;</div><div class="line">  $.ajax(&apos;AjaxHandler.ashx?func=GetServerTime4Modified&apos;,</div><div class="line">          &#123;</div><div class="line">              type: &apos;get&apos;,</div><div class="line">              dataType: &apos;text&apos;,</div><div class="line">              cache: true,</div><div class="line">              ifModified: true,</div><div class="line">              success: function (data) &#123;</div><div class="line">                  if (data)</div><div class="line">                      alert(data);</div><div class="line">              &#125;,</div><div class="line">      &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>关键代码如下：<br>客服端：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> $(<span class="string">'#btn_nowTime_long3'</span>).bind(<span class="string">'click'</span>, <span class="literal">null</span></div><div class="line">  , <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  $.ajax(<span class="string">'AjaxHandler.ashx?func=GetServerTime4Modified'</span>,</div><div class="line">          &#123;</div><div class="line">              <span class="attr">type</span>: <span class="string">'get'</span>,</div><div class="line">              <span class="attr">dataType</span>: <span class="string">'text'</span>,</div><div class="line">              <span class="attr">cache</span>: <span class="literal">true</span>,</div><div class="line">              <span class="attr">ifModified</span>: <span class="literal">true</span>,</div><div class="line">              <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">                  <span class="keyword">if</span> (data)</div><div class="line">                      alert(data);</div><div class="line">              &#125;,</div><div class="line">      &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>服务端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">if(!String.IsNullOrEmpty(context.Request.Headers[&quot;If-Modified-Since&quot;]))</div><div class="line">&#123;</div><div class="line">  if (CheckResourceValidate())  // 检查资源有效性</div><div class="line">  &#123;</div><div class="line">      // 如果资源有效，则直接返回304状态码，客户端回去到此状态码后会从缓存中取值。</div><div class="line">      context.Response.StatusCode = 304;</div><div class="line"> </div><div class="line">      return;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> // 请求数据</div><div class="line">GetServerTimeAfter2Second();</div><div class="line">context.Response.Cache.SetExpires(DateTime.Now.AddSeconds(5));</div><div class="line">// 设置Last-Modified响应体</div><div class="line">context.Response.Cache.SetLastModified(DateTime.Now);</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">String</span>.IsNullOrEmpty(context.Request.Headers[<span class="string">"If-Modified-Since"</span>]))</div><div class="line">&#123;</div><div class="line">  <span class="keyword">if</span> (CheckResourceValidate())  <span class="comment">// 检查资源有效性</span></div><div class="line">  &#123;</div><div class="line">      <span class="comment">// 如果资源有效，则直接返回304状态码，客户端回去到此状态码后会从缓存中取值。</span></div><div class="line">      context.Response.StatusCode = <span class="number">304</span>;</div><div class="line"> </div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> <span class="comment">// 请求数据</span></div><div class="line">GetServerTimeAfter2Second();</div><div class="line">context.Response.Cache.SetExpires(DateTime.Now.AddSeconds(<span class="number">5</span>));</div><div class="line"><span class="comment">// 设置Last-Modified响应体</span></div><div class="line">context.Response.Cache.SetLastModified(DateTime.Now);</div></pre></td></tr></table></figure>
 <h3 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h3><p>在JavaScript中，有一个很重要的安全性限制，被称为“Same-Origin Policy”（同源策略）。这一策略对于JavaScript代码能够访问的页面内容做了很重要的限制，即JavaScript只能访问与包含它的文档在同一域下的内容。所谓同源是指，域名(host)，协议(protocol)，端口(port)相同。   </p>
 <table>
 <thead>
@@ -388,10 +392,15 @@ cache和ifModified参数 跨域请求">
 </tr>
 </tbody>
 </table>
-<p>1)  $.ajax()为我们提供了两种解决方案，不过都是只支持get方式，分别是jQuery的jQuery.ajax“jsonp”格式和jquery.getScript()（即jQuery.ajax “script”格式）方式。<br>2)  $.ajax()跨域原理分析<br>由于javascript的安全限制“同源策略”，所以我们无法使用XMLHttpRequest直接请求别的域名下的资源。不过拥有src属性和href属性的script\img\iframe和link\a标签不受同源策略影响。<br>$.ajax()提供的两种解决方案正是应用了动态创建script的方式来实现（即：生成script标签，src引入脚本，然后执行，最后移除script标签）。<br>3)   jQuery.ajax()的jsonp和script方式的异同点：<br>a)   相同：都走$.ajax() script格式的流程；不会触发全局事件和局部事件；只支持GET方式（POST请求会自动转化为GET请求）；默认不启用缓存(cache:false)<br>b)   不同：jsonp方式可以通过jsonp和jsonpCallback参数指定一个特定回调函数。<br>4)   示例部署说明：<br>    因为是跨域请求，所以需要在本机部署两个示例程序以模拟不同域之间的访问，并且在示例代码中需要修改“crossUrl”为目的域路径。<br>5)   jsonp示例代码：<br>客服端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// jsonp方式跨域请求(dataType:jsonp)</div><div class="line">$(&apos;#btn_cross_req1&apos;).bind(&apos;click&apos;, null</div><div class="line">    , function () &#123;</div><div class="line">        $.ajax(crossUrl,</div><div class="line">            &#123;</div><div class="line">                type: &apos;get&apos;,</div><div class="line">                dataType: &apos;jsonp&apos;,</div><div class="line">                jsonp: &apos;jsonpParamName&apos;,</div><div class="line">                jsonpCallback: &apos;crossCallback&apos;,</div><div class="line">                crossDomain: true,</div><div class="line">            &#125;);</div><div class="line">&#125;);</div><div class="line">function crossCallback(data) &#123;</div><div class="line">alert(&apos;jsonp&apos; + data);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>1)</strong>  $.ajax()为我们提供了两种解决方案，不过都是只支持get方式，分别是jQuery的jQuery.ajax“jsonp”格式和jquery.getScript()（即jQuery.ajax “script”格式）方式。<br><strong>2)</strong>  $.ajax()跨域原理分析<br>由于javascript的安全限制“同源策略”，所以我们无法使用XMLHttpRequest直接请求别的域名下的资源。不过拥有src属性和href属性的script\img\iframe和link\a标签不受同源策略影响。<br>$.ajax()提供的两种解决方案正是应用了动态创建script的方式来实现（即：生成script标签，src引入脚本，然后执行，最后移除script标签）。<br><strong>3)</strong>   jQuery.ajax()的jsonp和script方式的异同点：<br>a)   相同：都走$.ajax() script格式的流程；不会触发全局事件和局部事件；只支持GET方式（POST请求会自动转化为GET请求）；默认不启用缓存(cache:false)<br>b)   不同：jsonp方式可以通过jsonp和jsonpCallback参数指定一个特定回调函数。<br><strong>4)</strong>   示例部署说明：<br>    因为是跨域请求，所以需要在本机部署两个示例程序以模拟不同域之间的访问，并且在示例代码中需要修改“crossUrl”为目的域路径。<br><strong>5)</strong>   jsonp示例代码：</p>
+</blockquote>
+<p>客服端：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// jsonp方式跨域请求(dataType:jsonp)</span></div><div class="line">$(<span class="string">'#btn_cross_req1'</span>).bind(<span class="string">'click'</span>, <span class="literal">null</span></div><div class="line">    , <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        $.ajax(crossUrl,</div><div class="line">            &#123;</div><div class="line">                <span class="attr">type</span>: <span class="string">'get'</span>,</div><div class="line">                <span class="attr">dataType</span>: <span class="string">'jsonp'</span>,</div><div class="line">                <span class="attr">jsonp</span>: <span class="string">'jsonpParamName'</span>,</div><div class="line">                <span class="attr">jsonpCallback</span>: <span class="string">'crossCallback'</span>,</div><div class="line">                <span class="attr">crossDomain</span>: <span class="literal">true</span>,</div><div class="line">            &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">crossCallback</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">alert(<span class="string">'jsonp'</span> + data);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 <p>服务端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">context.Response.ContentType = &quot;text/plain&quot;;</div><div class="line">string jsonpCallbackName = reqCollection[&quot;jsonpParamName&quot;];  </div><div class="line">context.Response.Write(String.Format(&quot;&#123;0&#125;(&apos;来自域:&#123;1&#125;的相应信息&apos;)&quot;, jsonpCallbackName, context.Request.Url.Host));</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">context.Response.ContentType = <span class="string">"text/plain"</span>;</div><div class="line">string jsonpCallbackName = reqCollection[<span class="string">"jsonpParamName"</span>];  </div><div class="line">context.Response.Write(<span class="built_in">String</span>.Format(<span class="string">"&#123;0&#125;('来自域:&#123;1&#125;的相应信息')"</span>, jsonpCallbackName, context.Request.Url.Host));</div></pre></td></tr></table></figure>
+<blockquote>
 <p>分析：<br>a)   因jsonp和jsonpCallback参数而改变的url如下。（即默认为：callback=jQuery随机值，更改为：jsonpParamName=crossCallback）<br>URL:<a href="http://192.168.1.100:6567/AjaxHandler.ashx?func=CrossRequest&amp;jsonpParamName=crossCallback&amp;_=1368360234428" target="_blank" rel="external">http://192.168.1.100:6567/AjaxHandler.ashx?func=CrossRequest&amp;jsonpParamName=crossCallback&amp;_=1368360234428</a><br>b)   服务器端获取到jsonp回调函数名后，返回一个函数表达式。<br>6)   在XMLHttpRequest Level 2中新增了跨域访问方式、接收二进制等新功能，详细请看：XMLHttpRequest2 新技巧</p>
+</blockquote>
 
       
     </div>
@@ -539,7 +548,7 @@ cache和ifModified参数 跨域请求">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -640,7 +649,15 @@ cache和ifModified参数 跨域请求">
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    total visited<span id="busuanzi_value_site_pv"></span>times
+</span>
+<span id="busuanzi_container_site_uv">
+  <span id="busuanzi_value_site_uv"></span>peoples
+</span>
+<div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2016</span>

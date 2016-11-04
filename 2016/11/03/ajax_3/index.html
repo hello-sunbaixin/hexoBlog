@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/03/ajax_3/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
 <meta property="og:description" content="解释了ajax源码中一些函数的使用">
-<meta property="og:updated_time" content="2016-11-03T08:53:19.892Z">
+<meta property="og:updated_time" content="2016-11-04T16:53:43.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ajax源码解析-jQuery ajax相关函数">
 <meta name="twitter:description" content="解释了ajax源码中一些函数的使用">
@@ -286,8 +286,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/ajax源码解析/" itemprop="url" rel="index">
+                    <span itemprop="name">ajax源码解析</span>
                   </a>
                 </span>
 
@@ -311,11 +311,15 @@
 
           
 
-          
+
+  
+        
           
 
           
-        </div>
+    
+
+    </div>
       </header>
     
 
@@ -332,8 +336,8 @@
 <a id="more"></a>
 <h3 id="1-jQuery-ajaxSetup"><a href="#1-jQuery-ajaxSetup" class="headerlink" title="1)   jQuery.ajaxSetup({ })"></a>1)   jQuery.ajaxSetup({ })</h3><p>jQuery.ajax()函数中的所有的参数选项都可以通过jQuery.ajaxSetup()函数来全局设置默认值。</p>
 <h3 id="2-ajax-函数的封装"><a href="#2-ajax-函数的封装" class="headerlink" title="2)   $.ajax()函数的封装"></a>2)   $.ajax()函数的封装</h3><p><strong>a)   $(“”).load(url [, params] [, callback])</strong><br>请求远程的HTML文件代码(dataType: “html”)，默认使用 GET 方式，如果传递了params参数则使用Post方式。在请求“成功”完成时将responseText属性值插入至DOM中。但不管请求是否成功完成“在最后”都会执行callback回调函数(即：complete:callback)。<br><strong>b)   jQuery.get(url [, data] [, callback] [, type] )</strong><br>通过HTTP GET请求载入数据，并在请求成功时执行回调函数（即：success: callback）。<br><strong>c)   jQuery.getJSON(url [, data] [, callback] )</strong><br>通过 HTTP GET 请求载入 JSON 数据。相当于: jQuery.get(url, [data],[callback], “json”)<br>可以通过使用JSONP 形式的回调函数来加载其他网域的JSON数据。<br><strong>d)   jQuery.getScript(url [, callback] )</strong><br>通过 HTTP GET 请求载入并执行一个 JavaScript 文件。相当于: jQuery.get(url, null, [callback], “script”)<br>可以跨域调用 JavaScript 文件。<br><strong>e)   jQuery.post(url [, data] [, callback] [, type] )</strong><br>通过 HTTP POST 请求载入信息，并在请求成功时执行回调函数（即：success: callback）。</p>
-<h3 id="3-对象序列化"><a href="#3-对象序列化" class="headerlink" title="3)   对象序列化"></a>3)   对象序列化</h3><p><strong>a)   jQuery.param(object,traditional)</strong><br>创建数组或对象的序列化表示，该序列化可在ajax请求时在URL查询字符串中使用。<br>序列化过程中会使用encodeURIComponent()函数把字符串作为URI组件进行编码。<br>encodeURIComponent() 方法不会对 ASCII 字母和数字进行编码，也不会对这些 ASCII 标点符号进行编码： - _ . ! ~ * ‘ ( ) 。其他字符（比如：;/?:@&amp;=+$,# 这些用于分隔 URI 组件的标点符号），都是由一个或多个十六进制的转义序列替换的。<br>// 在param中会进行如下处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function( key, value ) &#123;</div><div class="line">    // 如果value是函数，则取其函数返回值</div><div class="line">    value = jQuery.isFunction( value ) ? value() : value;</div><div class="line">    s[ s.length ] = encodeURIComponent( key ) + &quot;=&quot; + encodeURIComponent( value );</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>对于 jQuery 1.4，$.param() 方法将会通过深度递归的方式序列化对象，以便符合现代化脚本语言的需求，比如 PHP、Ruby on Rails 等。你可以传递traditional = true 或在ajax功能中传递包含traditional的options参数。<br>传送门：<a href="http://www.update8.com/Manual/jquery/docs/jQuery.param/index.html" target="_blank" rel="external">$.param()深度递归详解</a>和<a href="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax_param" target="_blank" rel="external">$.param() 示例</a><br><strong>b)   $(“”).serializeArray()</strong><br>可以将一个或多个表单元素（比如 input、 textarea等），或者 form 元素本身的jQuery对象序列化为JSON对象。（非 JSON 字符串。需要使用插件或者第三方库进行字符串化操作）<br>特别说明，元素不能被禁用（禁用的元素不会被包括在内），并且元素应当有含有 name 属性。提交按钮的值也不会被序列化。文件选择元素的数据也不会被序列化。<br><a href="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax_serializearray" target="_blank" rel="external">传送门：$(“”).serializeArray() 示例</a><br><strong>c)   $(“”).serialize()</strong><br>可以将一个或多个表单元素（比如 input、 textarea等），或者 form 元素本身的jQuery对象序列化为经过URL编码转换后的字符串，可直接用在URL查询字符串中。<br>jQuery内部定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">serialize: function() &#123;</div><div class="line">    return jQuery.param( this.serializeArray() );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-对象序列化"><a href="#3-对象序列化" class="headerlink" title="3)   对象序列化"></a>3)   对象序列化</h3><p><strong>a)   jQuery.param(object,traditional)</strong><br>创建数组或对象的序列化表示，该序列化可在ajax请求时在URL查询字符串中使用。<br>序列化过程中会使用encodeURIComponent()函数把字符串作为URI组件进行编码。<br>encodeURIComponent() 方法不会对 ASCII 字母和数字进行编码，也不会对这些 ASCII 标点符号进行编码： - _ . ! ~ * ‘ ( ) 。其他字符（比如：;/?:@&amp;=+$,# 这些用于分隔 URI 组件的标点符号），都是由一个或多个十六进制的转义序列替换的。<br>// 在param中会进行如下处理<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"> key, value </span>) </span>&#123;</div><div class="line">    <span class="comment">// 如果value是函数，则取其函数返回值</span></div><div class="line">    value = jQuery.isFunction( value ) ? value() : value;</div><div class="line">    s[ s.length ] = <span class="built_in">encodeURIComponent</span>( key ) + <span class="string">"="</span> + <span class="built_in">encodeURIComponent</span>( value );</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>对于 jQuery 1.4，$.param() 方法将会通过深度递归的方式序列化对象，以便符合现代化脚本语言的需求，比如 PHP、Ruby on Rails 等。你可以传递traditional = true 或在ajax功能中传递包含traditional的options参数。<br>传送门：<a href="http://www.update8.com/Manual/jquery/docs/jQuery.param/index.html" target="_blank" rel="external">$.param()深度递归详解</a>和<a href="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax_param" target="_blank" rel="external">$.param() 示例</a><br><strong>b)   $(“”).serializeArray()</strong><br>可以将一个或多个表单元素（比如 input、 textarea等），或者 form 元素本身的jQuery对象序列化为JSON对象。（非 JSON 字符串。需要使用插件或者第三方库进行字符串化操作）<br>特别说明，元素不能被禁用（禁用的元素不会被包括在内），并且元素应当有含有 name 属性。提交按钮的值也不会被序列化。文件选择元素的数据也不会被序列化。<br><a href="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax_serializearray" target="_blank" rel="external">传送门：$(“”).serializeArray() 示例</a><br><strong>c)   $(“”).serialize()</strong><br>可以将一个或多个表单元素（比如 input、 textarea等），或者 form 元素本身的jQuery对象序列化为经过URL编码转换后的字符串，可直接用在URL查询字符串中。<br>jQuery内部定义：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">serialize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> jQuery.param( <span class="keyword">this</span>.serializeArray() );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><a href="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax_serialize" target="_blank" rel="external">传送门：$(“”).serialize()示例</a></p>
 
       
@@ -482,7 +486,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -583,7 +587,15 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    total visited<span id="busuanzi_value_site_pv"></span>times
+</span>
+<span id="busuanzi_container_site_uv">
+  <span id="busuanzi_value_site_uv"></span>peoples
+</span>
+<div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2016</span>

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/03/ajax_4/</loc>
+    <lastmod>2016-11-04T17:01:14.779Z</lastmod>
+    <data>
+        <display>
+        <title>ajax源码解析-$.ajax()中常见应用示例</title>
+        <pubTime>2016-11-03T06:22:25.798Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>ajax源码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="ajax源码解析" url="http://yoursite.com/categories/ajax%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/02/ajax_1/</loc>
+    <lastmod>2016-11-04T16:55:03.378Z</lastmod>
+    <data>
+        <display>
+        <title>ajax源码解析-源码流程</title>
+        <pubTime>2016-11-02T07:27:11.468Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>ajax源码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="ajax源码解析" url="http://yoursite.com/categories/ajax%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/04/ajax_5/</loc>
+    <lastmod>2016-11-04T16:53:43.557Z</lastmod>
+    <data>
+        <display>
+        <title>ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport</title>
+        <pubTime>2016-11-04T08:24:07.349Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>ajax源码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="ajax源码解析" url="http://yoursite.com/categories/ajax%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/31/ajax/</loc>
+    <lastmod>2016-11-04T16:53:43.520Z</lastmod>
+    <data>
+        <display>
+        <title>ajax源码解析-s对象和jqXHR对象</title>
+        <pubTime>2016-10-31T11:34:06.794Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>ajax源码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="ajax源码解析" url="http://yoursite.com/categories/ajax%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/03/ajax_3/</loc>
+    <lastmod>2016-11-04T16:53:43.484Z</lastmod>
+    <data>
+        <display>
+        <title>ajax源码解析-jQuery ajax相关函数</title>
+        <pubTime>2016-11-03T06:11:31.691Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>ajax源码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="ajax源码解析" url="http://yoursite.com/categories/ajax%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/03/ajax_2/</loc>
+    <lastmod>2016-11-04T16:53:43.404Z</lastmod>
+    <data>
+        <display>
+        <title>ajax源码解析-jQuery Ajax事件</title>
+        <pubTime>2016-11-03T05:56:38.120Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>ajax源码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="ajax源码解析" url="http://yoursite.com/categories/ajax%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/sass/</loc>
+    <lastmod>2016-11-04T14:24:21.360Z</lastmod>
+    <data>
+        <display>
+        <title>sass</title>
+        <pubTime>2016-10-20T12:33:17.377Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>sass</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/03/tecLink/</loc>
+    <lastmod>2016-11-03T08:54:57.375Z</lastmod>
+    <data>
+        <display>
+        <title>技术文档</title>
+        <pubTime>2016-11-03T03:26:00.575Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>技术文档链接</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/28/JSON/</loc>
+    <lastmod>2016-10-28T11:58:52.740Z</lastmod>
+    <data>
+        <display>
+        <title>JSON 格式</title>
+        <pubTime>2016-10-28T02:57:41.100Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>JSON 格式</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    <lastmod>2016-10-28T08:30:10.398Z</lastmod>
+    <data>
+        <display>
+        <title>js小记</title>
+        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
+        
+        <tag>面试题</tag>
+         
+        <tag>js小记</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/28/hexo/</loc>
+    <lastmod>2016-10-28T08:24:57.450Z</lastmod>
+    <data>
+        <display>
+        <title>hexo搭建个人博客</title>
+        <pubTime>2016-10-28T08:16:28.175Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo博客" url="http://yoursite.com/categories/hexo%E5%8D%9A%E5%AE%A2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/21/note/</loc>
+    <lastmod>2016-10-27T03:09:18.931Z</lastmod>
+    <data>
+        <display>
+        <title>Javascript  高级程序设计</title>
+        <pubTime>2016-10-21T05:41:23.347Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>Javascript  高级程序设计</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/25/event/</loc>
+    <lastmod>2016-10-27T03:08:35.054Z</lastmod>
+    <data>
+        <display>
+        <title>jQuery.event兼容各浏览器的event详细解析</title>
+        <pubTime>2016-10-25T08:58:03.020Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>event</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/26/closure/</loc>
+    <lastmod>2016-10-26T07:28:24.728Z</lastmod>
+    <data>
+        <display>
+        <title>深入理解javascript的闭包特性</title>
+        <pubTime>2016-10-26T05:48:21.395Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>闭包</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/jsonp/</loc>
+    <lastmod>2016-10-24T04:44:00.886Z</lastmod>
+    <data>
+        <display>
+        <title>jsonp</title>
+        <pubTime>2016-10-20T12:33:17.328Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>jsonp</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/css3/</loc>
+    <lastmod>2016-10-24T04:42:54.474Z</lastmod>
+    <data>
+        <display>
+        <title>css3</title>
+        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>css3</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/php/</loc>
+    <lastmod>2016-10-24T04:40:36.262Z</lastmod>
+    <data>
+        <display>
+        <title>php</title>
+        <pubTime>2016-10-20T12:33:17.367Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>模板语言</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://yoursite.com/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/backbone/</loc>
+    <lastmod>2016-10-24T04:38:53.168Z</lastmod>
+    <data>
+        <display>
+        <title>Backbone</title>
+        <pubTime>2016-10-20T12:33:17.387Z</pubTime>
+        
+        <tag>backbone</tag>
+         
+        <tag>js框架语言</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/21/cookie/</loc>
+    <lastmod>2016-10-24T04:35:28.867Z</lastmod>
+    <data>
+        <display>
+        <title>cookie使用总结</title>
+        <pubTime>2016-10-21T06:00:17.884Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>cookie</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/24/$.extend/</loc>
+    <lastmod>2016-10-24T04:34:27.348Z</lastmod>
+    <data>
+        <display>
+        <title>$.extend详解</title>
+        <pubTime>2016-10-24T03:20:58.292Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>$.extend</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/learn/</loc>
+    <lastmod>2016-10-21T07:02:57.729Z</lastmod>
+    <data>
+        <display>
+        <title>学习计划</title>
+        <pubTime>2016-10-20T12:33:17.344Z</pubTime>
+        
+        <tag>学习规划</tag>
+         
+        <tag>前端之路</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习计划" url="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+</urlset>
