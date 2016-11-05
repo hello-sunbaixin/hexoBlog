@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/11/03/ajax_4/</loc>
-    <lastmod>2016-11-04T17:01:14.779Z</lastmod>
+    <loc>http://yoursite.com/2016/11/04/ajax_5/</loc>
+    <lastmod>2016-11-05T14:04:40.720Z</lastmod>
     <data>
         <display>
-        <title>ajax源码解析-$.ajax()中常见应用示例</title>
-        <pubTime>2016-11-03T06:22:25.798Z</pubTime>
+        <title>ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport</title>
+        <pubTime>2016-11-04T08:24:07.349Z</pubTime>
         
         <tag>js</tag>
          
@@ -27,7 +27,7 @@
     
   <url>
     <loc>http://yoursite.com/2016/11/02/ajax_1/</loc>
-    <lastmod>2016-11-04T16:55:03.378Z</lastmod>
+    <lastmod>2016-11-05T14:03:47.776Z</lastmod>
     <data>
         <display>
         <title>ajax源码解析-源码流程</title>
@@ -48,12 +48,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/11/04/ajax_5/</loc>
-    <lastmod>2016-11-04T16:53:43.557Z</lastmod>
+    <loc>http://yoursite.com/2016/11/03/ajax_4/</loc>
+    <lastmod>2016-11-04T17:01:14.779Z</lastmod>
     <data>
         <display>
-        <title>ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport</title>
-        <pubTime>2016-11-04T08:24:07.349Z</pubTime>
+        <title>ajax源码解析-$.ajax()中常见应用示例</title>
+        <pubTime>2016-11-03T06:22:25.798Z</pubTime>
         
         <tag>js</tag>
          
