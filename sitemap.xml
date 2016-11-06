@@ -2,6 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/10/28/JSON/</loc>
+    
+    <lastmod>2016-11-06T07:42:20.283Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/25/event/</loc>
+    
+    <lastmod>2016-11-06T07:36:59.115Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/21/cookie/</loc>
+    
+    <lastmod>2016-11-06T07:35:14.670Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/31/ajax/</loc>
+    
+    <lastmod>2016-11-06T07:29:27.458Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/03/ajax_2/</loc>
+    
+    <lastmod>2016-11-06T07:01:30.623Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/03/ajax_4/</loc>
+    
+    <lastmod>2016-11-06T07:01:01.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/02/ajax_1/</loc>
+    
+    <lastmod>2016-11-06T06:41:01.919Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/26/closure/</loc>
+    
+    <lastmod>2016-11-06T03:01:00.870Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    
+    <lastmod>2016-11-06T02:52:26.155Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/11/04/ajax_5/</loc>
     
     <lastmod>2016-11-05T14:04:40.720Z</lastmod>
@@ -9,37 +72,9 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/11/02/ajax_1/</loc>
-    
-    <lastmod>2016-11-05T14:03:47.776Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/11/03/ajax_4/</loc>
-    
-    <lastmod>2016-11-04T17:01:14.779Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/31/ajax/</loc>
-    
-    <lastmod>2016-11-04T16:53:43.520Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2016/11/03/ajax_3/</loc>
     
     <lastmod>2016-11-04T16:53:43.484Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/11/03/ajax_2/</loc>
-    
-    <lastmod>2016-11-04T16:53:43.404Z</lastmod>
     
   </url>
   
@@ -65,20 +100,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/10/28/JSON/</loc>
-    
-    <lastmod>2016-10-28T11:58:52.740Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
-    
-    <lastmod>2016-10-28T08:30:10.398Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2016/10/28/hexo/</loc>
     
     <lastmod>2016-10-28T08:24:57.450Z</lastmod>
@@ -89,20 +110,6 @@
     <loc>http://yoursite.com/2016/10/21/note/</loc>
     
     <lastmod>2016-10-27T03:09:18.931Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/25/event/</loc>
-    
-    <lastmod>2016-10-27T03:08:35.054Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/26/closure/</loc>
-    
-    <lastmod>2016-10-26T07:28:24.728Z</lastmod>
     
   </url>
   
@@ -131,13 +138,6 @@
     <loc>http://yoursite.com/2016/10/20/backbone/</loc>
     
     <lastmod>2016-10-24T04:38:53.168Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/21/cookie/</loc>
-    
-    <lastmod>2016-10-24T04:35:28.867Z</lastmod>
     
   </url>
   
