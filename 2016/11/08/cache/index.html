@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="js,$.extend," />
+  <meta name="keywords" content="http,强制缓存和协商缓存," />
 
 
 
@@ -84,19 +84,42 @@
 
 
 
-<meta name="description" content="jQuery.extend()函数用于将一个或多个对象的内容合并到目标对象。该函数可以将一个或多个对象的成员属性和方法复制到指定的对象上。该函数属于全局jQuery对象。">
+<meta name="description" content="强制缓存：
+
+在web服务器返回的响应中添加Expires和Cache-Control Header
+Expires：比较老的做法，设置一个过期时间
+Cache-Control：设置的是相对时间 Cache-Control的优先级高于Expires
+
+协商缓存  
+
+【Last-Modified和If-Modified-Since配合使用】【ETag和If-None-Match配合使用】 后者更">
 <meta property="og:type" content="article">
-<meta property="og:title" content="$.extend详解">
-<meta property="og:url" content="http://yoursite.com/2016/10/24/$.extend/index.html">
+<meta property="og:title" content="强制缓存和协商缓存">
+<meta property="og:url" content="http://yoursite.com/2016/11/08/cache/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
-<meta property="og:description" content="jQuery.extend()函数用于将一个或多个对象的内容合并到目标对象。该函数可以将一个或多个对象的成员属性和方法复制到指定的对象上。该函数属于全局jQuery对象。">
-<meta property="og:image" content="http://yoursite.com/uploads/extend_01.png">
-<meta property="og:image" content="http://yoursite.com/uploads/extend_02.png">
-<meta property="og:updated_time" content="2016-10-24T04:34:27.348Z">
+<meta property="og:description" content="强制缓存：
+
+在web服务器返回的响应中添加Expires和Cache-Control Header
+Expires：比较老的做法，设置一个过期时间
+Cache-Control：设置的是相对时间 Cache-Control的优先级高于Expires
+
+协商缓存  
+
+【Last-Modified和If-Modified-Since配合使用】【ETag和If-None-Match配合使用】 后者更">
+<meta property="og:image" content="http://yoursite.com/uploads/cache_1.jpg">
+<meta property="og:updated_time" content="2016-11-09T05:58:58.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="$.extend详解">
-<meta name="twitter:description" content="jQuery.extend()函数用于将一个或多个对象的内容合并到目标对象。该函数可以将一个或多个对象的成员属性和方法复制到指定的对象上。该函数属于全局jQuery对象。">
-<meta name="twitter:image" content="http://yoursite.com/uploads/extend_01.png">
+<meta name="twitter:title" content="强制缓存和协商缓存">
+<meta name="twitter:description" content="强制缓存：
+
+在web服务器返回的响应中添加Expires和Cache-Control Header
+Expires：比较老的做法，设置一个过期时间
+Cache-Control：设置的是相对时间 Cache-Control的优先级高于Expires
+
+协商缓存  
+
+【Last-Modified和If-Modified-Since配合使用】【ETag和If-None-Match配合使用】 后者更">
+<meta name="twitter:image" content="http://yoursite.com/uploads/cache_1.jpg">
 
 
 
@@ -117,10 +140,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/24/$.extend/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/08/cache/"/>
 
 
-  <title> $.extend详解 | Sunbaixin blog </title>
+  <title> 强制缓存和协商缓存 | Sunbaixin blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +286,7 @@
             
             
               
-                $.extend详解
+                强制缓存和协商缓存
               
             
           </h1>
@@ -275,8 +298,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-24T11:20:58+08:00" content="2016-10-24">
-              2016-10-24
+            <time itemprop="dateCreated" datetime="2016-11-08T19:39:29+08:00" content="2016-11-08">
+              2016-11-08
             </time>
           </span>
 
@@ -289,8 +312,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/http/" itemprop="url" rel="index">
+                    <span itemprop="name">http</span>
                   </a>
                 </span>
 
@@ -305,8 +328,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/24/$.extend/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/$.extend/" itemprop="commentsCount"></span>
+                <a href="/2016/11/08/cache/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/08/cache/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,44 +357,43 @@
 
       
         <blockquote>
-<p>jQuery.extend()函数用于将一个或多个对象的内容合并到目标对象。<br>该函数可以将一个或多个对象的成员属性和方法复制到指定的对象上。<br>该函数属于全局jQuery对象。</p>
+<p>强制缓存：</p>
+<ul>
+<li>在web服务器返回的响应中添加Expires和Cache-Control Header</li>
+<li>Expires：比较老的做法，设置一个过期时间</li>
+<li>Cache-Control：设置的是相对时间 Cache-Control的优先级高于Expires</li>
+</ul>
+<p>协商缓存  </p>
+<ul>
+<li>【Last-Modified和If-Modified-Since配合使用】【ETag和If-None-Match配合使用】 后者更靠谱一些</li>
+<li>请求头参数：If-Modified-Since  If-None-Match</li>
+<li>响应头参数：Last-Modified ETag</li>
+<li>请求头参数和响应头参数 比较 来看是否命中缓存<br>强制缓存的优先级高于协商缓存</li>
+</ul>
 </blockquote>
 <a id="more"></a>
-<h3 id="静态函数jQuery-extend-有以下两种用法："><a href="#静态函数jQuery-extend-有以下两种用法：" class="headerlink" title="静态函数jQuery.extend()有以下两种用法："></a>静态函数jQuery.extend()有以下两种用法：</h3><p>用法一：jQuery 1.0 新增该用法。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jQuery.extend( target [, object1 ] [, objectN... ] )</div></pre></td></tr></table></figure>
-<p>用法二：jQuery 1.1.4 新增该用法。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jQuery.extend( [ deep ], target , object1 [, objectN... ] )</div></pre></td></tr></table></figure>
-<p>用法二是用法一的变体，参数deep用于指示是否深度递归合并。<br>$.extend() 打印出的值也是target的值</p>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>请根据前面语法部分所定义的参数名称查找对应的参数。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>deep</td>
-<td>deep可选/Boolean类型指示是否深度合并对象，默认为false。如果该值为true，且多个对象的某个同名属性也都是对象，则该”属性对象”的属性也将进行合并。</td>
-</tr>
-<tr>
-<td>targetObject</td>
-<td>targetObject类型目标对象，其他对象的成员属性将被复制到该对象上。</td>
-</tr>
-<tr>
-<td>object1</td>
-<td>object1可选/Object类型第一个被合并的对象。</td>
-</tr>
-<tr>
-<td>objectN</td>
-<td>objectN可选/Object类型第N个被合并的对象。</td>
-</tr>
-</tbody>
-</table>
-<p><strong>注意事项</strong><br>  ● 该函数复制的对象属性包括方法在内。此外，还会复制对象继承自原型中的属性(JS内置的对象除外) 。<br>  ● 参数deep的默认值为false，你可以为该参数明确指定true值，但不能明确指定false值。简而言之，第一个参数不能为false值。<br>  ● 如果参数为null或undefined，则该参数将被忽略。<br>  ● 如果只为$.extend()指定了一个参数，则意味着参数target被省略。此时，target就是jQuery对象本身。通过这种方式，我们可以为全局对象jQuery添加新的函数。<br>  ● 如果多个对象具有相同的属性，则后者会覆盖前者的属性值。 </p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>用法一 实例  常见用法  如果多个被合并对象有相同的属性，则后者会覆盖之前的属性。<br><img src="/uploads/extend_01.png" alt="image"></p>
-<p>用法 二  此外，如果多个对象的同名属性都是对象，则合并这些”属性对象”的属性<br><img src="/uploads/extend_02.png" alt="image"></p>
+<h3 id="参考学习"><a href="#参考学习" class="headerlink" title="参考学习"></a>参考学习</h3><p><a href="http://www.cnblogs.com/lyzg/p/5125934.html" target="_blank" rel="external">强制缓存和协商缓存</a><br><a href="http://blog.csdn.net/hufan11100914/article/details/48029633" target="_blank" rel="external">请求头</a></p>
+<h3 id="知乎分析"><a href="#知乎分析" class="headerlink" title="知乎分析"></a>知乎分析</h3><p>作者：beepony<br>链接：<a href="https://www.zhihu.com/question/22073045/answer/27323420" target="_blank" rel="external">https://www.zhihu.com/question/22073045/answer/27323420</a><br>来源：知乎<br>著作权归作者所有，转载请联系作者获得授权。</p>
+<h4 id="http协议里的get和post方法"><a href="#http协议里的get和post方法" class="headerlink" title="http协议里的get和post方法"></a>http协议里的get和post方法</h4><p>首先，你要先比较了解 HTTP 协议里各个方法的定义。例如：GET 和 POST 方法</p>
+<p>GET 方法是从指定的资源请求数据<br>GET 请求可被缓存<br>GET 请求保留在浏览器历史记录中<br>GET 请求可被收藏为书签<br>GET 请求不应在处理敏感数据时使用<br>GET 请求有长度限制<br>GET 请求只应当用于取回数据</p>
+<p>POST 方法向指定资源提交要被处理的数据<br>POST 请求不会被缓存<br>POST 请求不会保留在浏览器历史记录中<br>POST 不能被收藏为书签<br>POST 请求对数据长度没有要求</p>
+<h4 id="Cache-Control-与-Expires"><a href="#Cache-Control-与-Expires" class="headerlink" title="Cache-Control 与 Expires"></a>Cache-Control 与 Expires</h4><p>Cache-Control 与 Expires 作用一致，都是指当前资源的有效期，控制浏览器是否直接从浏览器获取数据还是重新发送请求到服务器取数据。<br>Cache-Control 的选择更多，设置更细致，如果同时存在的话，优先级高于 Expires。</p>
+<h4 id="Last-Modified-ETag-与-Cache-Control-Expires"><a href="#Last-Modified-ETag-与-Cache-Control-Expires" class="headerlink" title="Last-Modified/ETag 与 Cache-Control/Expires"></a>Last-Modified/ETag 与 Cache-Control/Expires</h4><p>配置 Last-Modified/ETag 的情况下，浏览器再次访问统一 URI 的资源，还是会发送请求到服务器询问文件是否已经修改，如果没有，服务器会只返回影响吗 304回给浏览器，代表资源没有变化，告诉浏览器直接读取缓存数据</p>
+<p>Cache-Control/Expires 不同，如果检测到本地的缓存还是有效的时间范围内，浏览器直接使用本地副本，不会发送任何请求。<font color="#ff552e">两者一起使用时，Cache-Control/Expires的优先级要高于Last-Modified/ETag。</font>即当本地副本根据Cache-Control/Expires发现还在有效期内时，则不会再次发送请求去服务器询问修改时间（Last-Modified）或实体标识（Etag）了。<br>一般情况下，使用 Cache-Control/Expires 会配合 Last-Modified/ETag 一起使用，因为即使服务器设置缓存时间, 当用户点击“刷新”按钮时，浏览器会忽略缓存继续向服务器发送请求，这时 Last-Modified/ETag 将能够很好利用 304 ，从而减少响应开销。<br>看到这里，你也许会问，既然已经有了 Last-Modified 已经能够知道本地缓存是否是最新的了，为什么还需要 Etag 呢？</p>
+<p><strong>使用Etag主要是基于以下几个原因：</strong></p>
+<ul>
+<li>Last-Modified 标注的最后修改时间只能精确到秒，如果有些资源在一秒之内被多次修改的话，他就不能准确标注文件的新鲜度了</li>
+<li>如果某些资源会被定期生成，当内容没有变化，但 Last-Modified 却改变了，导致文件没使用缓存</li>
+<li>有可能存在服务器没有准确获取资源修改时间，或者与代理服务器时间不一致的情形。</li>
+</ul>
+<p>Etag 是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified 与 ETag 是可以一起使用的，服务器会优先验证 ETag，一致的情况下，才会继续比对 Last-Modified，最后才决定是否返回304。</p>
+<h4 id="用户操作也与缓存有关系"><a href="#用户操作也与缓存有关系" class="headerlink" title="用户操作也与缓存有关系"></a>用户操作也与缓存有关系</h4><p>此外，用户操作也与缓存有关系<br><img src="/uploads/cache_1.jpg" alt="images"><br>通过上表我们可以看到，当用户在按 F5 进行刷新的时候，会忽略 Expires/Cache-Control 的设置，会再次发送请求去服务器请求，而 Last-Modified/Etag 还是有效的，服务器会根据情况判断返回 304 还是 200；而当用户使用 Ctrl+F5 进行强制刷新的时候，只是所有的缓存机制都将失效，重新从服务器拉去资源。</p>
+<h4 id="不能被缓存的请求"><a href="#不能被缓存的请求" class="headerlink" title="不能被缓存的请求"></a>不能被缓存的请求</h4><ul>
+<li>HTTP 信息头中包含Cache-Control:no-cache，pragma:no-cache，或Cache-Control:max-age=0 等告诉浏览器不用缓存的请求</li>
+<li>需要根据Cookie，认证信息等决定输入内容的动态请求是不能被缓存的</li>
+<li>经过HTTPS安全加密的请求（有人也经过测试发现，ie 其实在头部加入 Cache-Control：max-age 信息，firefox 在头部加入 Cache-Control:Public 之后，能够对HTTPS的资源进行缓存）</li>
+<li>HTTP 响应头中不包含 Last-Modified/Etag，也不包含 Cache-Control/Expires 的请求无法被缓存</li>
+</ul>
 
       
     </div>
@@ -399,9 +421,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag">#js</a>
+            <a href="/tags/http/" rel="tag">#http</a>
           
-            <a href="/tags/extend/" rel="tag">#$.extend</a>
+            <a href="/tags/强制缓存和协商缓存/" rel="tag">#强制缓存和协商缓存</a>
           
         </div>
       
@@ -410,17 +432,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/21/cookie/" rel="next" title="cookie使用总结">
-                <i class="fa fa-chevron-left"></i> cookie使用总结
+              <a href="/2016/11/04/ajax_5/" rel="next" title="ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport">
+                <i class="fa fa-chevron-left"></i> ajax源码解析-jQuery. ajaxPrefilter和jQuery. ajaxTransport
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/25/event/" rel="prev" title="jQuery.event兼容各浏览器的event详细解析">
-                jQuery.event兼容各浏览器的event详细解析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -435,10 +453,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/24/$.extend/"
-     data-title="$.extend详解"
+        <div class="ds-share flat" data-thread-key="2016/11/08/cache/"
+     data-title="强制缓存和协商缓存"
      data-content=""
-     data-url="http://yoursite.com/2016/10/24/$.extend/">
+     data-url="http://yoursite.com/2016/11/08/cache/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -465,8 +483,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/24/$.extend/"
-           data-title="$.extend详解" data-url="http://yoursite.com/2016/10/24/$.extend/">
+      <div class="ds-thread" data-thread-key="2016/11/08/cache/"
+           data-title="强制缓存和协商缓存" data-url="http://yoursite.com/2016/11/08/cache/">
       </div>
     
   </div>
@@ -568,7 +586,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态函数jQuery-extend-有以下两种用法："><span class="nav-number">1.</span> <span class="nav-text">静态函数jQuery.extend()有以下两种用法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考学习"><span class="nav-number">1.</span> <span class="nav-text">参考学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知乎分析"><span class="nav-number">2.</span> <span class="nav-text">知乎分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http协议里的get和post方法"><span class="nav-number">2.1.</span> <span class="nav-text">http协议里的get和post方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache-Control-与-Expires"><span class="nav-number">2.2.</span> <span class="nav-text">Cache-Control 与 Expires</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Last-Modified-ETag-与-Cache-Control-Expires"><span class="nav-number">2.3.</span> <span class="nav-text">Last-Modified/ETag 与 Cache-Control/Expires</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户操作也与缓存有关系"><span class="nav-number">2.4.</span> <span class="nav-text">用户操作也与缓存有关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不能被缓存的请求"><span class="nav-number">2.5.</span> <span class="nav-text">不能被缓存的请求</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

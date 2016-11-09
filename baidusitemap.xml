@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://yoursite.com/2016/11/08/cache/</loc>
+    <lastmod>2016-11-09T05:58:58.456Z</lastmod>
+    <data>
+        <display>
+        <title>强制缓存和协商缓存</title>
+        <pubTime>2016-11-08T11:39:29.644Z</pubTime>
+        
+        <tag>http</tag>
+         
+        <tag>强制缓存和协商缓存</tag>
+         
+         
+           
+             
+              <breadCrumb title="http" url="http://yoursite.com/categories/http/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/css3/</loc>
+    <lastmod>2016-11-08T09:46:50.249Z</lastmod>
+    <data>
+        <display>
+        <title>css3</title>
+        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>css3</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2016/10/28/JSON/</loc>
     <lastmod>2016-11-06T07:42:20.283Z</lastmod>
     <data>
@@ -348,28 +392,6 @@
            
              
               <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/10/20/css3/</loc>
-    <lastmod>2016-10-24T04:42:54.474Z</lastmod>
-    <data>
-        <display>
-        <title>css3</title>
-        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
-        
-        <tag>css</tag>
-         
-        <tag>css3</tag>
-         
-         
-           
-             
-              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
           
         </display>
     </data>

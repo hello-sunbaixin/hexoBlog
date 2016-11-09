@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/11/08/cache/</loc>
+    
+    <lastmod>2016-11-09T05:58:58.456Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/20/css3/</loc>
+    
+    <lastmod>2016-11-08T09:46:50.249Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/10/28/JSON/</loc>
     
     <lastmod>2016-11-06T07:42:20.283Z</lastmod>
@@ -117,13 +131,6 @@
     <loc>http://yoursite.com/2016/10/20/jsonp/</loc>
     
     <lastmod>2016-10-24T04:44:00.886Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/20/css3/</loc>
-    
-    <lastmod>2016-10-24T04:42:54.474Z</lastmod>
     
   </url>
   
