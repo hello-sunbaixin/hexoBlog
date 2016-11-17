@@ -4,6 +4,220 @@
 
     
   <url>
+    <loc>http://yoursite.com/2016/11/17/clone/</loc>
+    <lastmod>2016-11-17T11:43:41.637Z</lastmod>
+    <data>
+        <display>
+        <title>对象简单及深度克隆（复制）</title>
+        <pubTime>2016-11-17T11:25:52.267Z</pubTime>
+        
+        <tag>js</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/15/variable_hoising/</loc>
+    <lastmod>2016-11-17T11:43:41.609Z</lastmod>
+    <data>
+        <display>
+        <title>变量提升和函数声明提前</title>
+        <pubTime>2016-11-15T06:30:30.668Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>Javascript  高级程序设计</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/17/encode/</loc>
+    <lastmod>2016-11-17T09:03:28.839Z</lastmod>
+    <data>
+        <display>
+        <title>编码 解码</title>
+        <pubTime>2016-11-17T09:01:12.764Z</pubTime>
+        
+        <tag>编码 解码</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/21/note/</loc>
+    <lastmod>2016-11-17T08:57:43.153Z</lastmod>
+    <data>
+        <display>
+        <title>Javascript  高级程序设计</title>
+        <pubTime>2016-10-21T05:41:23.347Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>Javascript  高级程序设计</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/16/animation/</loc>
+    <lastmod>2016-11-17T07:25:39.938Z</lastmod>
+    <data>
+        <display>
+        <title>小动画</title>
+        <pubTime>2016-11-16T09:52:04.291Z</pubTime>
+        
+        <tag>运营页</tag>
+         
+        <tag>css3动画</tag>
+         
+         
+           
+             
+              <breadCrumb title="css3" url="http://yoursite.com/categories/css3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/css3/</loc>
+    <lastmod>2016-11-17T07:25:39.907Z</lastmod>
+    <data>
+        <display>
+        <title>css3属性</title>
+        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
+        
+        <tag>css3</tag>
+         
+         
+           
+             
+              <breadCrumb title="css3" url="http://yoursite.com/categories/css3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/17/transitionend/</loc>
+    <lastmod>2016-11-17T07:16:52.654Z</lastmod>
+    <data>
+        <display>
+        <title>transitionend animationend 事件兼容问题</title>
+        <pubTime>2016-11-17T07:06:10.704Z</pubTime>
+        
+        <tag>运营页</tag>
+         
+        <tag>css3动画</tag>
+         
+         
+           
+             
+              <breadCrumb title="css3" url="http://yoursite.com/categories/css3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/16/chrome/</loc>
+    <lastmod>2016-11-17T05:34:31.888Z</lastmod>
+    <data>
+        <display>
+        <title>chrome控制台的使用</title>
+        <pubTime>2016-11-16T03:23:02.960Z</pubTime>
+        
+        <tag>chrome</tag>
+         
+        <tag>控制台</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/21/cookie/</loc>
+    <lastmod>2016-11-16T03:14:52.353Z</lastmod>
+    <data>
+        <display>
+        <title>cookie使用总结</title>
+        <pubTime>2016-10-21T06:00:17.884Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>cookie</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    <lastmod>2016-11-16T02:41:12.374Z</lastmod>
+    <data>
+        <display>
+        <title>js小记</title>
+        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
+        
+        <tag>面试题</tag>
+         
+        <tag>js小记</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2016/11/08/cache/</loc>
     <lastmod>2016-11-09T05:58:58.456Z</lastmod>
     <data>
@@ -19,28 +233,6 @@
            
              
               <breadCrumb title="http" url="http://yoursite.com/categories/http/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/10/20/css3/</loc>
-    <lastmod>2016-11-08T09:46:50.249Z</lastmod>
-    <data>
-        <display>
-        <title>css3</title>
-        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
-        
-        <tag>css</tag>
-         
-        <tag>css3</tag>
-         
-         
-           
-             
-              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
           
         </display>
     </data>
@@ -80,28 +272,6 @@
         <tag>js</tag>
          
         <tag>event</tag>
-         
-         
-           
-             
-              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/10/21/cookie/</loc>
-    <lastmod>2016-11-06T07:35:14.670Z</lastmod>
-    <data>
-        <display>
-        <title>cookie使用总结</title>
-        <pubTime>2016-10-21T06:00:17.884Z</pubTime>
-        
-        <tag>js</tag>
-         
-        <tag>cookie</tag>
          
          
            
@@ -224,28 +394,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
-    <lastmod>2016-11-06T02:52:26.155Z</lastmod>
-    <data>
-        <display>
-        <title>js小记</title>
-        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
-        
-        <tag>面试题</tag>
-         
-        <tag>js小记</tag>
-         
-         
-           
-             
-              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2016/11/04/ajax_5/</loc>
     <lastmod>2016-11-05T14:04:40.720Z</lastmod>
     <data>
@@ -348,28 +496,6 @@
            
              
               <breadCrumb title="hexo博客" url="http://yoursite.com/categories/hexo%E5%8D%9A%E5%AE%A2/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/10/21/note/</loc>
-    <lastmod>2016-10-27T03:09:18.931Z</lastmod>
-    <data>
-        <display>
-        <title>Javascript  高级程序设计</title>
-        <pubTime>2016-10-21T05:41:23.347Z</pubTime>
-        
-        <tag>js</tag>
-         
-        <tag>Javascript  高级程序设计</tag>
-         
-         
-           
-             
-              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>

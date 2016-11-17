@@ -411,7 +411,7 @@
 </tbody>
 </table>
 <p>常见问题 ie6 7下不支持JSON<br><strong>解决方法一</strong>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> jsons = req.responseText;    </div><div class="line"><span class="keyword">var</span> s;    </div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span>(<span class="built_in">JSON</span>) == <span class="string">'undefined'</span>)&#123;    </div><div class="line">     s = <span class="built_in">eval</span>(<span class="string">"("</span>+jsons+<span class="string">")"</span>);    </div><div class="line">&#125;<span class="keyword">else</span>&#123;    </div><div class="line">     s = <span class="built_in">JSON</span>.parse(jsons);    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>解决方法二</strong>：<br>调用的页面里引用json2.js即可解决问题（由于安全性问题 推荐方法二）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"js/json2.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<p><strong>解决方法二</strong>：<br>调用的页面里引用json2.js即可解决问题（由于安全性问题 推荐方法二）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"js/json2.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
 <p>json2.js地址 <a href="http://j2.58cdn.com.cn/js/v8/modules/common/json2.js" target="_blank" rel="external">http://j2.58cdn.com.cn/js/v8/modules/common/json2.js</a><br>或者到官网下载<a href="http://www.json.org/js.html" target="_blank" rel="external">http://www.json.org/js.html</a><br>github：<a href="https://github.com/douglascrockford/JSON-js" target="_blank" rel="external">https://github.com/douglascrockford/JSON-js</a></p>
 
       
@@ -552,7 +552,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -560,7 +560,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -569,7 +569,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -588,6 +588,15 @@
                     <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://javascript.ruanyifeng.com/" target="_blank" title="阮一峰">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  阮一峰
                 </a>
               </span>
             

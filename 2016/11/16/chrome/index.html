@@ -1,0 +1,1036 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="chrome,控制台," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="掌握谷歌的控制台可以使程序的调试事半功倍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chrome控制台的使用">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/chrome/index.html">
+<meta property="og:site_name" content="Sunbaixin blog">
+<meta property="og:description" content="掌握谷歌的控制台可以使程序的调试事半功倍">
+<meta property="og:image" content="http://yoursite.com/uploads/tab.png">
+<meta property="og:image" content="http://yoursite.com/uploads/console2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/console3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/console1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/source.png">
+<meta property="og:image" content="http://yoursite.com/uploads/block.png">
+<meta property="og:image" content="http://yoursite.com/uploads/color-coded-bars.png">
+<meta property="og:image" content="http://yoursite.com/uploads/network-header.png">
+<meta property="og:image" content="http://yoursite.com/uploads/network-image-preview.png">
+<meta property="og:image" content="http://yoursite.com/uploads/resource-preview-json.png">
+<meta property="og:image" content="http://yoursite.com/uploads/response.png">
+<meta property="og:image" content="http://yoursite.com/uploads/timing.png">
+<meta property="og:image" content="http://yoursite.com/uploads/websocket-text.png">
+<meta property="og:image" content="http://yoursite.com/uploads/websocket-opcode.png">
+<meta property="og:image" content="http://yoursite.com/uploads/filer-sort.png">
+<meta property="og:image" content="http://yoursite.com/uploads/film.gif">
+<meta property="og:image" content="http://yoursite.com/uploads/time1.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time2.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time3.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time4.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time15.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time5.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time6.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time7.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time8.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time9.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time10.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time11.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time12.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time13.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/time16.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/event1.png">
+<meta property="og:image" content="http://yoursite.com/uploads/event2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/event3.png">
+<meta property="og:image" content="http://yoursite.com/uploads/event4.png">
+<meta property="og:image" content="http://yoursite.com/uploads/event5.png">
+<meta property="og:image" content="http://yoursite.com/uploads/audit.png">
+<meta property="og:updated_time" content="2016-11-17T05:34:31.888Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chrome控制台的使用">
+<meta name="twitter:description" content="掌握谷歌的控制台可以使程序的调试事半功倍">
+<meta name="twitter:image" content="http://yoursite.com/uploads/tab.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/16/chrome/"/>
+
+
+  <title> chrome控制台的使用 | Sunbaixin blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Sunbaixin blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Goals determine what you are going to be</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                chrome控制台的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-16T11:23:02+08:00" content="2016-11-16">
+              2016-11-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/16/chrome/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/chrome/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+
+  
+        
+          
+
+          
+    
+
+    </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>掌握谷歌的控制台可以使程序的调试事半功倍</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="ELEMENT"><a href="#ELEMENT" class="headerlink" title="ELEMENT"></a>ELEMENT</h1><p><strong>编辑小技巧</strong></p>
+<ul>
+<li>Ctrl+shift+I /f12打开调试工具</li>
+<li>Ctrl+shift+j 打开调试工具 并把光标直接定位到控制台</li>
+<li>Ctrl+shift+c 打开调试工具  <img src="/uploads/tab.png" alt="pic"></li>
+</ul>
+<p><strong>定位文件</strong></p>
+<ul>
+<li>“Sources”面板中</li>
+<li>选择打开新的文件： ctrl+p ;</li>
+<li>选择指定文件中的某一行某一列：ctrl+o使用“:行数:列数”的功能</li>
+<li>选择指定文件中某一个函数：ctrl+shift+p 可输入选择想找的函数</li>
+</ul>
+<p><strong>展开列</strong></p>
+<ul>
+<li>选择”Elements”面板</li>
+<li>选择DOM元素和在带有剪头的地点按住Alt +点击鼠标左键，可以展开所有子节点</li>
+</ul>
+<p><strong>改变开发者工具的位置</strong><br>试一试快捷键：Ctrl + Shift + D。设置开发者工具有三个选项：</p>
+<ul>
+<li>不在窗口中显示开发者工具</li>
+<li>在窗口右侧显示开发者工具</li>
+<li>在窗口底部显示开发者工具</li>
+</ul>
+<p><strong>自定义颜色调色板</strong></p>
+<ul>
+<li>你可以点击颜色代码前面的小图标，调整颜色</li>
+</ul>
+<p><strong>多个光标</strong></p>
+<ul>
+<li>移动光标按住CMD + 点击可以添加多个光标，你也可以使用Ctrl + U撤销你选择的最后一个光标。</li>
+</ul>
+<p><strong>复制图片的Data URI</strong></p>
+<ul>
+<li>选择”Network”面板</li>
+<li>在“Resources”面板选择你的图片</li>
+<li>在图片上右击，选择“Copy Image as Data URI”选项</li>
+</ul>
+<p><strong>触发伪类</strong></p>
+<ul>
+<li>在左边的面板元素上右击鼠标，并选择“：active ：hover ：focus ：visited”</li>
+<li>另外在右边的面板中选择切换伪类状态的图标</li>
+</ul>
+<p><strong>使用$0获取当前元素</strong></p>
+<ul>
+<li>选择“Elements”面板</li>
+<li>在”Element”面板中选择DOM元素</li>
+<li>点击”Console”并输入$0可以获取当前元素</li>
+</ul>
+<p><strong>在元素中显示</strong></p>
+<ul>
+<li>在控制台，选择一个DOM节点：(eg:document.getElementById(“#box”))</li>
+<li>在“Console”面板中右击，选择”Reveal in Elements Panel”</li>
+</ul>
+<p><strong>查看事件监听器</strong></p>
+<ul>
+<li>选择“Elements”面板”</li>
+<li>在“Event Listeners”菜单中选择一个事件</li>
+<li>右击并选择“Show Function Definition”，你可以查看到对应的源码</li>
+</ul>
+<h1 id="CONSOLE"><a href="#CONSOLE" class="headerlink" title="CONSOLE"></a>CONSOLE</h1><h4 id="Using-the-Console"><a href="#Using-the-Console" class="headerlink" title="Using the Console"></a>Using the Console</h4><p>crtl+shif+J 打开控制+直接把光标定位到console面板</p>
+<p>计算一段程序执行时间，可以在timeline上看见<br><img src="/uploads/console2.png" alt="pic"><br>计算某条语句的执行次数<br><img src="/uploads/console3.png" alt="pic"><br>把参数以表格形式输出<br><img src="/uploads/console1.png" alt="pic"></p>
+<h4 id="Interact-from-Command-Line"><a href="#Interact-from-Command-Line" class="headerlink" title="Interact from Command Line"></a>Interact from Command Line</h4><h1 id="SOURCE"><a href="#SOURCE" class="headerlink" title="SOURCE"></a>SOURCE</h1><h3 id="运行预定义的代码片段"><a href="#运行预定义的代码片段" class="headerlink" title="运行预定义的代码片段"></a>运行预定义的代码片段</h3><ul>
+<li>在左侧边栏中选择: Sources &gt; Snippets</li>
+<li>右击选择Select New</li>
+<li>输入文件名和在右侧的面板中输入代码片段</li>
+<li>代码片段文件名上右击选择Run</li>
+</ul>
+<h3 id="Workspaces"><a href="#Workspaces" class="headerlink" title="Workspaces"></a>Workspaces</h3><ul>
+<li>选择“Sources”面板</li>
+<li>在Sources面板中右击并选择“Add Folder to Workspaces”最后选择你工程项目的存储位置即可</li>
+<li>右键点击本地映射文件，并选择Map to Network Resources就会加载相应的“网络”文件了</li>
+<li>修改你的文件代码和查看<br><img src="/uploads/source.png" alt="pic"></li>
+</ul>
+<h3 id="添加断点及Blackbox-script"><a href="#添加断点及Blackbox-script" class="headerlink" title="添加断点及Blackbox script"></a>添加断点及Blackbox script</h3><p>用于查看和调试当前页面所加载的脚本的源文件。<br>断点不只可以添加删除，还可以在断点处进行编辑。此外XHR Breakpoints允许当一个预期Ajax请求创建时断开<br><img src="/uploads/block.png" alt="pic"></p>
+<h3 id="blackbox允许屏蔽指定的js-屏蔽文件后会怎么样"><a href="#blackbox允许屏蔽指定的js-屏蔽文件后会怎么样" class="headerlink" title="blackbox允许屏蔽指定的js 屏蔽文件后会怎么样"></a>blackbox允许屏蔽指定的js 屏蔽文件后会怎么样</h3><ul>
+<li>库代码（被屏蔽的文件）里抛出异常时不会暂停（当设置为Pause on exceptions时）</li>
+<li>调试时Stepping into/out/over都会忽略库代码</li>
+<li>事件断点也会忽略库代码</li>
+<li>库代码里设置的任何断点也不会起作用</li>
+<li>最终的结果就是只会调试应用代码而忽略第三方代码（配置了Blackbox的代码）。 <a href="http://www.alloyteam.com/2015/01/chrome-devtools-blackbox/&gt;" target="_blank" rel="external">http://www.alloyteam.com/2015/01/chrome-devtools-blackbox/&gt;</a><br><strong>比较大的用途</strong>就是 一步一步调代码时候（step into/out/over），避免代码进入一些库中（jquery等） 这个配合事件监听以很方便找到某一事件的触发函数 （要快速找到当你点击一个按钮或一个链接被点击时候执行的代码等）</li>
+</ul>
+<h1 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h1><h4 id="network下的每一项"><a href="#network下的每一项" class="headerlink" title="network下的每一项"></a>network下的每一项</h4><p><img src="/uploads/color-coded-bars.png" alt="pic"></p>
+<ul>
+<li>Name and Path：分别是资源的名称和URL路径</li>
+<li>Method：用于请求的HTTP方法。例如:GET或POST。</li>
+<li>Status and Text：http状态码和文本信息</li>
+<li>Domain：请求资源的域名</li>
+<li>Type：所请求的资源的MIME类型。Documents，Stylesheets，Images，Scripts，XHR，Fonts<br>，Other</li>
+<li>Initiator：Initiator 可以快速定位请求是怎么发起的 有四种可能： - Parser：请求是由页面的HTML解析时发送的； - Redirect：请求是由页面重定向发送的； - Script：请求是由script脚本处理发送的； - Other：请求是由其他过程发送的，比如页面里的link链接点击导航到页面或者在地址栏输入URL地址。</li>
+<li>Cookies：cookie的细节在resource面板</li>
+<li>Set-Cookies：cookie在http请求中设置</li>
+<li>Size and Content：size是所有的请求头（一般几百字节）加上请求体的大小；content是所有解码内容的大小，如果从浏览器缓存中加载资源而不是通过网络,这一领域将包含文本(从缓存)。</li>
+<li>Time and Latency：Time是总的时间，从一开始请求到接受最后一个字节的时间；Latency：响应第一个字节的时间</li>
+<li>Timeline：下面会有详解<h4 id="network下的Header"><a href="#network下的Header" class="headerlink" title="network下的Header"></a>network下的Header</h4><img src="/uploads/network-header.png" alt="pic"><br>点击View parsed/View source可以看被解析格式或者源文件格式<br>点击View decoded/View URL encoded 可以看解码和编码格式的<h4 id="network-preview"><a href="#network-preview" class="headerlink" title="network-preview"></a>network-preview</h4><img src="/uploads/network-image-preview.png" alt="pic"><br><img src="/uploads/resource-preview-json.png" alt="pic"></li>
+</ul>
+<h4 id="network-response"><a href="#network-response" class="headerlink" title="network-response"></a>network-response</h4><p><img src="/uploads/response.png" alt="pic"></p>
+<h4 id="network-Timeline"><a href="#network-Timeline" class="headerlink" title="network-Timeline"></a>network-Timeline</h4><p><img src="/uploads/timing.png" alt="pic"></p>
+<ul>
+<li>Stalled/Blocking：浏览器发请求前本地的操作时间，比如去缓存中查看页面缓存等</li>
+<li>Proxy：与代理服务器连接的时间</li>
+<li>DNS Lookup： DNS查询的时间</li>
+<li>Connecting：建立TCP连接的时间 相当于客户端从发请求开始到TCP握手结束这一阶段。</li>
+<li>Sending：发送请求时间 一般很小</li>
+<li>Waiting：发送请求完毕到接收请求开始的时间。这个时间段就是服务器处理和返回数据网络延时时间。</li>
+<li>Content Download / Downloading:接受数据的时间<br><strong>蓝线表示</strong>： DOMReady事件。事件触发的条件是：浏览器已经把整个 HTML 文档的 DOM结构解析完毕。一般前端开发者监听这个事件是为了可靠地在文档中查找元素。这个事件触发之前有可能只下载了半截 HTML，想要的元素还没出现。<br><strong>红线表示</strong>： load 事件，触发条件是：整个页面的 JS CSS 图片都下载完毕。用户看到的进度条/小菊花已经不再显示为“忙”的状态。是用户眼中的加载完毕。<h4 id="network-cookie"><a href="#network-cookie" class="headerlink" title="network-cookie"></a>network-cookie</h4>cookie每个参数值详解<h4 id="WebSocket-frames"><a href="#WebSocket-frames" class="headerlink" title="WebSocket frames"></a>WebSocket frames</h4><img src="/uploads/websocket-text.png" alt="pic"><br><img src="/uploads/websocket-opcode.png" alt="pic"><br>data：<br>Continuation Frame<br>Binary Frame<br>Connection Close Frame<br>Ping Frame<br>Pong Frame<br>length：负载消息的长度 单位字节<br>time：当消息被创建的时候的时间戳<br>说明：在每一帧消息到达后刷新帧表格，点击左边的resource刷新。<br>只有最后100 WebSocket消息帧表保存的。</li>
+</ul>
+<h4 id="如何过滤和排序结果"><a href="#如何过滤和排序结果" class="headerlink" title="如何过滤和排序结果"></a>如何过滤和排序结果</h4><p><img src="/uploads/filer-sort.png" alt="pic"><br>每一列都有一个小箭头，点击切换排序<br>Timeline题目左键-可以更换条目<br>timeline：这是以每个网络请求的开始时间来排序。这是默认的排序,(和starttime一样)。<br>stattime：按每个网络请求的开始时间排序(排序由时间表选项一样)。<br>response time:按每个请求的响应时间来排序。<br>endtime：按每个请求完成时排序。<br>Duration：按每个请求的总时间排序。选择这个过滤器来确定哪些资源需要最长的时间来加载。<br>Latency：从请求开始到响应开始这一段时间排序。选择这个过滤器来确定哪些资源需要最长的时间加载出第一个字节。</p>
+<h4 id="Network-Filmstrip"><a href="#Network-Filmstrip" class="headerlink" title="Network Filmstrip"></a>Network Filmstrip</h4><p><img src="/uploads/film.gif" alt="pic"><br><strong>“Film Strip”显示页面从开始到结束渲染的截图。你可以点击截图和在timeline-style中查看视图。</strong></p>
+<ul>
+<li>选择“Network”面板</li>
+<li>点击“录制”图标</li>
+<li>重新加载页面</li>
+</ul>
+<h1 id="TIMELINE"><a href="#TIMELINE" class="headerlink" title="TIMELINE"></a>TIMELINE</h1><h4 id="Timeline面板中记录和分析了你的应用在运行时所有的活动情况，它是你排查应用性能瓶颈的最佳工具！"><a href="#Timeline面板中记录和分析了你的应用在运行时所有的活动情况，它是你排查应用性能瓶颈的最佳工具！" class="headerlink" title="Timeline面板中记录和分析了你的应用在运行时所有的活动情况，它是你排查应用性能瓶颈的最佳工具！"></a>Timeline面板中记录和分析了你的应用在运行时所有的活动情况，它是你排查应用性能瓶颈的最佳工具！</h4><h4 id="Timeline预览面板"><a href="#Timeline预览面板" class="headerlink" title="Timeline预览面板"></a>Timeline预览面板</h4><p>Timeline面板有三个主要的窗口：顶部的预览窗口，中间的记录窗口，底部的工具条，如下图：<br><img src="/uploads/time1.jpg" alt="pic"><br>在你开启记录（就好像打开了录像机的录制功能）后，在这期间你的应用中发生的所有事件都会被记录下来形成一条日志记录，按照记录的类型一般会标注上不同的颜色：<br><img src="/uploads/time2.jpg" alt="pic"><br>举个例子，下面的截图中显示了一个html页面的事件日志记录，可以看到，第一条记录表示的是浏览器为了获取html页面而发送了http请求的发送请求事件，接下来是一个接受响应事件，和接受对应响应体（html页面内容的字节）的事件，最后是一个加载完毕事件记录。<br><img src="/uploads/time3.jpg" alt="pic"><br>除了Records视图外，你还可以在三个模式中切换关注点：</p>
+<ul>
+<li>Events：显示所有的事件记录</li>
+<li>Frames：显示页面渲染的帧数</li>
+<li>Memory：显示页面的内存使用情况</li>
+</ul>
+<p>下面着重介绍一下三种模式</p>
+<h4 id="Timeline三种模式"><a href="#Timeline三种模式" class="headerlink" title="Timeline三种模式"></a>Timeline三种模式</h4><p><strong>Events 模式</strong><br>Events模式提供了一个概览图，包含了在记录期间你的页面被捕获到的所有事件，你可以很容易的看到你的应用到底哪里耗时最久，等等~~</p>
+<p>每个带颜色的横条表示特定类型的事件，横条的长度代表的是该事件从开始到结束的耗时~~<br><img src="/uploads/time4.jpg" alt="pic"><br><strong>Frames 模式</strong><br>帧模式从渲染性能的角度提供了数据支撑，一个“frame”表示浏览器为了渲染单个内容块而必须要做的工作（包括：执行js，处理事件，修改DOM，更改样式和布局，绘制页面）！</p>
+<p>我们的目标是保证我们的页面要有高于每秒60帧的跑分，这和目前大多数显示器的刷新率相吻合（60Hz）!<br><img src="/uploads/time15.jpg" alt="pic"><br>这么算的话，我们的应用的每一帧耗时应该低于16.6ms（1000ms/60）<br><img src="/uploads/time5.jpg" alt="pic"><br>上图中，在Frame视图中有两条贯穿该视图的横线，分别标识出60FPS和30FPS的基准，按照我们刚才提到的那个公式，我们可以理解为分别标识了16.6ms和33.3ms两个时间点~~</p>
+<p>图中帧柱的高度表示了该帧的总耗时，帧柱中的颜色分别对应该帧中包含的不停类型的事件！<br>注意上图中的鼠标位置，该工具条显示了当前选中的帧柱的耗时，可以看到鼠标指上去后会显示出该帧柱的详细数据！</p>
+<p>你可能注意到了在帧柱上存在灰色区域和空白区域~~它们分别代表：<br>灰色区块：那些没有被DevTools感知到的活动<br>空白区块：显示刷新周期（display refresh cycles）中的空闲时间段<br>如下图所示：<br><img src="/uploads/time6.jpg" alt="pic"><br>当你在Frame视图中选择了一个区域，在Timeline面板的最底部（右下方）会统计出你选中的时间范围内的帧柱的统计数据，如下图：<br><img src="/uploads/time7.jpg" alt="pic"><br>当鼠标指上去后会弹出详细信息，包含下面字段：</p>
+<ul>
+<li>Selected range：选中的时间段内包含的帧柱数</li>
+<li>Minimum Time：该时间段里帧柱中的最小耗时</li>
+<li>Average Time：该时间段里帧柱的平均耗时</li>
+<li>Maximum Time：该时间段里帧柱中的最大耗时</li>
+<li>Standard Deviation：计算平均耗时的有效偏差值</li>
+<li>Time by category：耗时的分布情况</li>
+</ul>
+<p><strong>Memory 模式</strong><br>Memory视图显示了我们的应用的内存使用情况图表，包括页面的文档数，DOM节点数，和没有被垃圾回收掉的仍然在内存中的事件监听器数，如下图：<br><img src="/uploads/time8.jpg" alt="pic"><br><strong>模拟流程</strong><br>打开一个你想分析的页面；<br>打开DevTools的Timeline面板，点击”Record”按钮，或者使用热键：Ctrl + E(Win), Cmd + E(Mac)；<br>然后在页面上操作你想要了解的功能；<br>停止记录，分析收集到的记录数据。<br><strong>收集记录的小技巧</strong></p>
+<ul>
+<li>尽可能的缩短记录的时间：确保记录的时间段很短，有利于锁定关注点，避免太多不必要的数据干扰；</li>
+<li>避免不必要的操作：同上道理，在记录期间，尽可能只触发你想分析的操作；</li>
+<li>关闭浏览器缓存：如果你想分析网络操作细节，你最好关闭浏览器缓存；</li>
+<li>关闭浏览器扩展工具：这样可以避免记录到这些第三方插件产生的行为记录，你可以开启浏览器的“隐身模式”</li>
+</ul>
+<p><strong>锁定强制同步布局瓶颈</strong><br>所谓布局（Layout），指的是浏览器计算页面中所有元素的位置和尺寸的过程！通常我们的Chrome会延迟布局计算，这样可以攒够一批变更（css变化或dom结构变化）后一次性执行！但是我们的脚本可以强制浏览器立刻进行布局操作，频繁的进行强制同步布局很可能会造成性能瓶颈！</p>
+<p>Timeline面板会用“黄色惊叹号三角标”标注出那些发生的强制浏览器布局，当你查看对应记录详情时，也会在弹出的窗口中看到问题代码的调用堆栈信息，如下：<br><img src="/uploads/time9.jpg" alt="pic"></p>
+<p>如果一个记录包含子记录触发了强制布局，那父记录会被一个“浅黄色惊叹号三角标”标识，如下图：<br><img src="/uploads/time10.jpg" alt="pic"></p>
+<p>这种子记录是如何产生的呢？原因有二：<br>1.在执行某个事件的过程中同步产生了其他事件；<br>2.当打开了底部工具条中的“Glue asynchronous events to causes”开关后，异步事件记录会作为触发该异步事件的记录的子记录。</p>
+<p>下面分别举两个例子：<br>当Chrome尝试去解析一段HTML时，如果发现该HTML引用了一些外部资源，那么Chrome必须先加载这些文件才能完成解析，这就是上面说的第一点，如下图：<br><img src="/uploads/time11.jpg" alt="pic"></p>
+<p>在前端浏览器中存在很多异步回调的场景，比方说ajax。由于触发异步和异步回调事件之间可能间隔很长时间，这对于我们分析数据造成了一定程度的不便，所以我们可以打开“Glue asynchronous events to causes”开关，如下图：<br><img src="/uploads/time12.jpg" alt="pic"></p>
+<p>心细的童鞋注意到了在上图中展示的第一条记录条中，被标识了不同颜色区块~它们分别对应下面的含义：</p>
+<ul>
+<li>左边深色：表示父记录和它的同步子记录的耗时（长度）；</li>
+<li>中间稍浅：表示父记录和它的异步子记录的耗时；</li>
+<li>右边泛白：表示从第一个异步事件开始到最后一个异步事件结束的耗时。<br>如下图：<br><img src="/uploads/time13.jpg" alt="pic"></li>
+</ul>
+<p>当鼠标指向某个记录时，弹出的窗口中显示了该记录详细的数据：</p>
+<ul>
+<li>Duration：匹配该记录及其子记录的总耗时；</li>
+<li>Self Time：只包含自己得耗时（不包含子记录）；</li>
+<li>CPU time：CPU耗时。<br>如下图：<br><img src="/uploads/time16.jpg" alt="pic"><h4 id="Timeline中的各种事件"><a href="#Timeline中的各种事件" class="headerlink" title="Timeline中的各种事件"></a>Timeline中的各种事件</h4><strong>Loading事件</strong><br><img src="/uploads/event1.png" alt="pic"><br><strong>Scripting事件</strong><br><img src="/uploads/event2.png" alt="pic"><br><img src="/uploads/event3.png" alt="pic"><br><strong>Render事件</strong><br><img src="/uploads/event4.png" alt="pic"><br><strong>Painting事件</strong><br><img src="/uploads/event5.png" alt="pic"><br><a href="http://www.kazaff.me/2014/01/18/chrome-developer-tools%E4%B9%8Btimeline%E9%9D%A2%E6%9D%BF/" target="_blank" rel="external">timeline详解-值的一看</a>;</li>
+</ul>
+<h1 id="PROFILES"><a href="#PROFILES" class="headerlink" title="PROFILES"></a>PROFILES</h1><h1 id="RESOURCE"><a href="#RESOURCE" class="headerlink" title="RESOURCE"></a>RESOURCE</h1><h1 id="Audits"><a href="#Audits" class="headerlink" title="Audits"></a>Audits</h1><h4 id="用于页面优化，对网络效率和性能的审查-并且会给出一些建议"><a href="#用于页面优化，对网络效率和性能的审查-并且会给出一些建议" class="headerlink" title="用于页面优化，对网络效率和性能的审查 并且会给出一些建议"></a>用于页面优化，对网络效率和性能的审查 并且会给出一些建议</h4><p><img src="/uploads/audit.png" alt="pic"></p>
+<h1 id="DEVICE-MODE"><a href="#DEVICE-MODE" class="headerlink" title="DEVICE MODE"></a>DEVICE MODE</h1><h1 id="REMOTE-DEBUGGING"><a href="#REMOTE-DEBUGGING" class="headerlink" title="REMOTE DEBUGGING"></a>REMOTE DEBUGGING</h1><h1 id="SETTING"><a href="#SETTING" class="headerlink" title="SETTING"></a>SETTING</h1>
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/erweima.png" alt="sunbaixin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫描上方二维码，关注我的博客</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/chrome/" rel="tag">#chrome</a>
+          
+            <a href="/tags/控制台/" rel="tag">#控制台</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/15/variable_hoising/" rel="next" title="变量提升和函数声明提前">
+                <i class="fa fa-chevron-left"></i> 变量提升和函数声明提前
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/16/animation/" rel="prev" title="小动画">
+                小动画 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/16/chrome/"
+     data-title="chrome控制台的使用"
+     data-content=""
+     data-url="http://yoursite.com/2016/11/16/chrome/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/16/chrome/"
+           data-title="chrome控制台的使用" data-url="http://yoursite.com/2016/11/16/chrome/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/head.jpg"
+               alt="sunbaixin" />
+          <p class="site-author-name" itemprop="name">sunbaixin</p>
+          <p class="site-description motion-element" itemprop="description">happy girl</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hello-sunbaixin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://javascript.ruanyifeng.com/" target="_blank" title="阮一峰">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  阮一峰
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ELEMENT"><span class="nav-number">1.</span> <span class="nav-text">ELEMENT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CONSOLE"><span class="nav-number">2.</span> <span class="nav-text">CONSOLE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-the-Console"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">Using the Console</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interact-from-Command-Line"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">Interact from Command Line</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SOURCE"><span class="nav-number">3.</span> <span class="nav-text">SOURCE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行预定义的代码片段"><span class="nav-number">3.0.1.</span> <span class="nav-text">运行预定义的代码片段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Workspaces"><span class="nav-number">3.0.2.</span> <span class="nav-text">Workspaces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加断点及Blackbox-script"><span class="nav-number">3.0.3.</span> <span class="nav-text">添加断点及Blackbox script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blackbox允许屏蔽指定的js-屏蔽文件后会怎么样"><span class="nav-number">3.0.4.</span> <span class="nav-text">blackbox允许屏蔽指定的js 屏蔽文件后会怎么样</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network"><span class="nav-number">4.</span> <span class="nav-text">Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#network下的每一项"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">network下的每一项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network下的Header"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">network下的Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-preview"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">network-preview</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-response"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">network-response</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-Timeline"><span class="nav-number">4.0.0.5.</span> <span class="nav-text">network-Timeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-cookie"><span class="nav-number">4.0.0.6.</span> <span class="nav-text">network-cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebSocket-frames"><span class="nav-number">4.0.0.7.</span> <span class="nav-text">WebSocket frames</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何过滤和排序结果"><span class="nav-number">4.0.0.8.</span> <span class="nav-text">如何过滤和排序结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Network-Filmstrip"><span class="nav-number">4.0.0.9.</span> <span class="nav-text">Network Filmstrip</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TIMELINE"><span class="nav-number">5.</span> <span class="nav-text">TIMELINE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Timeline面板中记录和分析了你的应用在运行时所有的活动情况，它是你排查应用性能瓶颈的最佳工具！"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">Timeline面板中记录和分析了你的应用在运行时所有的活动情况，它是你排查应用性能瓶颈的最佳工具！</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Timeline预览面板"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">Timeline预览面板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Timeline三种模式"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">Timeline三种模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Timeline中的各种事件"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">Timeline中的各种事件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PROFILES"><span class="nav-number">6.</span> <span class="nav-text">PROFILES</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RESOURCE"><span class="nav-number">7.</span> <span class="nav-text">RESOURCE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Audits"><span class="nav-number">8.</span> <span class="nav-text">Audits</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于页面优化，对网络效率和性能的审查-并且会给出一些建议"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">用于页面优化，对网络效率和性能的审查 并且会给出一些建议</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DEVICE-MODE"><span class="nav-number">9.</span> <span class="nav-text">DEVICE MODE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#REMOTE-DEBUGGING"><span class="nav-number">10.</span> <span class="nav-text">REMOTE DEBUGGING</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SETTING"><span class="nav-number">11.</span> <span class="nav-text">SETTING</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    total visited<span id="busuanzi_value_site_pv"></span>times
+</span>
+<span id="busuanzi_container_site_uv">
+  <span id="busuanzi_value_site_uv"></span>peoples
+</span>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunbaixin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunbaixin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
