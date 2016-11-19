@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/15/variable_hoising/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
 <meta property="og:description" content="理解JavaScript变量声明行为的一个好办法是把变量声明看作由两部分组成，即声明和赋值。JavaScript隐式地提升(hoists)声明部分到封闭函数的顶部，而将赋值留在原地。换句话说，变量的作用域是整个函数，但仅在var语句出现的位置进行赋值">
-<meta property="og:updated_time" content="2016-11-17T11:43:41.609Z">
+<meta property="og:updated_time" content="2016-11-17T12:09:36.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变量提升和函数声明提前">
 <meta name="twitter:description" content="理解JavaScript变量声明行为的一个好办法是把变量声明看作由两部分组成，即声明和赋值。JavaScript隐式地提升(hoists)声明部分到封闭函数的顶部，而将赋值留在原地。换句话说，变量的作用域是整个函数，但仅在var语句出现的位置进行赋值">
@@ -331,8 +331,9 @@
 
       
         <blockquote>
-<p>理解JavaScript变量声明行为的一个好办法是把变量声明看作由两部分组成，即声明和赋值。JavaScript隐式地提升(hoists)声明部分到封闭函数的顶部，而将赋值留在原地。<br>换句话说，变量的作用域是整个函数，但仅在var语句出现的位置进行赋值<br><a id="more"></a></p>
+<p>理解JavaScript变量声明行为的一个好办法是把变量声明看作由两部分组成，即声明和赋值。JavaScript隐式地提升(hoists)声明部分到封闭函数的顶部，而将赋值留在原地。<br>换句话说，变量的作用域是整个函数，但仅在var语句出现的位置进行赋值</p>
 </blockquote>
+<a id="more"></a>
 <h3 id="函数的声明方式"><a href="#函数的声明方式" class="headerlink" title="函数的声明方式"></a>函数的声明方式</h3><p>在定义一个函数的时候通常有两种声明方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">foo()&#123;&#125;;     <span class="comment">// 函数声明</span></div><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;    <span class="comment">// 函数表达式</span></div></pre></td></tr></table></figure></p>
 <h3 id="不同之处"><a href="#不同之处" class="headerlink" title="不同之处"></a>不同之处</h3><p>函数表达式后面加括号可以直接执行<br>函数声明会提前预解析<br><strong>预解析</strong><br>让我们先看一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">foo();         <span class="comment">//  函数声明</span></div><div class="line">foo_later();     <span class="comment">//  foo_later is not a function</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">'函数声明'</span>); &#125;</div><div class="line"><span class="keyword">var</span> foo_later = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">'函数表达式'</span>); &#125;</div></pre></td></tr></table></figure></p>
 <p>可以看到，函数声明foo被预解析了，它可以在其自身代码之前执行；而函数表达式foo_later则不能。要解决这个问题，我们先要弄清楚JavaScript解析器的工作机制。</p>
@@ -490,7 +491,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -507,7 +508,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

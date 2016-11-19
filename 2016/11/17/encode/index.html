@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/17/encode/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
 <meta property="og:description" content="escape() encodeURI() encodeURIComponent()">
-<meta property="og:updated_time" content="2016-11-17T09:03:28.839Z">
+<meta property="og:updated_time" content="2016-11-19T07:47:39.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编码 解码">
 <meta name="twitter:description" content="escape() encodeURI() encodeURIComponent()">
@@ -334,9 +334,13 @@
 <p>escape() encodeURI() encodeURIComponent()</p>
 </blockquote>
 <a id="more"></a>
-<p>编码 解码<br>摘要：<br>escape()不能直接用于URL编码，它的真正作用是返回一个字符的Unicode编码值。比如”春节”的返回结果是%u6625%u8282，，escape()不对”+”编码 主要用于汉字编码，现在已经不提倡使用。<br>encodeURI()是Javascript中真正用来对URL编码的函数。 编码整个url地址，但对特殊含义的符号”; / ? : @ &amp; = + $ , #”，也不进行编码。对应的解码函数是：decodeURI()。<br>encodeURIComponent() 能编码”; / ? : @ &amp; = + $ , #”这些特殊字符。对应的解码函数是decodeURIComponent()。<br>假如要传递带&amp;符号的网址，所以用encodeURIComponent()<br>详总：<br><a href="http://www.haorooms.com/post/js_escape_encodeURIComponent" target="_blank" rel="external">http://www.haorooms.com/post/js_escape_encodeURIComponent</a></p>
-<p>解码例子<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">decode</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> ov = value, nv;</div><div class="line">            <span class="keyword">var</span> re4escape = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"%u[a-zA-Z0-9]&#123;4&#125;"</span>,<span class="string">"ig"</span>);</div><div class="line">            <span class="keyword">var</span> re4decodeuri = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^((%[a-zA-Z0-9]&#123;2&#125;)|([!#$&amp;'()*+,-./:;=?@_~a-zA-Z0-9]))*$"</span>,<span class="string">""</span>);</div><div class="line">            <span class="keyword">if</span> (re4escape.test(ov))</div><div class="line">                nv = <span class="built_in">unescape</span>(ov);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (re4decodeuri.test(ov))</div><div class="line">                nv = <span class="built_in">decodeURIComponent</span>(ov);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                nv = ov;</div><div class="line">            <span class="keyword">if</span> (ov != nv)</div><div class="line">                <span class="keyword">return</span> decode(nv);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> nv</div><div class="line"></div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
-
+<p>编码 解码</p>
+<h3 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h3><ul>
+<li><strong>escape()</strong>不能直接用于URL编码，它的真正作用是返回一个字符的Unicode编码值。比如”春节”的返回结果是%u6625%u8282，，escape()不对”+”编码 主要用于汉字编码，现在已经不提倡使用。</li>
+<li><strong>encodeURI()</strong>是Javascript中真正用来对URL编码的函数。 编码整个url地址，但对特殊含义的符号”; / ? : @ &amp; = + $ , #”，也不进行编码。对应的解码函数是：decodeURI()。</li>
+<li><strong>encodeURIComponent()</strong> 能编码”; / ? : @ &amp; = + $ , #”这些特殊字符。对应的解码函数是decodeURIComponent()。<br>假如要传递带&amp;符号的网址，所以用encodeURIComponent()<br><strong>详总：</strong><br><a href="http://www.haorooms.com/post/js_escape_encodeURIComponent" target="_blank" rel="external">http://www.haorooms.com/post/js_escape_encodeURIComponent</a></li>
+</ul>
+<h3 id="解码例子"><a href="#解码例子" class="headerlink" title="解码例子"></a>解码例子</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">decode</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> ov = value, nv;</div><div class="line">            <span class="keyword">var</span> re4escape = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"%u[a-zA-Z0-9]&#123;4&#125;"</span>,<span class="string">"ig"</span>);</div><div class="line">            <span class="keyword">var</span> re4decodeuri = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^((%[a-zA-Z0-9]&#123;2&#125;)|([!#$&amp;'()*+,-./:;=?@_~a-zA-Z0-9]))*$"</span>,<span class="string">""</span>);</div><div class="line">            <span class="keyword">if</span> (re4escape.test(ov))</div><div class="line">                nv = <span class="built_in">unescape</span>(ov);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (re4decodeuri.test(ov))</div><div class="line">                nv = <span class="built_in">decodeURIComponent</span>(ov);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                nv = ov;</div><div class="line">            <span class="keyword">if</span> (ov != nv)</div><div class="line">                <span class="keyword">return</span> decode(nv);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> nv</div><div class="line"></div><div class="line">        &#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -473,7 +477,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -490,7 +494,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -539,7 +543,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#摘要："><span class="nav-number">1.</span> <span class="nav-text">摘要：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解码例子"><span class="nav-number">2.</span> <span class="nav-text">解码例子</span></a></li></ol></div>
             
           </div>
         </section>

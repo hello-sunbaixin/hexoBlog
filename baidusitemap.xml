@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://yoursite.com/2016/11/19/base_reference_type/</loc>
+    <lastmod>2016-11-19T11:23:03.253Z</lastmod>
+    <data>
+        <display>
+        <title>基本类型和引用类型</title>
+        <pubTime>2016-11-19T08:47:51.091Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>基本类型和引用类型</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2016/11/17/clone/</loc>
-    <lastmod>2016-11-17T11:43:41.637Z</lastmod>
+    <lastmod>2016-11-19T08:49:11.282Z</lastmod>
     <data>
         <display>
         <title>对象简单及深度克隆（复制）</title>
@@ -24,30 +46,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/11/15/variable_hoising/</loc>
-    <lastmod>2016-11-17T11:43:41.609Z</lastmod>
-    <data>
-        <display>
-        <title>变量提升和函数声明提前</title>
-        <pubTime>2016-11-15T06:30:30.668Z</pubTime>
-        
-        <tag>js</tag>
-         
-        <tag>Javascript  高级程序设计</tag>
-         
-         
-           
-             
-              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2016/11/17/encode/</loc>
-    <lastmod>2016-11-17T09:03:28.839Z</lastmod>
+    <lastmod>2016-11-19T07:47:39.965Z</lastmod>
     <data>
         <display>
         <title>编码 解码</title>
@@ -67,11 +67,33 @@
     
   <url>
     <loc>http://yoursite.com/2016/10/21/note/</loc>
-    <lastmod>2016-11-17T08:57:43.153Z</lastmod>
+    <lastmod>2016-11-18T09:36:28.397Z</lastmod>
     <data>
         <display>
         <title>Javascript  高级程序设计</title>
         <pubTime>2016-10-21T05:41:23.347Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>Javascript  高级程序设计</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/15/variable_hoising/</loc>
+    <lastmod>2016-11-17T12:09:36.750Z</lastmod>
+    <data>
+        <display>
+        <title>变量提升和函数声明提前</title>
+        <pubTime>2016-11-15T06:30:30.668Z</pubTime>
         
         <tag>js</tag>
          

@@ -262,6 +262,136 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/19/base_reference_type/" itemprop="url">
+                  基本类型和引用类型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-19T16:47:51+08:00" content="2016-11-19">
+              2016-11-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/19/base_reference_type/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/base_reference_type/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+
+  
+        
+          
+
+          
+    
+
+    </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>基本类型：undefined null Boolean Number String 基本类型都是按值访问的，就是可以操作保存在变量中的值；<br>而引用类型的值是保存在内存中的，js是不能操作对象在内存中的位置的，实际上是操作的对象的引用，因此引用类型的值是按引用访问的</p>
+<h3 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h3><p>对于引用类型的变量，可以对其增加和删除属性和方法。基本类型不可以<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> people=<span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">people.name=<span class="string">'sbx'</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="复制变量"><a href="#复制变量" class="headerlink" title="复制变量"></a>复制变量</h3><p><strong>基本类型</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num1=<span class="number">5</span>;</div><div class="line"><span class="keyword">var</span> num2=num1;</div></pre></td></tr></table></figure></p>
+<p><img src="/uploads/clone_1.png" alt="image">;<br><strong>引用类型</strong><br>在程序设计里边 注解有这样的一段话：当复制保存着对象的某个变量时，操作的是对象的引用。但在为对象添加属性时，操作的是实际的对象，举例说明</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj1=<span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">obj2=obj1;</div><div class="line">obj1.name=<span class="string">"sbx"</span>;</div><div class="line">alert(obj2.name);<span class="comment">//sbx</span></div></pre></td></tr></table></figure>
+<p><img src="/uploads/clone_2.png" alt="image">;<br>复制操作结束后，两个变量实际上将引用同一个对象。因此，改变其中一个变量，就会影响另一个变量.</p>
+<h3 id="类型检测"><a href="#类型检测" class="headerlink" title="类型检测"></a>类型检测</h3><p>typeof<br>instanceof</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/17/clone/" itemprop="url">
                   对象简单及深度克隆（复制）
                 </a>
@@ -335,9 +465,14 @@
 
       
         
-          
-            
-          
+          <blockquote>
+<p>除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/17/clone/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -971,7 +1106,8 @@
       
         
           <blockquote>
-<p>理解JavaScript变量声明行为的一个好办法是把变量声明看作由两部分组成，即声明和赋值。JavaScript隐式地提升(hoists)声明部分到封闭函数的顶部，而将赋值留在原地。<br>换句话说，变量的作用域是整个函数，但仅在var语句出现的位置进行赋值<br>
+<p>理解JavaScript变量声明行为的一个好办法是把变量声明看作由两部分组成，即声明和赋值。JavaScript隐式地提升(hoists)声明部分到封闭函数的顶部，而将赋值留在原地。<br>换句话说，变量的作用域是整个函数，但仅在var语句出现的位置进行赋值</p>
+</blockquote>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/11/15/variable_hoising/#more" rel="contents">
               阅读全文 &raquo;
@@ -1399,134 +1535,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/03/ajax_3/" itemprop="url">
-                  ajax源码解析-jQuery ajax相关函数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-03T14:11:31+08:00" content="2016-11-03">
-              2016-11-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ajax源码解析/" itemprop="url" rel="index">
-                    <span itemprop="name">ajax源码解析</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/03/ajax_3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/ajax_3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-
-  
-        
-          
-
-          
-    
-
-    </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>解释了ajax源码中一些函数的使用</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/03/ajax_3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1572,7 +1580,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1589,7 +1597,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
