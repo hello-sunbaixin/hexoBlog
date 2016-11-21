@@ -263,7 +263,7 @@
               
                 
                 <a class="post-title-link" href="/2016/11/21/prototype_chain/" itemprop="url">
-                  __proto__（隐式原型）与prototype（显式原型） 原型链
+                  __proto__（隐式原型）与prototype（显式原型）
                 </a>
               
             
@@ -335,32 +335,14 @@
 
       
         
-          
-            <p>在理解原型链之前，先看一个例子<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">A.prototype.test=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"A"</span>)&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">B.prototype=<span class="keyword">new</span> A();</div><div class="line"><span class="keyword">var</span> c=<span class="keyword">new</span> B();</div></pre></td></tr></table></figure></p>
-<p>请猜想c.constructor? 答：A</p>
-<p><strong>解答</strong><br>现在控制台打印c<br><img src="/uploads/prototypechain_2.png" alt="images"><br>对象c并没有constructor的属性，而是有内置属性<strong>proto</strong><br>c.<strong>proto</strong>==B.prototype<br>又因为<br>B.prototype=new A();<br>所以<br>B.prototype=p,p=new A();<br>p.<strong>proto</strong>=A.prototype;<br>B.prototype.<strong>proto</strong>==A.prototype;<br>所以<br>c.<strong>proto</strong>.<strong>proto</strong>==A.prototype</p>
-<p><img src="/uploads/prototypechain_1.png" alt="images"><br>构造函数的原型上内置属性<strong>proto</strong>和constructor<br>构造函数的原型上的构造器函数又指向prototype属性所在函数，即A.prototype.constructor==A</p>
-<p>c.<strong>proto</strong>.<strong>proto</strong>.constructor==A.prototype.constructor==A;<br><strong>proto</strong>可以忽略不写<br>c.constructor==A</p>
-<h2 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h2><p><strong>显示原型</strong><br>每一个函数在创建之后都会拥有一个名为prototype的属性，这个属性指向函数的原型对象。<br>Note：通过Function.prototype.bind方法构造出来的函数是个例外，它没有prototype属性;<br><strong>隐式原型</strong><br>JavaScript中任意对象都有一个内置属性[[prototype]]，在ES5之前没有标准的方法访问这个内置属性，但是大多数浏览器都支持通过<strong>proto</strong>来访问。ES5中有了对于这个内置属性标准的Get方法Object.getPrototypeOf().<br>Note: Object.prototype 这个对象是个例外，它的<strong>proto</strong>值为null<br><strong>二者的关系：</strong><br>隐式原型指向创建这个对象的函数(constructor)的prototype</p>
-<h2 id="作用是什么"><a href="#作用是什么" class="headerlink" title="作用是什么"></a>作用是什么</h2><p><strong>显式原型的作用：</strong><br>用来实现基于原型的继承与属性的共享。</p>
-<p><strong>隐式原型的作用：</strong><br>构成原型链，同样用于实现基于原型的继承。举个例子，当我们访问obj这个对象中的x属性时，如果在obj中找不到，那么就会沿着<strong>proto</strong>依次查找。</p>
-<h2 id="proto的指向"><a href="#proto的指向" class="headerlink" title="proto的指向"></a><strong>proto</strong>的指向</h2><p><strong>proto</strong>的指向到底如何判断呢？根据ECMA定义 ‘to the value of its constructor’s “prototype” ‘ —-指向创建这个对象的函数的显式原型。所以关键的点在于找到创建这个对象的构造函数，接下来就来看一下JS中对象被创建的方式，一眼看过去似乎有三种方式：（1）对象字面量的方式 （2）new 的方式 （3）ES5中的Object.create() 但是我认为本质上只有一种方式，也就是通过new来创建。为什么这么说呢，首先字面量的方式是一种为了开发人员更方便创建对象的一个语法糖，本质就是 var o = new Object(); o.xx = xx;o.yy=yy; 再来看看Object.create(),这是ES5中新增的方法，在这之前这被称为原型式继承，<br>道格拉斯在2006年写了一篇文章，题为 Prototypal Inheritance In JavaScript。在这篇文章中，他介绍了一种实现继承的方法，这种方法并没有使用严格意义上的构造函数。他的想法是借助原型可以基于已有的对象创建新对象，同时还不比因此创建自定义类型，为了达到这个目的，他给出了如下函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>)</span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    F.prototype = o;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>—– 《JavaScript高级程序设计》P169</p>
-<p>所以从实现代码 return new F() 中我们可以看到，这依然是通过new来创建的。不同之处在于由 Object.create() 创建出来的对象没有构造函数，看到这里你是不是要问，没有构造函数我怎么知道它的<strong>proto</strong>指向哪里呢，其实这里说它没有构造函数是指在 Object.create() 函数外部我们不能访问到它的构造函数，然而在函数内部实现中是有的，它短暂地存在了那么一会儿。假设我们现在就在函数内部，可以看到对象的构造函数是F, 现在<br>//以下是用于验证的伪代码<br>var f = new F();<br>//于是有<br>f.<strong>proto</strong> === F.prototype //true<br>//又因为<br>F.prototype === o;//true<br>//所以<br>f.<strong>proto</strong> === o;<br>因此由Object.create(o)创建出来的对象它的隐式原型指向o。好了，对象的创建方式分析完了，现在你应该能够判断一个对象的<strong>proto</strong>指向谁了。</p>
-<p>好吧，还是举一些一眼看过去比较疑惑的例子来巩固一下。</p>
-<p><strong>构造函数的显示原型的隐式原型：</strong><br>内建对象(built-in object)：比如Array()，Array.prototype.<strong>proto</strong>指向什么？Array.prototype也是一个对象，对象就是由 Object() 这个构造函数创建的，因此Array.prototype.<strong>proto</strong> === Object.prototype //true，或者也可以这么理解，所有的内建对象都是由Object()创建而来。<br><strong>自定义对象</strong></p>
-<ol>
-<li><p>默认情况下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo()</div><div class="line">Foo.prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">//true 理由同上</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>其他情况：<br>（1）<br>function Bar(){}<br>//这时我们想让Foo继承Bar<br>Foo.prototype = new Bar()<br>Foo.prototype.<strong>proto</strong> === Bar.prototype //true<br>（2）<br>//我们不想让Foo继承谁，但是我们要自己重新定义Foo.prototype<br>Foo.prototype = {<br>a:10,<br>b:-10<br>}<br>//这种方式就是用了对象字面量的方式来创建一个对象，根据前文所述<br>Foo.prototype.<strong>proto</strong> === Object.prototype<br>注： 以上两种情况都等于完全重写了Foo.prototype，所以Foo.prototype.constructor也跟着改变了，于是乎constructor这个属性和原来的构造函数Foo（）也就切断了联系。</p>
-</li>
-</ol>
-<p><strong>构造函数的隐式原型</strong><br>既然是构造函数那么它就是Function（）的实例，因此也就指向Function.prototype,比如 Object.<strong>proto</strong> === Function.prototype</p>
-<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><p>instanceof 操作符的内部实现机制和隐式原型、显式原型有直接的关系。instanceof的左值一般是一个对象，右值一般是一个构造函数，用来判断左值是否是右值的实例。它的内部实现原理是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//设 L instanceof R </div><div class="line">//通过判断</div><div class="line"> L.__proto__.__proto__ ..... === R.prototype ？</div><div class="line">//最终返回true or false</div></pre></td></tr></table></figure></p>
-<p>也就是沿着L的<strong>proto</strong>一直寻找到原型链末端，直到等于R.prototype为止。知道了这个也就知道为什么以下这些奇怪的表达式为什么会得到相应的值了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true </span></div><div class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">// true </span></div><div class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">//true</span></div><div class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></div><div class="line"><span class="built_in">Number</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">//false</span></div></pre></td></tr></table></figure></p>
-
-          
+          <blockquote>
+<p>理解<strong>proto</strong>和prototype，才能更好的理解原型链</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/21/prototype_chain/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -481,17 +463,14 @@
 
       
         
-          
-            <p>基本类型：undefined null Boolean Number String 基本类型都是按值访问的，就是可以操作保存在变量中的值；<br>而引用类型的值是保存在内存中的，js是不能操作对象在内存中的位置的，实际上是操作的对象的引用，因此引用类型的值是按引用访问的</p>
-<h3 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h3><p>对于引用类型的变量，可以对其增加和删除属性和方法。基本类型不可以<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> people=<span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">people.name=<span class="string">'sbx'</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="复制变量"><a href="#复制变量" class="headerlink" title="复制变量"></a>复制变量</h3><p><strong>基本类型</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num1=<span class="number">5</span>;</div><div class="line"><span class="keyword">var</span> num2=num1;</div></pre></td></tr></table></figure></p>
-<p><img src="/uploads/clone_1.png" alt="image">;<br><strong>引用类型</strong><br>在程序设计里边 注解有这样的一段话：当复制保存着对象的某个变量时，操作的是对象的引用。但在为对象添加属性时，操作的是实际的对象，举例说明</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj1=<span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">obj2=obj1;</div><div class="line">obj1.name=<span class="string">"sbx"</span>;</div><div class="line">alert(obj2.name);<span class="comment">//sbx</span></div></pre></td></tr></table></figure>
-<p><img src="/uploads/clone_2.png" alt="image">;<br>复制操作结束后，两个变量实际上将引用同一个对象。因此，改变其中一个变量，就会影响另一个变量.</p>
-<h3 id="类型检测"><a href="#类型检测" class="headerlink" title="类型检测"></a>类型检测</h3><p><strong>typeof</strong><br>typeof 操作符是确定一个变量是字符串、数值、布尔值，还是undefined 的最佳工具。typeof是检测基本数据类型的得力助手，<br>但是对引用类型的话没有太大作用，如果变量的值是一个对象或null,则返回的是Object;<br><strong>instanceof</strong><br>我们并不是想知道某个值是对象，而是想知道它是什么类型的对象，就要用instanceof；<br>所有引用类型的值都是Object 的实例。因此，在检测一个引用类型值和Object 构造<br>函数时，instanceof 操作符始终会返回true。当然，如果使用instanceof 操作符检测基本类型的<br>值，则该操作符始终会返回false，因为基本类型不是对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj=&#123;<span class="string">"key"</span>:&#123;<span class="string">"1"</span>:<span class="string">"2"</span>&#125;,<span class="string">"id"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;;</div><div class="line"><span class="keyword">typeof</span>(obj[<span class="string">"key"</span>])<span class="comment">//"object"</span></div><div class="line"><span class="keyword">typeof</span>(obj[<span class="string">"id"</span>])<span class="comment">//"object"</span></div><div class="line">obj[<span class="string">"key"</span>] <span class="keyword">instanceof</span> <span class="built_in">Object</span><span class="comment">//true</span></div><div class="line">obj[<span class="string">"id"</span>] <span class="keyword">instanceof</span> <span class="built_in">Object</span><span class="comment">//true</span></div><div class="line">obj[<span class="string">"id"</span>] <span class="keyword">instanceof</span> <span class="built_in">Array</span><span class="comment">//true</span></div></pre></td></tr></table></figure></p>
-<p>当然instanceof还用来检测实例与原型之间的关系，所有出现在实例原型链上的原型都会返回true;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function A()&#123;&#125;;</div><div class="line">A.prototype.test=function()&#123;console.log(&quot;A&quot;)&#125;;</div><div class="line">function B()&#123;&#125;;</div><div class="line">B.prototype=new A();</div><div class="line">var c=new B();</div><div class="line"></div><div class="line">c instanceof B//true</div><div class="line">c instanceof A//true</div><div class="line">c instanceof Object//true</div></pre></td></tr></table></figure></p>
-
-          
+          <blockquote>
+<p>基本类型：undefined null Boolean Number String 基本类型都是按值访问的，就是可以操作保存在变量中的值；<br>而引用类型的值是保存在内存中的，js是不能操作对象在内存中的位置的，实际上是操作的对象的引用，因此引用类型的值是按引用访问的</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/19/base_reference_type/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
