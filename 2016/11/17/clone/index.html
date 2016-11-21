@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别">
+<meta name="description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考的文章">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对象简单及深度克隆（复制）">
+<meta property="og:title" content="对象简单及深度克隆（复制  拷贝）">
 <meta property="og:url" content="http://yoursite.com/2016/11/17/clone/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
-<meta property="og:description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别">
-<meta property="og:updated_time" content="2016-11-19T08:49:11.282Z">
+<meta property="og:description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考的文章">
+<meta property="og:updated_time" content="2016-11-21T06:50:15.264Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对象简单及深度克隆（复制）">
-<meta name="twitter:description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别">
+<meta name="twitter:title" content="对象简单及深度克隆（复制  拷贝）">
+<meta name="twitter:description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考的文章">
 
 
 
@@ -117,7 +117,7 @@
   <link rel="canonical" href="http://yoursite.com/2016/11/17/clone/"/>
 
 
-  <title> 对象简单及深度克隆（复制） | Sunbaixin blog </title>
+  <title> 对象简单及深度克隆（复制  拷贝） | Sunbaixin blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
             
             
               
-                对象简单及深度克隆（复制）
+                对象简单及深度克隆（复制  拷贝）
               
             
           </h1>
@@ -331,10 +331,13 @@
 
       
         <blockquote>
-<p>除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别</p>
+<p>除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考<a href="基本类型和引用类型"></a>的文章</p>
 </blockquote>
 <a id="more"></a>
-
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>基本类型的拷贝，利用=就可以实现，而如果引用类型（Array，Object）还是=来拷贝的话，就是浅拷贝<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[1,2,3];</div><div class="line">var arrobj=arr;</div><div class="line">arrobj.push(5);</div><div class="line">alert(arr)//[1,2,3,5]</div></pre></td></tr></table></figure></p>
+<p>可见对于引用类型的复制，操作的是引用对象而不是在内存中的实际的值，拷贝对象和被拷贝对象都指向内存中的同一个位置，一改则都改，<br>为了避免拷贝对象和被拷贝对象的互相的干扰，就需要深度拷贝；</p>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>所谓”深拷贝”，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用”浅拷贝”就行了</p>
+<h3 id="js的slice函数"><a href="#js的slice函数" class="headerlink" title="js的slice函数"></a>js的slice函数</h3><h3 id="js的concat函数"><a href="#js的concat函数" class="headerlink" title="js的concat函数"></a>js的concat函数</h3>
       
     </div>
 
@@ -396,7 +399,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/11/17/clone/"
-     data-title="对象简单及深度克隆（复制）"
+     data-title="对象简单及深度克隆（复制  拷贝）"
      data-content=""
      data-url="http://yoursite.com/2016/11/17/clone/">
   <div class="ds-share-inline">
@@ -426,7 +429,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/11/17/clone/"
-           data-title="对象简单及深度克隆（复制）" data-url="http://yoursite.com/2016/11/17/clone/">
+           data-title="对象简单及深度克隆（复制  拷贝）" data-url="http://yoursite.com/2016/11/17/clone/">
       </div>
     
   </div>
@@ -471,7 +474,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -488,7 +491,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -537,7 +540,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.</span> <span class="nav-text">深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#js的slice函数"><span class="nav-number">2.1.</span> <span class="nav-text">js的slice函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js的concat函数"><span class="nav-number">2.2.</span> <span class="nav-text">js的concat函数</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

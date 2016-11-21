@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="js,jsonp," />
+  <meta name="keywords" content="js,原型链," />
 
 
 
@@ -84,19 +84,25 @@
 
 
 
-<meta name="description" content="JSONP跨域原理解析 可参考JavaScript是一种在Web开发中经常使用的前端动态脚本技术。在JavaScript中，有一个很重要的安全性限制，被称为“Same-Origin Policy”（同源策略）。这一策略对于JavaScript代码能够访问的页面内容做了很重要的限制，即JavaScript只能访问与包含它的文档在同一域下的内容。">
+<meta name="description" content="在理解原型链之前，先看一个例子12345function A()&amp;#123;&amp;#125;;A.prototype.test=function()&amp;#123;console.log(&quot;A&quot;)&amp;#125;;function B()&amp;#123;&amp;#125;;B.prototype=new A();var c=new B();
+请猜想c.constructor? 答：A
+解答现在控制台打印c对象c并没有c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jsonp">
-<meta property="og:url" content="http://yoursite.com/2016/10/20/jsonp/index.html">
+<meta property="og:title" content="__proto__（隐式原型）与prototype（显式原型） 原型链">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/prototype_chain/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
-<meta property="og:description" content="JSONP跨域原理解析 可参考JavaScript是一种在Web开发中经常使用的前端动态脚本技术。在JavaScript中，有一个很重要的安全性限制，被称为“Same-Origin Policy”（同源策略）。这一策略对于JavaScript代码能够访问的页面内容做了很重要的限制，即JavaScript只能访问与包含它的文档在同一域下的内容。">
-<meta property="og:image" content="http://yoursite.com/../images/jsonp_01.png">
-<meta property="og:image" content="http://yoursite.com/../images/jsonp_02.png">
-<meta property="og:updated_time" content="2016-10-24T04:44:00.886Z">
+<meta property="og:description" content="在理解原型链之前，先看一个例子12345function A()&amp;#123;&amp;#125;;A.prototype.test=function()&amp;#123;console.log(&quot;A&quot;)&amp;#125;;function B()&amp;#123;&amp;#125;;B.prototype=new A();var c=new B();
+请猜想c.constructor? 答：A
+解答现在控制台打印c对象c并没有c">
+<meta property="og:image" content="http://yoursite.com/uploads/prototypechain_2.png">
+<meta property="og:image" content="http://yoursite.com/uploads/prototypechain_1.png">
+<meta property="og:updated_time" content="2016-11-21T10:11:55.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jsonp">
-<meta name="twitter:description" content="JSONP跨域原理解析 可参考JavaScript是一种在Web开发中经常使用的前端动态脚本技术。在JavaScript中，有一个很重要的安全性限制，被称为“Same-Origin Policy”（同源策略）。这一策略对于JavaScript代码能够访问的页面内容做了很重要的限制，即JavaScript只能访问与包含它的文档在同一域下的内容。">
-<meta name="twitter:image" content="http://yoursite.com/../images/jsonp_01.png">
+<meta name="twitter:title" content="__proto__（隐式原型）与prototype（显式原型） 原型链">
+<meta name="twitter:description" content="在理解原型链之前，先看一个例子12345function A()&amp;#123;&amp;#125;;A.prototype.test=function()&amp;#123;console.log(&quot;A&quot;)&amp;#125;;function B()&amp;#123;&amp;#125;;B.prototype=new A();var c=new B();
+请猜想c.constructor? 答：A
+解答现在控制台打印c对象c并没有c">
+<meta name="twitter:image" content="http://yoursite.com/uploads/prototypechain_2.png">
 
 
 
@@ -117,10 +123,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/20/jsonp/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/21/prototype_chain/"/>
 
 
-  <title> jsonp | Sunbaixin blog </title>
+  <title> __proto__（隐式原型）与prototype（显式原型） 原型链 | Sunbaixin blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +269,7 @@
             
             
               
-                jsonp
+                __proto__（隐式原型）与prototype（显式原型） 原型链
               
             
           </h1>
@@ -275,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-20T20:33:17+08:00" content="2016-10-20">
-              2016-10-20
+            <time itemprop="dateCreated" datetime="2016-11-21T15:43:14+08:00" content="2016-11-21">
+              2016-11-21
             </time>
           </span>
 
@@ -289,8 +295,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
                   </a>
                 </span>
 
@@ -305,8 +311,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/20/jsonp/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/jsonp/" itemprop="commentsCount"></span>
+                <a href="/2016/11/21/prototype_chain/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/21/prototype_chain/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,59 +339,30 @@
       
 
       
-        <h2 id="JSONP跨域原理解析-可参考"><a href="#JSONP跨域原理解析-可参考" class="headerlink" title="JSONP跨域原理解析 可参考"></a>JSONP跨域原理解析 <a href="http://www.nowamagic.net/librarys/veda/detail/224/" target="_blank" rel="external">可参考</a></h2><p>JavaScript是一种在Web开发中经常使用的<strong>前端动态脚本技术</strong>。在JavaScript中，有一个很重要的安全性限制，被称为“Same-Origin Policy”（<strong>同源策略</strong>）。这一策略对于JavaScript代码能够访问的页面内容做了很重要的限制，即JavaScript只能访问与包含它的文档在同一域下的内容。</p>
-<a id="more"></a>
-<p>JavaScript这个安全策略在进行多iframe或多窗口编程、以及Ajax编程时显得尤为重要。根据这个策略，在baidu.com下的页面中包含的JavaScript代码，不能访问在google.com域名下的页面内容；甚至不同的子域名之间的页面也不能通过JavaScript代码互相访问。<strong>对于Ajax的影响在于，通过XMLHttpRequest实现的Ajax请求，不能向不同的域提交请求</strong>，例如，在abc.example.com下的页面，不能向def.example.com提交Ajax请求，等等</p>
-<p>然而，当进行一些比较深入的前端编程的时候，不可避免地需要进行跨域操作，<strong>这时候“同源策略”就显得过于苛刻。JSONP跨域GET请求是一个常用的解决方案</strong>，下面我们来看一下JSONP跨域是如何实现的，并且探讨下<strong>JSONP跨域的原理。</strong></p>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>写法一：</p>
-<p><img src="../images/jsonp_01.png" alt="jsonp"></p>
-<p>写法二：</p>
-<p><img src="../images/jsonp_02.png" alt="jsonp"></p>
-<p>netwrok上查看接口如下</p>
-<pre><code>http://api.fang.58.com/phplocal/getshangquan/?jsoncallback=jQuery1800931218545883894_1463990648558&amp;cityid=1&amp;cateid=70134&amp;localid=1142&amp;_=1463990652773
-</code></pre><h3 id="Jsonp的执行过程如下："><a href="#Jsonp的执行过程如下：" class="headerlink" title="Jsonp的执行过程如下："></a>Jsonp的执行过程如下：</h3><p>一.</p><h4>首先在客户端注册一个callback (默认名字为callback，用户可自定义名字如:’jsoncallback’，但要保证服务器能够查询到这个参数名)</h4><p></p>
+        <p>在理解原型链之前，先看一个例子<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">A.prototype.test=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"A"</span>)&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">B.prototype=<span class="keyword">new</span> A();</div><div class="line"><span class="keyword">var</span> c=<span class="keyword">new</span> B();</div></pre></td></tr></table></figure></p>
+<p>请猜想c.constructor? 答：A</p>
+<p><strong>解答</strong><br>现在控制台打印c<br><img src="/uploads/prototypechain_2.png" alt="images"><br>对象c并没有constructor的属性，而是有内置属性<strong>proto</strong><br>c.<strong>proto</strong>==B.prototype<br>又因为<br>B.prototype=new A();<br>所以<br>B.prototype=p,p=new A();<br>p.<strong>proto</strong>=A.prototype;<br>B.prototype.<strong>proto</strong>==A.prototype;<br>所以<br>c.<strong>proto</strong>.<strong>proto</strong>==A.prototype</p>
+<p><img src="/uploads/prototypechain_1.png" alt="images"><br>构造函数的原型上内置属性<strong>proto</strong>和constructor<br>构造函数的原型上的构造器函数又指向prototype属性所在函数，即A.prototype.constructor==A</p>
+<p>c.<strong>proto</strong>.<strong>proto</strong>.constructor==A.prototype.constructor==A;<br><strong>proto</strong>可以忽略不写<br>c.constructor==A</p>
+<h2 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h2><p><strong>显示原型</strong><br>每一个函数在创建之后都会拥有一个名为prototype的属性，这个属性指向函数的原型对象。<br>Note：通过Function.prototype.bind方法构造出来的函数是个例外，它没有prototype属性;<br><strong>隐式原型</strong><br>JavaScript中任意对象都有一个内置属性[[prototype]]，在ES5之前没有标准的方法访问这个内置属性，但是大多数浏览器都支持通过<strong>proto</strong>来访问。ES5中有了对于这个内置属性标准的Get方法Object.getPrototypeOf().<br>Note: Object.prototype 这个对象是个例外，它的<strong>proto</strong>值为null<br><strong>二者的关系：</strong><br>隐式原型指向创建这个对象的函数(constructor)的prototype</p>
+<h2 id="作用是什么"><a href="#作用是什么" class="headerlink" title="作用是什么"></a>作用是什么</h2><p><strong>显式原型的作用：</strong><br>用来实现基于原型的继承与属性的共享。</p>
+<p><strong>隐式原型的作用：</strong><br>构成原型链，同样用于实现基于原型的继承。举个例子，当我们访问obj这个对象中的x属性时，如果在obj中找不到，那么就会沿着<strong>proto</strong>依次查找。</p>
+<h2 id="proto的指向"><a href="#proto的指向" class="headerlink" title="proto的指向"></a><strong>proto</strong>的指向</h2><p><strong>proto</strong>的指向到底如何判断呢？根据ECMA定义 ‘to the value of its constructor’s “prototype” ‘ —-指向创建这个对象的函数的显式原型。所以关键的点在于找到创建这个对象的构造函数，接下来就来看一下JS中对象被创建的方式，一眼看过去似乎有三种方式：（1）对象字面量的方式 （2）new 的方式 （3）ES5中的Object.create() 但是我认为本质上只有一种方式，也就是通过new来创建。为什么这么说呢，首先字面量的方式是一种为了开发人员更方便创建对象的一个语法糖，本质就是 var o = new Object(); o.xx = xx;o.yy=yy; 再来看看Object.create(),这是ES5中新增的方法，在这之前这被称为原型式继承，<br>道格拉斯在2006年写了一篇文章，题为 Prototypal Inheritance In JavaScript。在这篇文章中，他介绍了一种实现继承的方法，这种方法并没有使用严格意义上的构造函数。他的想法是借助原型可以基于已有的对象创建新对象，同时还不比因此创建自定义类型，为了达到这个目的，他给出了如下函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>)</span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    F.prototype = o;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>—– 《JavaScript高级程序设计》P169</p>
+<p>所以从实现代码 return new F() 中我们可以看到，这依然是通过new来创建的。不同之处在于由 Object.create() 创建出来的对象没有构造函数，看到这里你是不是要问，没有构造函数我怎么知道它的<strong>proto</strong>指向哪里呢，其实这里说它没有构造函数是指在 Object.create() 函数外部我们不能访问到它的构造函数，然而在函数内部实现中是有的，它短暂地存在了那么一会儿。假设我们现在就在函数内部，可以看到对象的构造函数是F, 现在<br>//以下是用于验证的伪代码<br>var f = new F();<br>//于是有<br>f.<strong>proto</strong> === F.prototype //true<br>//又因为<br>F.prototype === o;//true<br>//所以<br>f.<strong>proto</strong> === o;<br>因此由Object.create(o)创建出来的对象它的隐式原型指向o。好了，对象的创建方式分析完了，现在你应该能够判断一个对象的<strong>proto</strong>指向谁了。</p>
+<p>好吧，还是举一些一眼看过去比较疑惑的例子来巩固一下。</p>
+<p><strong>构造函数的显示原型的隐式原型：</strong><br>内建对象(built-in object)：比如Array()，Array.prototype.<strong>proto</strong>指向什么？Array.prototype也是一个对象，对象就是由 Object() 这个构造函数创建的，因此Array.prototype.<strong>proto</strong> === Object.prototype //true，或者也可以这么理解，所有的内建对象都是由Object()创建而来。<br><strong>自定义对象</strong></p>
+<ol>
+<li><p>默认情况下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo()</div><div class="line">Foo.prototype.__proto__ === <span class="built_in">Object</span>.prototype <span class="comment">//true 理由同上</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>其他情况：<br>（1）<br>function Bar(){}<br>//这时我们想让Foo继承Bar<br>Foo.prototype = new Bar()<br>Foo.prototype.<strong>proto</strong> === Bar.prototype //true<br>（2）<br>//我们不想让Foo继承谁，但是我们要自己重新定义Foo.prototype<br>Foo.prototype = {<br>a:10,<br>b:-10<br>}<br>//这种方式就是用了对象字面量的方式来创建一个对象，根据前文所述<br>Foo.prototype.<strong>proto</strong> === Object.prototype<br>注： 以上两种情况都等于完全重写了Foo.prototype，所以Foo.prototype.constructor也跟着改变了，于是乎constructor这个属性和原来的构造函数Foo（）也就切断了联系。</p>
+</li>
+</ol>
+<p><strong>构造函数的隐式原型</strong><br>既然是构造函数那么它就是Function（）的实例，因此也就指向Function.prototype,比如 Object.<strong>proto</strong> === Function.prototype</p>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><p>instanceof 操作符的内部实现机制和隐式原型、显式原型有直接的关系。instanceof的左值一般是一个对象，右值一般是一个构造函数，用来判断左值是否是右值的实例。它的内部实现原理是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//设 L instanceof R </div><div class="line">//通过判断</div><div class="line"> L.__proto__.__proto__ ..... === R.prototype ？</div><div class="line">//最终返回true or false</div></pre></td></tr></table></figure></p>
+<p>也就是沿着L的<strong>proto</strong>一直寻找到原型链末端，直到等于R.prototype为止。知道了这个也就知道为什么以下这些奇怪的表达式为什么会得到相应的值了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true </span></div><div class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">// true </span></div><div class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">//true</span></div><div class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></div><div class="line"><span class="built_in">Number</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">//false</span></div></pre></td></tr></table></figure></p>
 
-<p> 说明：ajax内部的处理总的来分2大块 1.基于XMLHttpRequest的ajax请求 2.基于script的jsonp跨域请求</p>
-
-
-<p>jquery源码（<a href="http://www.cnblogs.com/aaronjs/p/3798868.html" target="_blank" rel="external">源码分析参考</a> )若想基于script的jsonp跨域请求，根据ajax传递的参数决定 首先看url上是否有callback=？（如jsoncallback=？就可以跨域请求，不管dataType参数值是什么）如果没有的话 会查看dataType的类型，如果是jsonp url上会拼接callback=？（默认是callback，当然如果参数上有 jsonp：’jsoncallback’，那么url会拼接jsoncallback=？ 总之callback=？是核心 ）</p>
-
-<p>二。然后把callback的值(如:jQuery1236827957501 这个是jquery和随机数拼接在一起的 jquery源码可见)传给服务器。</p>
-<pre><code>expando: &quot;jQuery&quot; + (g.fn.jquery + Math.random()).replace(/\D/g, &quot;&quot;),
-。。。
-var e = qn.apop() || g.expando + &quot;_&quot; + Mn++;
-</code></pre>注意：服务端得到callback的数值后，要用jQuery1236827957501(……)把将要输出的json内容包括起来，此时，服务器生成 json 数据才能被客户端正确接收。
-<p>三.然后以 javascript 语法的方式，生成一个function， function 名字就是传递上来的参数 ‘jsoncallback’的值 jQuery1236827957501 .<br>最后将 json 数据直接以入参的方式，放置到 function 中，这样就生成了一段 js 语法的文档，返回给客户端。</p>
-<pre><code>jQuery1800931218545883894_1463990648558({&quot;threelocal&quot;:[{&quot;cate&quot;:&quot;A&quot;,&quot;catelist&quot;:[{&quot;listname&quot;:&quot;anzhenqiao&quot;,&quot;localname&quot;:&quot;安贞&quot;,&quot;id&quot;:1204,&quot;clickcode&quot;。。。
-</code></pre><p>四.客户端浏览器，解析script标签，并执行返回的 javascript 文档，此时javascript文档数据，作为参数， 传入到了客户端预先定义好的 callback 函数(如上例中jquery $.ajax()方法封装的的success: function (json) )里。可以理解成带有参数的函数调用</p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>可以说jsonp的方式原理上和<script src="http://跨域/...xx.js"></script>是一致的(qq空间就是大量采用这种方式来实现跨域数据交换的)。JSONP是一种脚本注入(Script Injection)行为，所以有一定的安全隐患。</p>
-<pre><code>var eleScript= document.createElement(&quot;script&quot;);
-eleScript.type = &quot;text/javascript&quot;;
-eleScript.src = &quot;http://example2.com/getinfo.php&quot;;
-document.getElementsByTagName(&quot;HEAD&quot;)[0].appendChild(eleScript)
-</code></pre><p>实质的调用形式 其实如下例子</p>
-<pre><code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt; 
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; &gt; 
-
-&lt;head&gt; 
-
-&lt;title&gt;Test Jsonp&lt;/title&gt; 
-
-&lt;script type=&quot;text/javascript&quot;&gt; 
-
-       function jsonpCallback(result) 
-        { 
-         alert(result.msg); 
-        } 
-
-    &lt;/script&gt; 
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://crossdomain.com/jsonServerResponse?jsonp=jsonpCallback&quot;&gt;&lt;/script&gt; 
-&lt;/head&gt; 
-&lt;body&gt; 
-&lt;/body&gt; 
-&lt;/html&gt;  
-</code></pre>
       
     </div>
 
@@ -414,7 +391,7 @@ document.getElementsByTagName(&quot;HEAD&quot;)[0].appendChild(eleScript)
           
             <a href="/tags/js/" rel="tag">#js</a>
           
-            <a href="/tags/jsonp/" rel="tag">#jsonp</a>
+            <a href="/tags/原型链/" rel="tag">#原型链</a>
           
         </div>
       
@@ -423,17 +400,13 @@ document.getElementsByTagName(&quot;HEAD&quot;)[0].appendChild(eleScript)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/20/css3/" rel="next" title="css3属性">
-                <i class="fa fa-chevron-left"></i> css3属性
+              <a href="/2016/11/19/base_reference_type/" rel="next" title="基本类型和引用类型">
+                <i class="fa fa-chevron-left"></i> 基本类型和引用类型
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/20/learn/" rel="prev" title="学习计划">
-                学习计划 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -448,10 +421,10 @@ document.getElementsByTagName(&quot;HEAD&quot;)[0].appendChild(eleScript)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/20/jsonp/"
-     data-title="jsonp"
+        <div class="ds-share flat" data-thread-key="2016/11/21/prototype_chain/"
+     data-title="__proto__（隐式原型）与prototype（显式原型） 原型链"
      data-content=""
-     data-url="http://yoursite.com/2016/10/20/jsonp/">
+     data-url="http://yoursite.com/2016/11/21/prototype_chain/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -478,8 +451,8 @@ document.getElementsByTagName(&quot;HEAD&quot;)[0].appendChild(eleScript)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/20/jsonp/"
-           data-title="jsonp" data-url="http://yoursite.com/2016/10/20/jsonp/">
+      <div class="ds-thread" data-thread-key="2016/11/21/prototype_chain/"
+           data-title="__proto__（隐式原型）与prototype（显式原型） 原型链" data-url="http://yoursite.com/2016/11/21/prototype_chain/">
       </div>
     
   </div>
@@ -590,7 +563,7 @@ document.getElementsByTagName(&quot;HEAD&quot;)[0].appendChild(eleScript)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSONP跨域原理解析-可参考"><span class="nav-number">1.</span> <span class="nav-text">JSONP跨域原理解析 可参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#举例说明"><span class="nav-number">1.1.</span> <span class="nav-text">举例说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsonp的执行过程如下："><span class="nav-number">1.2.</span> <span class="nav-text">Jsonp的执行过程如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">首先在客户端注册一个callback (默认名字为callback，用户可自定义名字如:’jsoncallback’，但要保证服务器能够查询到这个参数名)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">1.3.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么？"><span class="nav-number">1.</span> <span class="nav-text">是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用是什么"><span class="nav-number">2.</span> <span class="nav-text">作用是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto的指向"><span class="nav-number">3.</span> <span class="nav-text">proto的指向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#instanceof"><span class="nav-number">4.</span> <span class="nav-text">instanceof</span></a></li></ol></div>
             
           </div>
         </section>
