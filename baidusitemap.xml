@@ -4,21 +4,39 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/11/19/base_reference_type/</loc>
-    <lastmod>2016-11-21T12:32:00.663Z</lastmod>
+    <loc>http://yoursite.com/2016/11/17/encode/</loc>
+    <lastmod>2016-11-22T11:50:49.959Z</lastmod>
     <data>
         <display>
-        <title>基本类型和引用类型</title>
-        <pubTime>2016-11-19T08:47:51.091Z</pubTime>
+        <title>编码 解码</title>
+        <pubTime>2016-11-17T09:01:12.764Z</pubTime>
         
-        <tag>js</tag>
-         
-        <tag>基本类型和引用类型</tag>
+        <tag>编码 解码</tag>
          
          
            
              
-              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/17/clone/</loc>
+    <lastmod>2016-11-22T07:50:35.367Z</lastmod>
+    <data>
+        <display>
+        <title>对象简单及深度克隆（复制  拷贝）</title>
+        <pubTime>2016-11-17T11:25:52.267Z</pubTime>
+        
+        <tag>js</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
           
         </display>
     </data>
@@ -27,7 +45,7 @@
     
   <url>
     <loc>http://yoursite.com/2016/11/21/prototype_chain/</loc>
-    <lastmod>2016-11-21T12:31:18.351Z</lastmod>
+    <lastmod>2016-11-22T05:49:20.227Z</lastmod>
     <data>
         <display>
         <title>__proto__（隐式原型）与prototype（显式原型）</title>
@@ -48,39 +66,21 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/11/17/clone/</loc>
-    <lastmod>2016-11-21T06:50:15.264Z</lastmod>
+    <loc>http://yoursite.com/2016/11/19/base_reference_type/</loc>
+    <lastmod>2016-11-21T12:32:00.663Z</lastmod>
     <data>
         <display>
-        <title>对象简单及深度克隆（复制  拷贝）</title>
-        <pubTime>2016-11-17T11:25:52.267Z</pubTime>
+        <title>基本类型和引用类型</title>
+        <pubTime>2016-11-19T08:47:51.091Z</pubTime>
         
         <tag>js</tag>
          
-         
-           
-             
-              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/11/17/encode/</loc>
-    <lastmod>2016-11-19T07:47:39.965Z</lastmod>
-    <data>
-        <display>
-        <title>编码 解码</title>
-        <pubTime>2016-11-17T09:01:12.764Z</pubTime>
-        
-        <tag>编码 解码</tag>
+        <tag>基本类型和引用类型</tag>
          
          
            
              
-              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+              <breadCrumb title="读书笔记" url="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>

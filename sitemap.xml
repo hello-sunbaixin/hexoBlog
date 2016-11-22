@@ -2,30 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2016/11/19/base_reference_type/</loc>
+    <loc>http://yoursite.com/2016/11/17/encode/</loc>
     
-    <lastmod>2016-11-21T12:32:00.663Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/11/21/prototype_chain/</loc>
-    
-    <lastmod>2016-11-21T12:31:18.351Z</lastmod>
+    <lastmod>2016-11-22T11:50:49.959Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2016/11/17/clone/</loc>
     
-    <lastmod>2016-11-21T06:50:15.264Z</lastmod>
+    <lastmod>2016-11-22T07:50:35.367Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/11/17/encode/</loc>
+    <loc>http://yoursite.com/2016/11/21/prototype_chain/</loc>
     
-    <lastmod>2016-11-19T07:47:39.965Z</lastmod>
+    <lastmod>2016-11-22T05:49:20.227Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/19/base_reference_type/</loc>
+    
+    <lastmod>2016-11-21T12:32:00.663Z</lastmod>
     
   </url>
   

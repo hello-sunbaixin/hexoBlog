@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/17/clone/index.html">
 <meta property="og:site_name" content="Sunbaixin blog">
 <meta property="og:description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考的文章">
-<meta property="og:updated_time" content="2016-11-21T06:50:15.264Z">
+<meta property="og:updated_time" content="2016-11-22T07:50:35.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象简单及深度克隆（复制  拷贝）">
 <meta name="twitter:description" content="除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考的文章">
@@ -334,10 +334,47 @@
 <p>除了数组和json数据要深度克隆,其他都可以=来复制,这种复制的差异主要是基本类型和引用类型之间的差别,为了理解深入，可以先去参考<a href="基本类型和引用类型"></a>的文章</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>基本类型的拷贝，利用=就可以实现，而如果引用类型（Array，Object）还是=来拷贝的话，就是浅拷贝<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=[1,2,3];</div><div class="line">var arrobj=arr;</div><div class="line">arrobj.push(5);</div><div class="line">alert(arr)//[1,2,3,5]</div></pre></td></tr></table></figure></p>
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>基本类型的拷贝，利用=就可以实现，而如果引用类型（Array，Object）还是=来拷贝的话，就是浅拷贝<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> arrobj=arr;</div><div class="line">arrobj.push(<span class="number">5</span>);</div><div class="line">alert(arr)<span class="comment">//[1,2,3,5]</span></div></pre></td></tr></table></figure></p>
 <p>可见对于引用类型的复制，操作的是引用对象而不是在内存中的实际的值，拷贝对象和被拷贝对象都指向内存中的同一个位置，一改则都改，<br>为了避免拷贝对象和被拷贝对象的互相的干扰，就需要深度拷贝；</p>
-<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>所谓”深拷贝”，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用”浅拷贝”就行了</p>
-<h3 id="js的slice函数"><a href="#js的slice函数" class="headerlink" title="js的slice函数"></a>js的slice函数</h3><h3 id="js的concat函数"><a href="#js的concat函数" class="headerlink" title="js的concat函数"></a>js的concat函数</h3>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>所谓”深拷贝”，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用”浅拷贝”就行了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//源码</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">p, c</span>) </span>&#123;</div><div class="line">　　　　<span class="keyword">var</span> c = c || &#123;&#125;;</div><div class="line">　　　　<span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> p) &#123;</div><div class="line">　　　　　　<span class="keyword">if</span> (<span class="keyword">typeof</span> p[i] === <span class="string">'object'</span>) &#123;</div><div class="line">　　　　　　　　c[i] = (p[i].constructor === <span class="built_in">Array</span>) ? [] : &#123;&#125;;</div><div class="line">　　　　　　　　deepCopy(p[i], c[i]);<span class="comment">//递归</span></div><div class="line">　　　　　　&#125; <span class="keyword">else</span> &#123;</div><div class="line">　　　　　　　　　c[i] = p[i];</div><div class="line">　　　　　　&#125;</div><div class="line">　　　　&#125;</div><div class="line">　　　　<span class="keyword">return</span> c;</div><div class="line">　　&#125;</div></pre></td></tr></table></figure></p>
+<p>延伸：$.extend()也有深拷贝和浅拷贝，想了解猛戳<a href="/2016/10/24/$.extend">$.extend()</a></p>
+<h3 id="数组深拷贝"><a href="#数组深拷贝" class="headerlink" title="数组深拷贝"></a>数组深拷贝</h3><h4 id="1-js的slice函数"><a href="#1-js的slice函数" class="headerlink" title="1.js的slice函数"></a>1.js的slice函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">arrayObj.slice(start, [end])</div></pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arrayObj</td>
+<td>必选项。一个 Array 对象。  </td>
+</tr>
+<tr>
+<td>start</td>
+<td>必选项。arrayObj 中所指定的部分的开始元素是从零开始计算的下标。  </td>
+</tr>
+<tr>
+<td>end</td>
+<td>可选项。arrayObj 中所指定的部分的结束元素是从零开始计算的下标。  </td>
+</tr>
+</tbody>
+</table>
+<p><strong>说明</strong></p>
+<ul>
+<li>slice 方法返回一个 Array 对象，其中包含了 arrayObj 的指定部分。 </li>
+<li>slice 方法一直复制到 end 所指定的元素，但是不包括该元素。</li>
+<li>如果 start 为负，将它作为 length + start处理，此处 length 为数组的长度。</li>
+<li>如果 end 为负，就将它作为 length + end 处理，此处 length 为数组的长度。</li>
+<li>如果省略 end ，那么 slice 方法将一直复制到 arrayObj 的结尾。</li>
+<li>如果 end 出现在 start 之前，不复制任何元素到新数组中。<br><strong>例子</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"><span class="keyword">var</span> arrobj=arr.slice(<span class="number">0</span>);</div><div class="line">arrobj.push(<span class="number">7</span>)</div><div class="line">alert(arrobj)<span class="comment">//[1,2,4,5,7]</span></div><div class="line">alert(arr)<span class="comment">//[1,2,4,5]</span></div><div class="line"><span class="comment">//看一下slice具体的使用</span></div><div class="line">arr.slice(<span class="number">0</span>)<span class="comment">//[1, 2, 4, 5]</span></div><div class="line">arr.slice(<span class="number">0</span>,<span class="number">4</span>)<span class="comment">//[1, 2, 4, 5]</span></div><div class="line">arr.slice(<span class="number">0</span>,<span class="number">3</span>)<span class="comment">//[1, 2, 4]</span></div><div class="line">arr.slice(<span class="number">-1</span>,<span class="number">3</span>)<span class="comment">//[]</span></div><div class="line">arr.slice(<span class="number">-3</span>,<span class="number">3</span>)<span class="comment">//[2, 4]</span></div><div class="line">arr.slice(<span class="number">4</span>,<span class="number">3</span>)<span class="comment">//[]</span></div><div class="line">arr.slice(<span class="number">1</span>,<span class="number">-2</span>)<span class="comment">//[2]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-js的concat函数"><a href="#2-js的concat函数" class="headerlink" title="2.js的concat函数"></a>2.js的concat函数</h4><p>concat() 方法用于连接两个或多个数组。<br>该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。<br><strong>语法</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">arrayObject.concat(arrayX,arrayX,......,arrayX)</div></pre></td></tr></table></figure></p>
+<p><strong>说明</strong><br>返回一个新的数组。该数组是通过把所有 arrayX 参数添加到 arrayObject 中生成的。如果要进行 concat() 操作的参数是数组，那么添加的是数组中的元素，而不是数组。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">"One"</span>,<span class="string">"Two"</span>,<span class="string">"Three"</span>];</div><div class="line"><span class="keyword">var</span> arrobj=arr.concat();</div></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -540,7 +577,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.</span> <span class="nav-text">深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#js的slice函数"><span class="nav-number">2.1.</span> <span class="nav-text">js的slice函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js的concat函数"><span class="nav-number">2.2.</span> <span class="nav-text">js的concat函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.</span> <span class="nav-text">深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组深拷贝"><span class="nav-number">2.1.</span> <span class="nav-text">数组深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-js的slice函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.js的slice函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-js的concat函数"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.js的concat函数</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
