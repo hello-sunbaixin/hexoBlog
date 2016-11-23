@@ -4,6 +4,136 @@
 
     
   <url>
+    <loc>http://yoursite.com/2016/11/23/inline/</loc>
+    <lastmod>2016-11-23T11:13:00.639Z</lastmod>
+    <data>
+        <display>
+        <title>display:inline inline-block block几种方法</title>
+        <pubTime>2016-11-23T08:04:35.806Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>display</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/23/clearFloat/</loc>
+    <lastmod>2016-11-23T08:14:54.666Z</lastmod>
+    <data>
+        <display>
+        <title>清除浮动的几种方法</title>
+        <pubTime>2016-11-23T06:03:19.219Z</pubTime>
+        
+        <tag>BFC</tag>
+         
+        <tag>css</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/20/css3/</loc>
+    <lastmod>2016-11-23T08:13:31.854Z</lastmod>
+    <data>
+        <display>
+        <title>background;box-sizing;@2x;</title>
+        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
+        
+        <tag>css3</tag>
+         
+         
+           
+             
+              <breadCrumb title="css3" url="http://yoursite.com/categories/css3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/23/hasLayout/</loc>
+    <lastmod>2016-11-23T07:33:21.209Z</lastmod>
+    <data>
+        <display>
+        <title>什么是hasLayout</title>
+        <pubTime>2016-11-23T06:56:35.139Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>hasLayout</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    <lastmod>2016-11-23T02:43:52.939Z</lastmod>
+    <data>
+        <display>
+        <title>js小记</title>
+        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
+        
+        <tag>面试题</tag>
+         
+        <tag>js小记</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/22/BFC/</loc>
+    <lastmod>2016-11-22T12:10:38.022Z</lastmod>
+    <data>
+        <display>
+        <title>BFC原理</title>
+        <pubTime>2016-11-22T12:04:05.691Z</pubTime>
+        
+        <tag>BFC</tag>
+         
+        <tag>css</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2016/11/17/encode/</loc>
     <lastmod>2016-11-22T11:50:49.959Z</lastmod>
     <data>
@@ -154,26 +284,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/10/20/css3/</loc>
-    <lastmod>2016-11-17T07:25:39.907Z</lastmod>
-    <data>
-        <display>
-        <title>css3属性</title>
-        <pubTime>2016-10-20T07:30:39.060Z</pubTime>
-        
-        <tag>css3</tag>
-         
-         
-           
-             
-              <breadCrumb title="css3" url="http://yoursite.com/categories/css3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2016/11/17/transitionend/</loc>
     <lastmod>2016-11-17T07:16:52.654Z</lastmod>
     <data>
@@ -228,28 +338,6 @@
         <tag>js</tag>
          
         <tag>cookie</tag>
-         
-         
-           
-             
-              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
-    <lastmod>2016-11-16T02:41:12.374Z</lastmod>
-    <data>
-        <display>
-        <title>js小记</title>
-        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
-        
-        <tag>面试题</tag>
-         
-        <tag>js小记</tag>
          
          
            

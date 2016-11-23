@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/11/23/inline/</loc>
+    
+    <lastmod>2016-11-23T11:13:00.639Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/23/clearFloat/</loc>
+    
+    <lastmod>2016-11-23T08:14:54.666Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/20/css3/</loc>
+    
+    <lastmod>2016-11-23T08:13:31.854Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/23/hasLayout/</loc>
+    
+    <lastmod>2016-11-23T07:33:21.209Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    
+    <lastmod>2016-11-23T02:43:52.939Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/22/BFC/</loc>
+    
+    <lastmod>2016-11-22T12:10:38.022Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/11/17/encode/</loc>
     
     <lastmod>2016-11-22T11:50:49.959Z</lastmod>
@@ -51,13 +93,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/10/20/css3/</loc>
-    
-    <lastmod>2016-11-17T07:25:39.907Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2016/11/17/transitionend/</loc>
     
     <lastmod>2016-11-17T07:16:52.654Z</lastmod>
@@ -75,13 +110,6 @@
     <loc>http://yoursite.com/2016/10/21/cookie/</loc>
     
     <lastmod>2016-11-16T03:14:52.353Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
-    
-    <lastmod>2016-11-16T02:41:12.374Z</lastmod>
     
   </url>
   
