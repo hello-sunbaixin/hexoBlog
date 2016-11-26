@@ -4,16 +4,80 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/11/23/inline/</loc>
-    <lastmod>2016-11-23T11:13:00.639Z</lastmod>
+    <loc>http://yoursite.com/2016/11/26/svn/</loc>
+    <lastmod>2016-11-26T10:18:27.416Z</lastmod>
     <data>
         <display>
-        <title>display:inline inline-block block几种方法</title>
-        <pubTime>2016-11-23T08:04:35.806Z</pubTime>
+        <title>svn的使用</title>
+        <pubTime>2016-11-26T06:33:30.650Z</pubTime>
+        
+        <tag>svn</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/25/touch/</loc>
+    <lastmod>2016-11-26T02:41:49.259Z</lastmod>
+    <data>
+        <display>
+        <title>浅谈touch事件</title>
+        <pubTime>2016-11-25T06:50:02.262Z</pubTime>
         
         <tag>css</tag>
          
-        <tag>display</tag>
+        <tag>touch</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    <lastmod>2016-11-25T09:36:09.830Z</lastmod>
+    <data>
+        <display>
+        <title>js小记</title>
+        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
+        
+        <tag>面试题</tag>
+         
+        <tag>js小记</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/24/position/</loc>
+    <lastmod>2016-11-24T08:23:01.900Z</lastmod>
+    <data>
+        <display>
+        <title>position</title>
+        <pubTime>2016-11-24T02:40:41.826Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>position</tag>
          
          
            
@@ -27,7 +91,7 @@
     
   <url>
     <loc>http://yoursite.com/2016/11/23/clearFloat/</loc>
-    <lastmod>2016-11-23T08:14:54.666Z</lastmod>
+    <lastmod>2016-11-24T08:22:39.132Z</lastmod>
     <data>
         <display>
         <title>清除浮动的几种方法</title>
@@ -36,6 +100,28 @@
         <tag>BFC</tag>
          
         <tag>css</tag>
+         
+         
+           
+             
+              <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/23/inline/</loc>
+    <lastmod>2016-11-24T08:22:14.337Z</lastmod>
+    <data>
+        <display>
+        <title>display:inline inline-block block几种方法</title>
+        <pubTime>2016-11-23T08:04:35.806Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>display</tag>
          
          
            
@@ -83,28 +169,6 @@
            
              
               <breadCrumb title="css" url="http://yoursite.com/categories/css/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
-    <lastmod>2016-11-23T02:43:52.939Z</lastmod>
-    <data>
-        <display>
-        <title>js小记</title>
-        <pubTime>2016-10-27T11:12:43.616Z</pubTime>
-        
-        <tag>面试题</tag>
-         
-        <tag>js小记</tag>
-         
-         
-           
-             
-              <breadCrumb title="js" url="http://yoursite.com/categories/js/"/>
           
         </display>
     </data>

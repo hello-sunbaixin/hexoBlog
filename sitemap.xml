@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2016/11/23/inline/</loc>
+    <loc>http://yoursite.com/2016/11/26/svn/</loc>
     
-    <lastmod>2016-11-23T11:13:00.639Z</lastmod>
+    <lastmod>2016-11-26T10:18:27.416Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/25/touch/</loc>
+    
+    <lastmod>2016-11-26T02:41:49.259Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
+    
+    <lastmod>2016-11-25T09:36:09.830Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/24/position/</loc>
+    
+    <lastmod>2016-11-24T08:23:01.900Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2016/11/23/clearFloat/</loc>
     
-    <lastmod>2016-11-23T08:14:54.666Z</lastmod>
+    <lastmod>2016-11-24T08:22:39.132Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/23/inline/</loc>
+    
+    <lastmod>2016-11-24T08:22:14.337Z</lastmod>
     
   </url>
   
@@ -26,13 +54,6 @@
     <loc>http://yoursite.com/2016/11/23/hasLayout/</loc>
     
     <lastmod>2016-11-23T07:33:21.209Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/27/jsSummary/</loc>
-    
-    <lastmod>2016-11-23T02:43:52.939Z</lastmod>
     
   </url>
   
