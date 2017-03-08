@@ -4,6 +4,43 @@
 
     
   <url>
+    <loc>http://yoursite.com/2016/12/29/vue_problem/</loc>
+    <lastmod>2017-01-04T07:42:10.263Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2016-12-29T11:34:31.302Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/12/21/vue_learn/</loc>
+    <lastmod>2016-12-31T10:35:56.843Z</lastmod>
+    <data>
+        <display>
+        <title>vue的学习之路(适用于小白)</title>
+        <pubTime>2016-12-21T12:01:43.800Z</pubTime>
+        
+        <tag>vue</tag>
+         
+        <tag>框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="vue" url="http://yoursite.com/categories/vue/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2016/12/17/bower_rendering/</loc>
     <lastmod>2016-12-26T09:50:28.616Z</lastmod>
     <data>
@@ -30,28 +67,6 @@
         <display>
         <title>vue之组件之间的通信</title>
         <pubTime>2016-12-26T06:08:12.429Z</pubTime>
-        
-        <tag>vue</tag>
-         
-        <tag>框架</tag>
-         
-         
-           
-             
-              <breadCrumb title="vue" url="http://yoursite.com/categories/vue/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/12/21/vue_learn/</loc>
-    <lastmod>2016-12-26T06:09:12.843Z</lastmod>
-    <data>
-        <display>
-        <title>vue的学习之路(适用于小白)</title>
-        <pubTime>2016-12-21T12:01:43.800Z</pubTime>
         
         <tag>vue</tag>
          

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/12/29/vue_problem/</loc>
+    
+    <lastmod>2017-01-04T07:42:10.263Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/12/21/vue_learn/</loc>
+    
+    <lastmod>2016-12-31T10:35:56.843Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/12/17/bower_rendering/</loc>
     
     <lastmod>2016-12-26T09:50:28.616Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://yoursite.com/2016/12/26/vue_communicate/</loc>
     
     <lastmod>2016-12-26T09:46:52.047Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/12/21/vue_learn/</loc>
-    
-    <lastmod>2016-12-26T06:09:12.843Z</lastmod>
     
   </url>
   

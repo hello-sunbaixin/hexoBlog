@@ -4,6 +4,13 @@
   
     
     <entry>
+      <title></title>
+      <url>http://yoursite.com/2016/12/29/vue_problem/</url>
+      <content type="text"><![CDATA[vue vuex vue-resource vue-router 都有版本的升级因此遇到问题，确认使用的方法是否与版本对应，免得踩坑。。。1.端口号的问题2.vue-router 2.0改变的内容1234路由跳转 this.$route.router.go(&#123;name:&quot;list&quot;&#125;); 改为 $this.$router.push(&apos;/list&apos;) 3.vue2.0废弃dispatch4.$index 现在必须使用 index 了（在 v-for 中显示声明）123&lt;ul class=&apos;agent-otherhouse-list&apos;&gt; &lt;li v-for=&apos;(house,index) in houseData&apos; v-cloak v-on:mouseover=&apos;hoverShow(index)&apos; :class=&quot;&#123;&apos;on&apos;:indexPage==index&#125;&quot;&gt; &lt;/li&gt;&lt;/ul&gt; 5.]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[vue之组件之间的通信]]></title>
       <url>http://yoursite.com/2016/12/26/vue_communicate/</url>
       <content type="text"><![CDATA[组件之间的通信 propscamelCase-vs-kebab-caseHTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）App.vue kebab-case in HTMLrender_demo1.vue camelCase in JavaScript再次说明，如果你使用字符串模版，不用在意这些限制。举例App.vuerender_demo1.vue]]></content>
@@ -20,7 +27,7 @@
     <entry>
       <title><![CDATA[vue的学习之路(适用于小白)]]></title>
       <url>http://yoursite.com/2016/12/21/vue_learn/</url>
-      <content type="text"><![CDATA[作为vue 学习的小白，有必要知道快速入门，需要学习什么或者看哪些内容 vue官网vue源码解析http://blog.cgsdream.org/2016/11/05/vue-source-analysis-1/ 学习教程http://www.jb51.net/Special/874.htm 功能模块划分功能模块页面区域App.vue项目的入口import from 省略后缀 es6语法components 注册组件]]></content>
+      <content type="text"><![CDATA[作为vue 学习的小白，有必要知道快速入门，需要学习什么或者看哪些内容 vue官网vue源码解析http://blog.cgsdream.org/2016/11/05/vue-source-analysis-1/ 学习教程http://www.jb51.net/Special/874.htm 功能模块划分功能模块页面区域App.vue项目的入口import from 省略后缀 es6语法components 注册组件http://jiongks.name/blog/just-vue/http://blog.csdn.net/tencent_bugly/article/details/52512287https://segmentfault.com/a/1190000006000118http://blog.csdn.net/yolo0927/article/details/53464721http://www.cnblogs.com/jiangxiaobo/p/5425048.htmlvue2.0新手踩坑http://www.jianshu.com/p/5ba253651c3bvue+vue-route+vuexhttp://www.cnblogs.com/ychl/p/6122104.htmlvue-router 2.0改变的内容 https://cwsjoker.github.io/mystatic/CNode_Vue_Spa/index.html#!/artlist]]></content>
     </entry>
 
     
